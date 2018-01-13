@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>getRutas_controlador</servlet-name>
+        <servlet-class>Controladores.getRutas_controlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getEstaciones_controlador</servlet-name>
+        <servlet-class>Controladores.getEstaciones_controlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getRuta_controlador</servlet-name>
+        <servlet-class>Controladores.getRuta_controlador</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getRutas_controlador</servlet-name>
+        <url-pattern>/getRutas_controlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getEstaciones_controlador</servlet-name>
+        <url-pattern>/getEstaciones_controlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getRuta_controlador</servlet-name>
+        <url-pattern>/getRuta_controlador</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

@@ -9,14 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="Vistas/js/JavaScript.js" type="text/javascript"></script>
         <title>JSP Page</title>
         <link href="Vistas/css/css.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-    <img src="Vistas/Imagenes/Logo.png" class="logo" alt="Logo"/>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a href="index.jsp"><img src="Vistas/Imagenes/Logo.png" class="logo" alt="Logo"/></a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navBar">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,26 +36,27 @@
         </div>
     </nav>
 </head>
-<body>
+<body onload="getEstaciones()">
     <div>
         <div class="formulario_inicio">
             <form>
                 <div class="form-group">
-                    <input type="text" class="form-control"   placeholder="Origen">
+                    <input type="text" class="form-control" list="estaciones1"   placeholder="Origen">
+                    <datalist type="text" id="estaciones1">
+                    </datalist>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control"  placeholder="Destino">
+                     <datalist type="text" id="estaciones2">
+                    </datalist>
                 </div>
                 <div class="form-group">
                     <input type="date" class="form-control"  placeholder="Fecha de ida">
                 </div>
                 <div class="form-group">
-                    <input type="date" class="form-control"  placeholder="Fecha de Vuelta">
-                </div>
-                <div class="form-group">
                     <input type="number" class="form-control"  placeholder="Numero de personas" min="1">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-warning">Confirmar</button>
             </form>
         </div>
         <div  class="carousel slide" data-ride="carousel">
@@ -82,7 +84,7 @@
         <div class="row">
             <div class="col-sm" id="columna_info">
                 <div class="caja_imagen_icon_flat"><img class="imagen_icon_flat" src="Vistas/Imagenes/bus.png"  alt="bus"/></div>
-                <h2>Maxima profesionalidad</h2>
+                <h2>Maxima profesionalidad</h2><br>
                 <p>Más allá de la extensa oferta de servicios de Transporte Regular y Transporte Discrecional, las posibilidades 
                     para el cliente de Varian se amplían con servicios de alquiler de flotas de vehículos a medida de sus necesidades a 
                     través de fórmulas de Renting y similares, de organización de congresos y de actividades culturales de salud - ocio.</p>
@@ -97,6 +99,7 @@
             <div class="col-sm" id="columna_info">
                 <div class="caja_imagen_icon_flat"><img class="imagen_icon_flat" src="Vistas/Imagenes/movil.png"  alt="bus"/></div>
                 <h2>Seguimiento GPS</h2>
+                <br>
                 <p>Más allá de la extensa oferta de servicios de Transporte Regular y Transporte Discrecional, las posibilidades 
                     para el cliente de Varian se amplían con servicios de alquiler de flotas de vehículos a medida de sus necesidades a 
                     través de fórmulas de Renting y similares, de organización de congresos y de actividades culturales de salud - ocio.</p>

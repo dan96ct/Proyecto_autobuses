@@ -20,6 +20,9 @@ z-index: 10;}
 #info_empresa{
     margin-top: 40px;
 }
+#navBar{
+    background-color: #FFA200 !important;
+}
 #carousel{height: 500px;}
 #columna_info{text-align: center;}
 .caja_imagen_icon_flat{
