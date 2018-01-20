@@ -12,12 +12,17 @@ import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
 
 /**
  *
@@ -34,8 +39,12 @@ public class getEstaciones_controlador extends HttpServlet {
         try {
             ConexBD = ConexionBBDD.GetConexion();
             Conexion = ConexBD.GetCon();
-        } catch (ClassNotFoundException classNotFoundException) {
-        } catch (SQLException sQLException) {
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(getEstaciones_controlador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(getEstaciones_controlador.class.getName()).log(Level.SEVERE, null, ex);
+
         }
 
     }
@@ -53,8 +62,15 @@ public class getEstaciones_controlador extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Operaciones operaciones = new Operaciones();
+        ArrayList<String> estaciones = new ArrayList<>();
+
         try {
-            out.println(operaciones.getRutas(Conexion));
+            estaciones = operaciones.getEstaciones(Conexion);
+            try (PrintWriter out = response.getWriter()) {
+                JSONArray arrayJSON = new JSONArray(Arrays.asList(estaciones));
+                out.println(arrayJSON);
+
+            }
         } catch (SQLException ex) {
             Logger.getLogger(getEstaciones_controlador.class.getName()).log(Level.SEVERE, null, ex);
         }

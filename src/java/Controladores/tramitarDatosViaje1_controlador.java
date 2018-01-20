@@ -6,26 +6,23 @@
 package Controladores;
 
 import DAO.ConexionBBDD;
-import DAO.Operaciones;
+import Modelo.Billete;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.JSONArray;
 
 /**
  *
  * @author dani
  */
-public class getRuta_controlador extends HttpServlet {
+public class tramitarDatosViaje1_controlador extends HttpServlet {
 
     Connection Conexion;
 
@@ -38,12 +35,11 @@ public class getRuta_controlador extends HttpServlet {
             Conexion = ConexBD.GetCon();
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(getRuta_controlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(tramitarDatosViaje1_controlador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(getRuta_controlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(tramitarDatosViaje1_controlador.class.getName()).log(Level.SEVERE, null, ex);
 
         }
-
     }
 
     /**
@@ -58,19 +54,24 @@ public class getRuta_controlador extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String estacion = (String) request.getParameter("estacion");
-        Operaciones operaciones = new Operaciones();
-        ArrayList<String> estaciones = new ArrayList<>();
+        String origen = (String) request.getParameter("origen");
+        String destino = (String) request.getParameter("destino");
+        String fecha = (String) request.getParameter("fecha");
+        int numPersonas = Integer.valueOf(request.getParameter("numPersonas"));
         
-        try {
-            estaciones = operaciones.getRutas(Conexion,estacion);
-            try (PrintWriter out = response.getWriter()) {
-                JSONArray arrayJSON = new JSONArray(Arrays.asList(estaciones));
-                out.println(arrayJSON);
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(getEstaciones_controlador.class.getName()).log(Level.SEVERE, null, ex);
+        Billete billete = new Billete(origen, destino, fecha, numPersonas);
+        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet tramitarDatosViaje1_controlador</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet tramitarDatosViaje1_controlador at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

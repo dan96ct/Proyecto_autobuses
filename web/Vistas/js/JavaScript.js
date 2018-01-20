@@ -20,8 +20,38 @@ function getEstaciones() {
     objetoAjax.send();
     objetoAjax.onreadystatechange = function () {
         if (objetoAjax.readyState === 4 && objetoAjax.status === 200) {
-            alert(objetoAjax.responseText);
+            mostrarEstaciones();
         }
+    }
+}
+function getRutas(estacion) {
+    objetoAjax = AJAXCrearObjeto(); //crea el objeto
+    objetoAjax.open('GET', '/Proyecto_autobuses/getRuta_controlador?estacion=' + estacion.value);
+    objetoAjax.send();
+    objetoAjax.onreadystatechange = function () {
+        if (objetoAjax.readyState === 4 && objetoAjax.status === 200) {
+            mostrarRutas();
+        }
+    }
+}
+function mostrarRutas() {
+    var datos = objetoAjax.responseText;
+    var estacionesLista = JSON.parse(datos);
+    var estacionesList = document.getElementById("estaciones2");
+    for (var i = 0; i < estacionesLista[0].length; i++) {
+        var option = document.createElement("option");
+        option.innerHTML = estacionesLista[0][i];
+        estacionesList.appendChild(option);
+    }
+}
+function mostrarEstaciones() {
+    var datos = objetoAjax.responseText;
+    var estacionesLista = JSON.parse(datos);
+    var estacionesList = document.getElementById("estaciones1");
+    for (var i = 0; i < estacionesLista[0].length; i++) {
+        var option = document.createElement("option");
+        option.innerHTML = estacionesLista[0][i];
+        estacionesList.appendChild(option);
     }
 
 }

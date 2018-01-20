@@ -12,6 +12,10 @@
         <servlet-name>getRuta_controlador</servlet-name>
         <servlet-class>Controladores.getRuta_controlador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>tramitarDatosViaje1_controlador</servlet-name>
+        <servlet-class>Controladores.tramitarDatosViaje1_controlador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>getRutas_controlador</servlet-name>
         <url-pattern>/getRutas_controlador</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>getRuta_controlador</servlet-name>
         <url-pattern>/getRuta_controlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>tramitarDatosViaje1_controlador</servlet-name>
+        <url-pattern>/tramitarDatosViaje1_controlador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

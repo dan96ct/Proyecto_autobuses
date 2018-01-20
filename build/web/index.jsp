@@ -37,24 +37,24 @@
     </nav>
 </head>
 <body onload="getEstaciones()">
-    <div>
+    <div style="min-height: 500px;">
         <div class="formulario_inicio">
-            <form>
+            <form action="Vistas/seleccionBillete_vista.jsp">
                 <div class="form-group">
-                    <input type="text" class="form-control" list="estaciones1"   placeholder="Origen">
+                    <input type="text" class="form-control" list="estaciones1"   placeholder="Origen" name="origen" onchange="getRutas(this)" required>
                     <datalist type="text" id="estaciones1">
                     </datalist>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control"  placeholder="Destino">
-                     <datalist type="text" id="estaciones2">
+                    <input type="text" class="form-control" list="estaciones2" name="destino" placeholder="Destino" required>
+                    <datalist type="text" id="estaciones2">
                     </datalist>
                 </div>
                 <div class="form-group">
-                    <input type="date" class="form-control"  placeholder="Fecha de ida">
+                    <input type="date" class="form-control"  placeholder="Fecha de ida" name="fecha" required>
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control"  placeholder="Numero de personas" min="1">
+                    <input type="number" class="form-control"  placeholder="Numero de personas" name="numPersonas" min="1" required>
                 </div>
                 <button type="submit" class="btn btn-warning">Confirmar</button>
             </form>
@@ -79,34 +79,34 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div id="info_empresa" class="container">
-        <div class="row">
-            <div class="col-sm" id="columna_info">
-                <div class="caja_imagen_icon_flat"><img class="imagen_icon_flat" src="Vistas/Imagenes/bus.png"  alt="bus"/></div>
-                <h2>Maxima profesionalidad</h2><br>
-                <p>Más allá de la extensa oferta de servicios de Transporte Regular y Transporte Discrecional, las posibilidades 
-                    para el cliente de Varian se amplían con servicios de alquiler de flotas de vehículos a medida de sus necesidades a 
-                    través de fórmulas de Renting y similares, de organización de congresos y de actividades culturales de salud - ocio.</p>
-            </div>
-            <div class="col-sm" id="columna_info">
-                <div class="caja_imagen_icon_flat"><img class="imagen_icon_flat" src="Vistas/Imagenes/chatting.png"  alt="bus"/></div>
-                <h2>Asistencia en todo momento</h2>
-                <p>Más allá de la extensa oferta de servicios de Transporte Regular y Transporte Discrecional, las posibilidades 
-                    para el cliente de Varian se amplían con servicios de alquiler de flotas de vehículos a medida de sus necesidades a 
-                    través de fórmulas de Renting y similares, de organización de congresos y de actividades culturales de salud - ocio.</p>
-            </div>
-            <div class="col-sm" id="columna_info">
-                <div class="caja_imagen_icon_flat"><img class="imagen_icon_flat" src="Vistas/Imagenes/movil.png"  alt="bus"/></div>
-                <h2>Seguimiento GPS</h2>
-                <br>
-                <p>Más allá de la extensa oferta de servicios de Transporte Regular y Transporte Discrecional, las posibilidades 
-                    para el cliente de Varian se amplían con servicios de alquiler de flotas de vehículos a medida de sus necesidades a 
-                    través de fórmulas de Renting y similares, de organización de congresos y de actividades culturales de salud - ocio.</p>
+
+        <div id="info_empresa" class="container">
+            <div class="row">
+                <div class="col-sm" id="columna_info">
+                    <div class="caja_imagen_icon_flat"><img class="imagen_icon_flat" src="Vistas/Imagenes/bus.png"  alt="bus"/></div>
+                    <h2>Maxima profesionalidad</h2><br>
+                    <p>Más allá de la extensa oferta de servicios de Transporte Regular y Transporte Discrecional, las posibilidades 
+                        para el cliente de Varian se amplían con servicios de alquiler de flotas de vehículos a medida de sus necesidades a 
+                        través de fórmulas de Renting y similares, de organización de congresos y de actividades culturales de salud - ocio.</p>
+                </div>
+                <div class="col-sm" id="columna_info">
+                    <div class="caja_imagen_icon_flat"><img class="imagen_icon_flat" src="Vistas/Imagenes/chatting.png"  alt="bus"/></div>
+                    <h2>Asistencia en todo momento</h2>
+                    <p>Más allá de la extensa oferta de servicios de Transporte Regular y Transporte Discrecional, las posibilidades 
+                        para el cliente de Varian se amplían con servicios de alquiler de flotas de vehículos a medida de sus necesidades a 
+                        través de fórmulas de Renting y similares, de organización de congresos y de actividades culturales de salud - ocio.</p>
+                </div>
+                <div class="col-sm" id="columna_info">
+                    <div class="caja_imagen_icon_flat"><img class="imagen_icon_flat" src="Vistas/Imagenes/movil.png"  alt="bus"/></div>
+                    <h2>Seguimiento GPS</h2>
+                    <br>
+                    <p>Más allá de la extensa oferta de servicios de Transporte Regular y Transporte Discrecional, las posibilidades 
+                        para el cliente de Varian se amplían con servicios de alquiler de flotas de vehículos a medida de sus necesidades a 
+                        través de fórmulas de Renting y similares, de organización de congresos y de actividades culturales de salud - ocio.</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 <footer id="footer_pagina">© 1960 - 2018 Varian SL Inc.</footer>
 </body>
 </html>
