@@ -66,6 +66,11 @@ public class Billete {
         return personas;
     }
 
+    @Override
+    public String toString() {
+        return "Billete{" + "origen=" + origen + ", destino=" + destino + ", dia=" + dia + ", hora=" + hora + ", precio=" + precio + ", personas=" + personas + '}';
+    }
+
     public void setPersonas(int personas) {
         this.personas = personas;
     }

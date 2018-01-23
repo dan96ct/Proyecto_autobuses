@@ -39,7 +39,7 @@
 <body onload="getEstaciones()">
     <div style="min-height: 500px;">
         <div class="formulario_inicio">
-            <form action="Vistas/seleccionBillete_vista.jsp">
+            <form action="tramitarDatosViaje1_controlador">
                 <div class="form-group">
                     <input type="text" class="form-control" list="estaciones1"   placeholder="Origen" name="origen" onchange="getRutas(this)" required>
                     <datalist type="text" id="estaciones1">

@@ -4,6 +4,8 @@
     Author     : dani
 --%>
 
+<%@page import="Modelo.Horario"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,10 +20,23 @@
     <div id="barra_superior"><a href="../index.jsp"><img src="Imagenes/Logo.png" class="logo" alt="Logo"/></a></div>
 </head>
 <body>
-    <div id="contenido" style="min-height: 600px;">
-        
-    </div>
-    <footer id="footer_pagina">© 1960 - 2018 Varian SL Inc.</footer>
+    <% if (session.getAttribute("horarios") == null) {
+    %>
+    <% }
+        ArrayList<Horario> horarios = (ArrayList<Horario>) session.getAttribute("horarios");
+        session.invalidate(); %>
+    <div id="contenido" style="min-height: 900px;">
+        <%  for (int i = 0; i < horarios.size(); i++) {
+            %><div id="horario"> <label class="datoHorario"><b>H.Salida: </b><% out.print(horarios.get(i).getHoraSalida()); %> </label>
+            <label class="datoHorario"> <b>H.llegada: </b><% out.print(horarios.get(i).getHoraLlegada()); %></label>
+            <label class="datoHorario"><b>Plazas: </b><% out.print(horarios.get(i).getPlazasLibres()); %></label>
+            <label class="datoHorario"><b>Precio: </b><% out.print(horarios.get(i).getPrecio()); %> </label></div>
+            <%
+
+                }
+            %>
+</div>
+<footer id="footer_pagina">© 1960 - 2018 Varian SL Inc.</footer>
 
 </body>
 </html>

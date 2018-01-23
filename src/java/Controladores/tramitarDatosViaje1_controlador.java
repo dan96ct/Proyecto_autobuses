@@ -6,6 +6,7 @@
 package Controladores;
 
 import DAO.ConexionBBDD;
+import DAO.Operaciones;
 import Modelo.Billete;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -58,9 +60,22 @@ public class tramitarDatosViaje1_controlador extends HttpServlet {
         String destino = (String) request.getParameter("destino");
         String fecha = (String) request.getParameter("fecha");
         int numPersonas = Integer.valueOf(request.getParameter("numPersonas"));
-        
+
         Billete billete = new Billete(origen, destino, fecha, numPersonas);
-        
+        System.out.print(billete.toString());
+        Operaciones operaciones = new Operaciones();
+
+        HttpSession session = request.getSession();
+
+        session.setAttribute("billete", billete);
+
+        try {
+            session.setAttribute("horarios", operaciones.getHorariosRuta(billete, Conexion));
+        } catch (SQLException ex) {
+            Logger.getLogger(tramitarDatosViaje1_controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        response.sendRedirect("Vistas/seleccionBillete_vista.jsp");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -69,7 +84,8 @@ public class tramitarDatosViaje1_controlador extends HttpServlet {
             out.println("<title>Servlet tramitarDatosViaje1_controlador</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet tramitarDatosViaje1_controlador at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet tramitarDatosViaje1_controlador at " + "</h1>");
+
             out.println("</body>");
             out.println("</html>");
         }
