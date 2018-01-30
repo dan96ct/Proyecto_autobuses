@@ -37,8 +37,8 @@
     </nav>
 </head>
 <body onload="getEstaciones()">
-    <div style="min-height: 500px;">
-        <div class="formulario_inicio">
+    <main id="contenido">
+        <section class="formulario_inicio">
             <form action="tramitarDatosViaje1_controlador">
                 <div class="form-group">
                     <input type="text" class="form-control" list="estaciones1"   placeholder="Origen" name="origen" onchange="getRutas(this)" required>
@@ -58,8 +58,8 @@
                 </div>
                 <button type="submit" class="btn btn-warning">Confirmar</button>
             </form>
-        </div>
-        <div  class="carousel slide" data-ride="carousel">
+        </section>
+        <section  class="carousel slide" data-ride="carousel">
             <div class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -78,9 +78,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div id="info_empresa" class="container">
+        <section id="info_empresa" class="container">
             <div class="row">
                 <div class="col-sm" id="columna_info">
                     <div class="caja_imagen_icon_flat"><img class="imagen_icon_flat" src="Vistas/Imagenes/bus.png"  alt="bus"/></div>
@@ -105,8 +105,8 @@
                         través de fórmulas de Renting y similares, de organización de congresos y de actividades culturales de salud - ocio.</p>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 <footer id="footer_pagina">© 1960 - 2018 Varian SL Inc.</footer>
 </body>
 </html>

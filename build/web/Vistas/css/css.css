@@ -53,13 +53,40 @@ and open the template in the editor.
 #contenido{
     background-color: #f3f3f3;
     font-size: 19px;
+    min-height: 900px;
+}
+.info_viaje{
+    margin: 0 auto;
+    padding: 1em;
+    background-color: white;
+    width: 70%;
+    text-align: left;
+}
+#p_infoViaje{
+    text-align: center;
+}
+.label_billetes{
+    font-size: 14px;
+}
+.label_busqueda{
+    border-width: 0px 1px 0px 0px;
+    border-style: solid;
+    margin: 4px;
+    padding-right: 6px;
 
 }
-#horario{margin: 0 auto;
-         background-color: white;
-         width: 50%;
-         text-align: center;
-         padding: 1em;}
+.horario{
+    margin: 11px;
+    padding: 1.5em;
+    background-color: white;
+}
+#boton_horario{
+    margin-left: 10px;
+}
+#lista_horarios{margin: 0 auto;
+                width: 50%;
+                padding-top: 2em;
+                text-align: center;}
 .datoHorario{
     margin: 10px;
 }

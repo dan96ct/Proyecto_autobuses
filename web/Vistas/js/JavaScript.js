@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 function AJAXCrearObjeto() {
     if (window.XMLHttpRequest) {
 // navegadores que siguen los estándares
@@ -13,7 +14,6 @@ function AJAXCrearObjeto() {
     }
     return objetoAjax;
 }
-
 function getEstaciones() {
     objetoAjax = AJAXCrearObjeto(); //crea el objeto
     objetoAjax.open('GET', '/Proyecto_autobuses/getEstaciones_controlador');
