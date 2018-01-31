@@ -14,6 +14,9 @@ function AJAXCrearObjeto() {
     }
     return objetoAjax;
 }
+function cogerDatosHorario(horaS,horaLL,precio) {
+    location.href = '/Proyecto_autobuses/tramitarDatosViaje2_controlador?horaS=' + horaS + '&horaLL=' + horaLL + '&precio=' + precio;
+}
 function getEstaciones() {
     objetoAjax = AJAXCrearObjeto(); //crea el objeto
     objetoAjax.open('GET', '/Proyecto_autobuses/getEstaciones_controlador');

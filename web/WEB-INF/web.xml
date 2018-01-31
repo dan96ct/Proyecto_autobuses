@@ -16,6 +16,10 @@
         <servlet-name>tramitarDatosViaje1_controlador</servlet-name>
         <servlet-class>Controladores.tramitarDatosViaje1_controlador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>tramitarDatosViaje2_controlador</servlet-name>
+        <servlet-class>Controladores.tramitarDatosViaje2_controlador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>getRutas_controlador</servlet-name>
         <url-pattern>/getRutas_controlador</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>tramitarDatosViaje1_controlador</servlet-name>
         <url-pattern>/tramitarDatosViaje1_controlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>tramitarDatosViaje2_controlador</servlet-name>
+        <url-pattern>/tramitarDatosViaje2_controlador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

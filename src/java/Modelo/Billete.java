@@ -11,9 +11,25 @@ package Modelo;
  */
 public class Billete {
 
-    private String origen, destino, dia, hora;
+    private String origen, destino, dia, horaSalida,horaLlegada;
     private double precio;
     private int personas;
+    public String getHoraSalida() {
+        return horaSalida;
+    }
+
+    public void setHoraSalida(String horaSalida) {
+        this.horaSalida = horaSalida;
+    }
+
+    public String getHoraLlegada() {
+        return horaLlegada;
+    }
+
+    public void setHoraLlegada(String horaLlegada) {
+        this.horaLlegada = horaLlegada;
+    }
+
 
     public Billete(String origen, String destino, String dia, int personas) {
         this.origen = origen;
@@ -45,15 +61,6 @@ public class Billete {
     public void setDia(String dia) {
         this.dia = dia;
     }
-
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
-
     public double getPrecio() {
         return precio;
     }
@@ -68,7 +75,7 @@ public class Billete {
 
     @Override
     public String toString() {
-        return "Billete{" + "origen=" + origen + ", destino=" + destino + ", dia=" + dia + ", hora=" + hora + ", precio=" + precio + ", personas=" + personas + '}';
+        return "Billete{" + "origen=" + origen + ", destino=" + destino + ", dia=" + dia + ", horaSalida=" + horaSalida + ", horaLlegada=" + horaLlegada + ", precio=" + precio + ", personas=" + personas + '}';
     }
 
     public void setPersonas(int personas) {

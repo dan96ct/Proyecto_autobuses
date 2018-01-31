@@ -24,11 +24,11 @@
 <body>
     <% if (session.getAttribute("horarios") == null || session.getAttribute("billetes") == null) {
     %>
-    <% }
+    <% } 
         ArrayList<Horario> horarios = (ArrayList<Horario>) session.getAttribute("horarios");
         Billete billete = new Billete();
         billete = (Billete) session.getAttribute("billete");
-        session.invalidate(); %>
+    %>
     <main id="contenido">
         <section id="lista_horarios">
             <section class="info_viaje">
@@ -38,13 +38,14 @@
                 <p id="p_infoViaje">Origen: <strong><%out.print(billete.getOrigen()); %></strong> - Destino: <strong><%out.print(billete.getDestino()); %></strong></p>
             </section>
             <%  for (int i = 0; i < horarios.size(); i++) {
-            %><article class="horario" id="<%out.print("horario" + i); %>"> <label class="datoHorario"><b>H.Salida: </b><% out.print(horarios.get(i).getHoraSalida()); %> </label>
-                <label class="datoHorario"> <b>H.llegada: </b><% out.print(horarios.get(i).getHoraLlegada()); %></label>
-                <label class="datoHorario"><b>Plazas: </b><% out.print(horarios.get(i).getPlazasLibres()); %></label>
-                <label class="datoHorario"><b>Precio: </b><% out.print(horarios.get(i).getPrecio()); %> </label><button id="boton_horario" type="button" class="btn btn-warning">Elegir horario</button></article>
+            %><article class="horario" id="<%out.print("horario" + i); %>"> <label class="datoHorario">H.Salida:<strong><% out.print(horarios.get(i).getHoraSalida()); %></strong> </label>
+                <label class="datoHorario"> H.llegada<strong><% out.print(horarios.get(i).getHoraLlegada()); %></strong></label>
+                <label class="datoHorario">Plazas:<b><% out.print(horarios.get(i).getPlazasLibres()); %></b></label>
+                <label class="datoHorario">Precio:<strong><% out.print(horarios.get(i).getPrecio()); %></strong></label><button name="<%out.print(i);%>" onclick="cogerDatosHorario(<% out.print("'" + horarios.get(i).getHoraSalida() + "'" + "," + "'" + horarios.get(i).getHoraLlegada() + "'" + "," + "'" + horarios.get(i).getPrecio() + "'"); %>)" id="boton_horario" class="btn btn-warning">Elegir horario</button></article>
                 <%
 
-                    }
+                        }
+                    
                 %>
         </section>
     </main>

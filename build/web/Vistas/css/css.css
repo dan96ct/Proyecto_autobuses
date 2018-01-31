@@ -24,6 +24,11 @@ and open the template in the editor.
     background-color: #FFA200 !important;
 }
 #carousel{height: 500px;}
+#formulario_billetes{
+    margin: 0 auto;
+    width: 70%;
+}
+.nav-item{ margin: 0 auto;}
 #columna_info{text-align: center;}
 .caja_imagen_icon_flat{
     border-radius: 50%;
