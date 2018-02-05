@@ -5,17 +5,31 @@
  */
 package Modelo;
 
+import Modelo.Pasajero;
+import java.util.ArrayList;
+
 /**
  *
  * @author dani
  */
 public class Billete {
 
-    private String origen, destino, dia, horaSalida,horaLlegada;
+    private String origen, destino, dia, horaSalida, horaLlegada;
     private double precio;
     private int personas;
+    private ArrayList<Pasajero> arrayPasajeros = new ArrayList<>();
+
+    public ArrayList<Pasajero> getArrayPasajeros() {
+        return arrayPasajeros;
+    }
+    
+
     public String getHoraSalida() {
         return horaSalida;
+    }
+
+    public void addPasajero(Pasajero pasajero) {
+        arrayPasajeros.add(pasajero);
     }
 
     public void setHoraSalida(String horaSalida) {
@@ -29,7 +43,6 @@ public class Billete {
     public void setHoraLlegada(String horaLlegada) {
         this.horaLlegada = horaLlegada;
     }
-
 
     public Billete(String origen, String destino, String dia, int personas) {
         this.origen = origen;
@@ -61,6 +74,7 @@ public class Billete {
     public void setDia(String dia) {
         this.dia = dia;
     }
+
     public double getPrecio() {
         return precio;
     }

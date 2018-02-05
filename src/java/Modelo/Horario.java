@@ -13,6 +13,15 @@ public class Horario {
     private String horaSalida, horaLlegada;
     private int plazasLibres;
     private double precio;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getHoraSalida() {
         return horaSalida;

@@ -24,11 +24,12 @@
 <body>
     <% if (session.getAttribute("horarios") == null || session.getAttribute("billetes") == null) {
     %>
-    <% } 
+    <% }
         ArrayList<Horario> horarios = (ArrayList<Horario>) session.getAttribute("horarios");
         Billete billete = new Billete();
         billete = (Billete) session.getAttribute("billete");
     %>
+
     <main id="contenido">
         <section id="lista_horarios">
             <section class="info_viaje">
@@ -44,8 +45,8 @@
                 <label class="datoHorario">Precio:<strong><% out.print(horarios.get(i).getPrecio()); %></strong></label><button name="<%out.print(i);%>" onclick="cogerDatosHorario(<% out.print("'" + horarios.get(i).getHoraSalida() + "'" + "," + "'" + horarios.get(i).getHoraLlegada() + "'" + "," + "'" + horarios.get(i).getPrecio() + "'"); %>)" id="boton_horario" class="btn btn-warning">Elegir horario</button></article>
                 <%
 
-                        }
-                    
+                    }
+
                 %>
         </section>
     </main>

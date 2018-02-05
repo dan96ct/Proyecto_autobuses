@@ -82,13 +82,14 @@ public class Operaciones {
             idDestino = rs2.getString("id");
         }
 
-        String ordensql3 = "SELECT * FROM rutas,rutas_horarios, horarios WHERE rutas.origen = ? AND rutas.destino = ? AND rutas.id = rutas_horarios.ruta AND rutas_horarios.horaSalida = horarios.id;";
+        String ordensql3 = "SELECT horarios.hora'hora', rutas_horarios.horaLLegada'horaLLegada',rutas.precio'precio',rutas_horarios.id'idRuta' FROM rutas,rutas_horarios, horarios WHERE rutas.origen = ? AND rutas.destino = ? AND rutas.id = rutas_horarios.ruta AND rutas_horarios.horaSalida = horarios.id;";
         PreparedStatement PrepStm3 = conn.prepareStatement(ordensql3);
         PrepStm3.setString(1, idOrigen);
         PrepStm3.setString(2, idDestino);
         ResultSet rs3 = PrepStm3.executeQuery();
         while (rs3.next()) {
             Horario horario = new Horario(rs3.getString("hora"), rs3.getString("horaLLegada"),8, rs3.getDouble("precio"));
+            horario.setId(rs3.getInt("idRuta"));
             System.out.println(horario.toString());
             horarios.add(horario);
         }

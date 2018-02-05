@@ -27,22 +27,47 @@
             Billete billete = new Billete();
             billete = (Billete) session.getAttribute("billete");
             out.print(billete.toString());
-            session.invalidate();
         %><section id="formulario_billetes">
             <ul class="nav nav-tabs">
+                <%for (int i = 1; i < billete.getPersonas() + 1; i++) {%>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Psajero 1</a>
+                    <button class="nav-link <% if (i == 1) {
+                            out.print("active");
+                        } %>" id="<% out.print(i);%>" onclick="activarFormulario(this);" type="button"><% out.print("Pasajero " + i);%></button>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pasajero 2</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pasajero 3</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pasajero 4</a>
-                </li>
+                <%}
+                %>
             </ul>
+            <form id="formulario_usuario">
+                <h2 id="tituloFormulario_usuario">Datos de pasajero 1</h2>
+                <hr>
+                <div class="form-group">
+                    <label for="indentificacion">Numero de identificacion</label>
+                    <input type="text" class="form-control" id="identificador" name="identificador1" aria-describedby="indentificacion" placeholder="Introduce tu numero de autentificacion" required>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre1" aria-describedby="nombre" placeholder="Introduce tu nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" class="form-control" id="apellidos" name="apellidos1" aria-describedby="apellidos" placeholder="Introduce tus apellidos" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email1" aria-describedby="email" placeholder="Introduce tu Email" required>
+                    <small id="emailHelp" class="form-text text-muted">Nunca revelaremos la informacion de tu correo a nadie</small>
+                </div>
+                <table id="autobus">
+                    <tr><td colspan="2">Elige el asiento</td></tr>
+                    <tr><td>[]</td><td>[]</td></tr>
+                    <tr><td>[]</td><td>[]</td></tr>
+                    <tr><td>[]</td><td>[]</td></tr>
+                    <tr><td>[]</td><td>[]</td></tr>
+                </table>
+                <button type="button" class="btn btn-success" onclick="comprobarDatosPasajero();">Confirmar pasajero</button>
+                <button type="button" class="btn btn-success" onclick="confirmarTodosLosDatos('<% out.print(billete.getPersonas()); %>')">Confirmar todos los datos</button>
+            </form>
         </section>
     </main>
 </body>
