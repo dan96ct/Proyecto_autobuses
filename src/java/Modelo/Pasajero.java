@@ -10,13 +10,14 @@ package Modelo;
  * @author dani
  */
 public class Pasajero {
-    private String nombre,apellido,correo,identificador,asiento;
+    private String nombre,apellido,correo,identificador;
+    private int asiento;
 
-    public String getAsiento() {
+    public int getAsiento() {
         return asiento;
     }
 
-    public void setAsiento(String asiento) {
+    public void setAsiento(int asiento) {
         this.asiento = asiento;
     }
     

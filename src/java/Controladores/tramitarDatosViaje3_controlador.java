@@ -40,6 +40,7 @@ public class tramitarDatosViaje3_controlador extends HttpServlet {
         String apellidos = (String) request.getParameter("apellidos");
         String email = (String) request.getParameter("email");
         String nif = (String) request.getParameter("nif");
+        String asiento = (String) request.getParameter("asiento");
 
         Pasajero pasajero = new Pasajero(nombre, apellidos, email, nif);
         System.out.println(pasajero.toString());

@@ -44,6 +44,20 @@ function comprobarDatosPasajero() {
         }
     }
 }
+
+function elegirAsiento(elemento) {
+    var todosLosAsientos = document.getElementsByTagName("td");
+    for (var i = 0; i < todosLosAsientos.length; i++) {
+        if (todosLosAsientos[i].getAttribute("name") !== "ocupado") {
+            todosLosAsientos[i].setAttribute("style", "color:black;");
+            todosLosAsientos[i].setAttribute("name", "");
+        }
+    }
+    if (elemento.getAttribute("name") !== "ocupado") {
+        elemento.setAttribute("style", "color:green;");
+        elemento.setAttribute("name", "activado");
+    }
+}
 function comprobarCamposVacios() {
     var validacion = true;
     var identificador = document.getElementById("identificador");
@@ -81,16 +95,33 @@ function guardarDatosPasajero(numero) {
     var nombre = document.getElementById("nombre").value;
     var apellidos = document.getElementById("apellidos").value;
     var email = document.getElementById("email").value;
+
+    var asiento = 0;
+    var todosLosAsientos = document.getElementsByTagName("td");
+    for (var i = 0; i < todosLosAsientos.length; i++) {
+        if (todosLosAsientos[i].getAttribute("name") == "activado") {
+            asiento = todosLosAsientos[i].getAttribute("id");
+            todosLosAsientos[i].setAttribute("name", "ocupado");
+        }
+    }
     objetoAjax = AJAXCrearObjeto(); //crea el objeto
-    objetoAjax.open('GET', '/Proyecto_autobuses/tramitarDatosViaje3_controlador?nif=' + numIdentificacion + '&nombre=' + nombre + '&apellidos=' + apellidos + '&email=' + email);
+    objetoAjax.open('GET', '/Proyecto_autobuses/tramitarDatosViaje3_controlador?nif=' + numIdentificacion + '&nombre=' + nombre + '&apellidos=' + apellidos + '&email=' + email + '&asiento=' + asiento);
     objetoAjax.send();
     objetoAjax.onreadystatechange = function () {
         if (objetoAjax.readyState === 4 && objetoAjax.status === 200) {
         }
     }
-
-    var pasajero = {"numPasajero": numero, "nif": numIdentificacion, "nombre": nombre, "apellidos": apellidos, "email": email};
-    arrayPasajeros.push(pasajero);
+    var datosIntroducidos = false;
+    for (var i = 0; i < arrayPasajeros.length; i++) {
+        if (arrayPasajeros[i].numPasajero == numero) {
+            arrayPasajeros[i] = {"numPasajero": numero, "nif": numIdentificacion, "nombre": nombre, "apellidos": apellidos, "email": email, "asiento": asiento};
+            datosIntroducidos = true;
+        }
+    }
+    if (datosIntroducidos == false) {
+        var pasajero = {"numPasajero": numero, "nif": numIdentificacion, "nombre": nombre, "apellidos": apellidos, "email": email, "asiento": asiento};
+        arrayPasajeros.push(pasajero);
+    }
     formularioConfirmado();
 
 }
@@ -103,10 +134,11 @@ function comprobarFormularios(numPersonas) {
 
 }
 function confirmarTodosLosDatos(numPersonas) {
+    alert(arrayPasajeros.length);
     if (comprobarFormularios(numPersonas) === true) {
         var json = JSON.stringify(arrayPasajeros);
         location.href = 'pagoBillete_vista.jsp';
-    }else{
+    } else {
         alert("Faltan formularios por completar");
     }
 }
@@ -145,7 +177,6 @@ function activarFormulario(element) {
     document.getElementById("nombre").value = "";
     document.getElementById("apellidos").value = "";
     document.getElementById("email").value = "";
-
 
     formularioNormal();
 
@@ -187,6 +218,23 @@ function formularioNormal() {
     for (var i = 0; i < arrayForm.length; i++) {
         arrayForm[i].setAttribute("style", "color:black;");
     }
+    var todosLosAsientos = document.getElementsByTagName("td");
+    for (var i = 0; i < todosLosAsientos.length; i++) {
+        if (todosLosAsientos[i].getAttribute("name") == "ocupado") {
+            todosLosAsientos[i].setAttribute("style", "color:red;");
+        } else {
+            todosLosAsientos[i].setAttribute("style", "color:black;");
+            todosLosAsientos[i].setAttribute("name", "");
+        }
+        for (var f = 0; f < arrayPasajeros.length; f++) {
+            if (arrayPasajeros[f].asiento == todosLosAsientos[i].getAttribute("id")) {
+                todosLosAsientos[i].setAttribute("name", "activado");
+                todosLosAsientos[i].setAttribute("style", "color:green;");
+
+            }
+        }
+    }
+
 
 }
 function borrarHijos(nodo) {
