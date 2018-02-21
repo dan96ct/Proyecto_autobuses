@@ -18,11 +18,12 @@ and open the template in the editor.
                    position: absolute;
                    z-index: 10;}
 #resumenDatos{
-    width: 50%;
+    width: 40%;
     display: inline-block;
     background-color: white;
     text-align: center;
     margin-top: 30px;
+    margin: 30px;
     padding: 2em;
     float: right;
 }
@@ -36,7 +37,8 @@ and open the template in the editor.
     text-align: center;
     margin-top: 20px;
     float: left;
-    width: 50%;
+    width: 40%;
+    margin: 30px;
     background-color: white;
 }
 #botones_formulario{

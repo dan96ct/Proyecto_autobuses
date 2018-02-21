@@ -360,6 +360,14 @@ function datosPasajero(elemento){
         if (arrayPasajeros[i].id == id){
             $('#nombre').empty();
             $('#nombre').append('<b>Nombre </b>' + arrayPasajeros[i].nombre);
+            $('#apellidos').empty();
+            $('#apellidos').append('<b>Apellido </b>' + arrayPasajeros[i].apellidos);
+            $('#nif').empty();
+            $('#nif').append('<b>NIF </b>' + arrayPasajeros[i].nif);
+            $('#email').empty();
+            $('#email').append('<b>Email </b>' + arrayPasajeros[i].email);
+            $('#asiento').empty();
+            $('#asiento').append('<b>Asiento </b>' + arrayPasajeros[i].asiento);
         }
     }
 }

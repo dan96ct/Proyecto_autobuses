@@ -40,7 +40,7 @@
                 %>
             </div>
             <h2>Datos pasajero</h2>
-            <label id="nombre"></label><br>
+            <label id="nombre">Seleccione un pasajero</label><br>
             <label id="apellidos"></label><br>
             <label id="nif"></label><br>
             <label id="email"></label><br>
