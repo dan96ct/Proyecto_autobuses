@@ -41,13 +41,30 @@ public class tramitarDatosViaje3_controlador extends HttpServlet {
         String email = (String) request.getParameter("email");
         String nif = (String) request.getParameter("nif");
         String asiento = (String) request.getParameter("asiento");
-
-        Pasajero pasajero = new Pasajero(nombre, apellidos, email, nif);
-        System.out.println(pasajero.toString());
+        String id = (String) request.getParameter("id");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + id);
         HttpSession session = request.getSession();
         Billete billete = new Billete();
         billete = (Billete) session.getAttribute("billete");
-        billete.addPasajero(pasajero);
+
+        boolean validar = true;
+        for (int i = 0; i < billete.getArrayPasajeros().size(); i++) {
+            if (billete.getArrayPasajeros().get(i).getId().equals(id)) {
+                billete.getArrayPasajeros().get(i).setNombre(nombre);
+                billete.getArrayPasajeros().get(i).setApellido(apellidos);
+                billete.getArrayPasajeros().get(i).setCorreo(email);
+                billete.getArrayPasajeros().get(i).setIdentificador(nif);
+                billete.getArrayPasajeros().get(i).setAsiento(Integer.parseInt(asiento));
+                validar = false;
+                break;
+            }
+        }
+        if (validar) {
+            Pasajero pasajero = new Pasajero(nombre, apellidos, email, nif);
+            pasajero.setAsiento(Integer.parseInt(asiento));
+            pasajero.setId(id);
+            billete.addPasajero(pasajero);
+        }
 
         session.setAttribute("billete", billete);
         try (PrintWriter out = response.getWriter()) {

@@ -23,6 +23,7 @@ public class Billete {
         return arrayPasajeros;
     }
     
+    
 
     public String getHoraSalida() {
         return horaSalida;

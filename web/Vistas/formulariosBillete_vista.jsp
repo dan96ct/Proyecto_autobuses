@@ -26,7 +26,6 @@
         <% }
             Billete billete = new Billete();
             billete = (Billete) session.getAttribute("billete");
-            out.print(billete.toString());
         %><section id="formulario_billetes">
             <ul class="nav nav-tabs">
                 <%for (int i = 1; i < billete.getPersonas() + 1; i++) {%>
@@ -59,7 +58,7 @@
                     <small id="emailHelp" class="form-text text-muted">Nunca revelaremos la informacion de tu correo a nadie</small>
                 </div>
                 <table id="autobus">
-                    <tr><td colspan="2">Elige el asiento</td></tr>
+                    <tr><td colspan="2" id="tituloTabla">Elige el asiento</td></tr>
                     <tr><td id="1" onclick="elegirAsiento(this);">[  ]</td><td id="2" onclick="elegirAsiento(this);">[  ]</td></tr>
                     <tr><td id="3" onclick="elegirAsiento(this);">[  ]</td><td id="4" onclick="elegirAsiento(this);">[  ]</td></tr>
                     <tr><td id="5" onclick="elegirAsiento(this);">[  ]</td><td id="6" onclick="elegirAsiento(this);">[  ]</td></tr>

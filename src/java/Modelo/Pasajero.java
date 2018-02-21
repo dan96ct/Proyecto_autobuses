@@ -10,8 +10,16 @@ package Modelo;
  * @author dani
  */
 public class Pasajero {
-    private String nombre,apellido,correo,identificador;
+    private String nombre,apellido,correo,identificador,id;//El id no tiene ninguna relacion con la base de datos, sirve para evitar que se introduzca dos veces el mismo pasajero
     private int asiento;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public int getAsiento() {
         return asiento;

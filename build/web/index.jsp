@@ -37,6 +37,9 @@
     </nav>
 </head>
 <body onload="getEstaciones()">
+    <script>
+        generarID();
+    </script>
     <main id="contenido">
         <section class="formulario_inicio">
             <form action="tramitarDatosViaje1_controlador">
@@ -107,6 +110,6 @@
             </div>
         </section>
     </main>
-<footer id="footer_pagina">© 1960 - 2018 Varian SL Inc.</footer>
+    <footer id="footer_pagina">© 1960 - 2018 Varian SL Inc.</footer>
 </body>
 </html>

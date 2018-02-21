@@ -17,11 +17,30 @@ and open the template in the editor.
                    margin-top: 3%;
                    position: absolute;
                    z-index: 10;}
+#resumenDatos{
+    width: 50%;
+    display: inline-block;
+    background-color: white;
+    text-align: center;
+    margin-top: 30px;
+    padding: 2em;
+    float: right;
+}
 #info_empresa{
     margin-top: 40px;
 }
 #navBar{
     background-color: #FFA200 !important;
+}
+#formularios_pago{
+    text-align: center;
+    margin-top: 20px;
+    float: left;
+    width: 50%;
+    background-color: white;
+}
+#botones_formulario{
+    width: 100%;
 }
 #carousel{height: 500px;}
 #formulario_billetes{
