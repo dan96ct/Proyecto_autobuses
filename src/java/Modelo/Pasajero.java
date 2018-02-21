@@ -42,8 +42,10 @@ public class Pasajero {
 
     @Override
     public String toString() {
-        return "Pasajero{" + "nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", identificador=" + identificador + '}';
+        return "Pasajero{" + "nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", identificador=" + identificador + ", id=" + id + ", asiento=" + asiento + '}';
     }
+
+  
 
     public String getNombre() {
         return nombre;

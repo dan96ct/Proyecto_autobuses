@@ -25,7 +25,8 @@ and open the template in the editor.
     margin-top: 30px;
     margin: 30px;
     padding: 2em;
-    float: right;
+    float: left;
+
 }
 #info_empresa{
     margin-top: 40px;
@@ -33,13 +34,20 @@ and open the template in the editor.
 #navBar{
     background-color: #FFA200 !important;
 }
-#formularios_pago{
+#pasajeros_datos{
     text-align: center;
     margin-top: 20px;
-    float: left;
     width: 40%;
     margin: 30px;
     background-color: white;
+    display: inline-block;
+}
+#formulario_pago{
+    float:right;
+    width: 50%;
+    margin: 30px;
+    background-color: white;
+    padding: 2em;
 }
 #botones_formulario{
     width: 100%;
@@ -71,9 +79,6 @@ and open the template in the editor.
 #barra_superior{
     width: 100%;
     height: 20%;
-    -webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
 
 }
 #contenido{
