@@ -90,7 +90,6 @@
             <label id="nombre">Seleccione un pasajero</label><br>
             <label id="apellidos"></label><br>
             <label id="nif"></label><br>
-            <label id="email"></label><br>
             <label id="asiento"></label><br>
 
         </section>

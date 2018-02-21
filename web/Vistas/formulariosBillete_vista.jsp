@@ -52,11 +52,6 @@
                     <label for="apellidos">Apellidos</label>
                     <input type="text" class="form-control" id="apellidos" name="apellidos1" aria-describedby="apellidos" placeholder="Introduce tus apellidos" required>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email1" aria-describedby="email" placeholder="Introduce tu Email" required>
-                    <small id="emailHelp" class="form-text text-muted">Nunca revelaremos la informacion de tu correo a nadie</small>
-                </div>
                 <table id="autobus">
                     <tr><td colspan="2" id="tituloTabla">Elige el asiento</td></tr>
                     <tr><td id="1" onclick="elegirAsiento(this);">[  ]</td><td id="2" onclick="elegirAsiento(this);">[  ]</td></tr>
