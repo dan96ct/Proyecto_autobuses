@@ -105,7 +105,6 @@ function comprobarCamposVacios() {
     var identificador = document.getElementById("identificador");
     var nombre = document.getElementById("nombre");
     var apellidos = document.getElementById("apellidos");
-    var email = document.getElementById("email");
 
     if (identificador.value === "") {
         identificador.setAttribute("class", "form-control is-invalid");
@@ -124,12 +123,7 @@ function comprobarCamposVacios() {
             validacion = false;
         }
     }
-    if (email.value === "") {
-        email.setAttribute("class", "form-control is-invalid");
-        if (validacion !== false) {
-            validacion = false;
-        }
-    }
+
     var todosLosAsientos = document.getElementsByTagName("td");
     var validar = false;
     for (var i = 0; i < todosLosAsientos.length; i++) {
@@ -152,7 +146,6 @@ function guardarDatosPasajero(numero) {
     var numIdentificacion = document.getElementById("identificador").value;
     var nombre = document.getElementById("nombre").value;
     var apellidos = document.getElementById("apellidos").value;
-    var email = document.getElementById("email").value;
 
     var asiento = 0;
     var todosLosAsientos = document.getElementsByTagName("td");
@@ -166,10 +159,10 @@ function guardarDatosPasajero(numero) {
     var datosIntroducidos = false;
     for (var i = 0; i < arrayPasajeros.length; i++) {
         if (arrayPasajeros[i].numPasajero == numero) {
-            arrayPasajeros[i] = {"numPasajero": numero, "nif": numIdentificacion, "nombre": nombre, "apellidos": apellidos, "email": email, "asiento": asiento, "id": arrayPasajeros[i].id};
+            arrayPasajeros[i] = {"numPasajero": numero, "nif": numIdentificacion, "nombre": nombre, "apellidos": apellidos, "asiento": asiento, "id": arrayPasajeros[i].id};
             datosIntroducidos = true;
             objetoAjax = AJAXCrearObjeto(); //crea el objeto
-            objetoAjax.open('GET', '/Proyecto_autobuses/tramitarDatosViaje3_controlador?nif=' + numIdentificacion + '&nombre=' + nombre + '&apellidos=' + apellidos + '&email=' + email + '&asiento=' + asiento + '&id=' + arrayPasajeros[i].id);
+            objetoAjax.open('GET', '/Proyecto_autobuses/tramitarDatosViaje3_controlador?nif=' + numIdentificacion + '&nombre=' + nombre + '&apellidos=' + apellidos + '&asiento=' + asiento + '&id=' + arrayPasajeros[i].id);
             objetoAjax.send();
             objetoAjax.onreadystatechange = function () {
                 if (objetoAjax.readyState === 4 && objetoAjax.status === 200) {
@@ -178,9 +171,9 @@ function guardarDatosPasajero(numero) {
         }
     }
     if (datosIntroducidos == false) {
-        var pasajero = {"numPasajero": numero, "nif": numIdentificacion, "nombre": nombre, "apellidos": apellidos, "email": email, "asiento": asiento, "id": generarID()};
+        var pasajero = {"numPasajero": numero, "nif": numIdentificacion, "nombre": nombre, "apellidos": apellidos, "asiento": asiento, "id": generarID()};
         objetoAjax = AJAXCrearObjeto(); //crea el objeto
-        objetoAjax.open('GET', '/Proyecto_autobuses/tramitarDatosViaje3_controlador?nif=' + numIdentificacion + '&nombre=' + nombre + '&apellidos=' + apellidos + '&email=' + email + '&asiento=' + asiento + '&id=' + pasajero.id);
+        objetoAjax.open('GET', '/Proyecto_autobuses/tramitarDatosViaje3_controlador?nif=' + numIdentificacion + '&nombre=' + nombre + '&apellidos=' + apellidos + '&asiento=' + asiento + '&id=' + pasajero.id);
         objetoAjax.send();
         objetoAjax.onreadystatechange = function () {
             if (objetoAjax.readyState === 4 && objetoAjax.status === 200) {
@@ -236,12 +229,10 @@ function activarFormulario(element) {
     document.getElementById("identificador").setAttribute("name", "identificador" + numForm);
     document.getElementById("nombre").setAttribute("name", "nombre" + numForm);
     document.getElementById("apellidos").setAttribute("name", "apellidos" + numForm);
-    document.getElementById("email").setAttribute("name", "email" + numForm);
 
     document.getElementById("identificador").value = "";
     document.getElementById("nombre").value = "";
     document.getElementById("apellidos").value = "";
-    document.getElementById("email").value = "";
 
 
 
@@ -257,7 +248,6 @@ function comprobarFormularioCompleto(numForm) {
             document.getElementById("identificador").value = arrayPasajeros[i].nif;
             document.getElementById("nombre").value = arrayPasajeros[i].nombre;
             document.getElementById("apellidos").value = arrayPasajeros[i].apellidos;
-            document.getElementById("email").value = arrayPasajeros[i].email;
 
             formularioConfirmado(arrayPasajeros[i].numPasajero);
         }
@@ -267,7 +257,6 @@ function formularioConfirmado(numPasajero) {
     document.getElementById("identificador").setAttribute("class", "form-control is-valid");
     document.getElementById("nombre").setAttribute("class", "form-control is-valid");
     document.getElementById("apellidos").setAttribute("class", "form-control is-valid");
-    document.getElementById("email").setAttribute("class", "form-control is-valid");
     var arrayForm = document.getElementsByClassName("form-group");
     for (var i = 0; i < arrayForm.length; i++) {
         arrayForm[i].setAttribute("style", "color:green;");
@@ -287,7 +276,6 @@ function formularioNormal() {
     document.getElementById("identificador").setAttribute("class", "form-control");
     document.getElementById("nombre").setAttribute("class", "form-control");
     document.getElementById("apellidos").setAttribute("class", "form-control");
-    document.getElementById("email").setAttribute("class", "form-control");
     var arrayForm = document.getElementsByClassName("form-group");
     for (var i = 0; i < arrayForm.length; i++) {
         arrayForm[i].setAttribute("style", "color:black;");
@@ -364,8 +352,6 @@ function datosPasajero(elemento){
             $('#apellidos').append('<b>Apellido </b>' + arrayPasajeros[i].apellidos);
             $('#nif').empty();
             $('#nif').append('<b>NIF </b>' + arrayPasajeros[i].nif);
-            $('#email').empty();
-            $('#email').append('<b>Email </b>' + arrayPasajeros[i].email);
             $('#asiento').empty();
             $('#asiento').append('<b>Asiento </b>' + arrayPasajeros[i].asiento);
         }
