@@ -287,6 +287,7 @@ function formularioNormal() {
         for (var f = 0; f < arrayAsientos.length; f++) {
             if (todosLosAsientos[i].getAttribute("id") == arrayAsientos[f].numeroAsiento) {
                 todosLosAsientos[i].setAttribute("style", "color:red;");
+                todosLosAsientos[i].setAttribute("name", "ocupado");
                 validar = false;
                 break;
             }
@@ -339,13 +340,13 @@ function generarID() {
     }
     return id;
 }
-function añadirPasajero(pasajero){
+function añadirPasajero(pasajero) {
     arrayPasajeros.push(pasajero);
 }
-function datosPasajero(elemento){
+function datosPasajero(elemento) {
     var id = elemento.getAttribute("name");
     for (var i = 0; i < arrayPasajeros.length; i++) {
-        if (arrayPasajeros[i].id == id){
+        if (arrayPasajeros[i].id == id) {
             $('#nombre').empty();
             $('#nombre').append('<b>Nombre </b>' + arrayPasajeros[i].nombre);
             $('#apellidos').empty();

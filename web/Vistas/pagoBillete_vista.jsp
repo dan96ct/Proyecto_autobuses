@@ -63,6 +63,10 @@
                     <input type="text" class="form-control" name="NIF" id="NIFPago" placeholder="Introduce tu NIF">
                 </div>
                 <div class="form-group">
+                    <label for="Email">Email del titular de la tarjeta</label>
+                    <input type="email" class="form-control" name="Email" id="email" placeholder="Introduce tu correo electronico">
+                </div>
+                <div class="form-group">
                     <label for="Nombre">Nombre del titular de la tarjeta</label>
                     <input type="text" class="form-control" name="nombre" id="nombrePago" placeholder="Introduce tu nombre">
                 </div>

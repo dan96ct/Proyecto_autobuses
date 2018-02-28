@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `bd_autobuses` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE  IF NOT EXISTS `bd_autobuses` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci */;
 USE `bd_autobuses`;
 -- MySQL dump 10.13  Distrib 5.7.20, for macos10.12 (x86_64)
 --
@@ -39,6 +39,34 @@ CREATE TABLE `autobuses` (
 LOCK TABLES `autobuses` WRITE;
 /*!40000 ALTER TABLE `autobuses` DISABLE KEYS */;
 /*!40000 ALTER TABLE `autobuses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `clientes`
+--
+
+DROP TABLE IF EXISTS `clientes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `clientes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nif` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `tarjeta` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `fechaCaducidad` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `clientes`
+--
+
+LOCK TABLES `clientes` WRITE;
+/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -157,7 +185,7 @@ DROP TABLE IF EXISTS `rutas_horarios`;
 CREATE TABLE `rutas_horarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `horaSalida` int(11) NOT NULL,
-  `horaLLegada` time(6) DEFAULT NULL,
+  `horaLLegada` time DEFAULT NULL,
   `ruta` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_rutaHorario_idx` (`ruta`),
@@ -172,8 +200,65 @@ CREATE TABLE `rutas_horarios` (
 
 LOCK TABLES `rutas_horarios` WRITE;
 /*!40000 ALTER TABLE `rutas_horarios` DISABLE KEYS */;
-INSERT INTO `rutas_horarios` VALUES (1,1,'09:20:00.000000',3),(2,2,'10:20:00.000000',3),(3,3,'12:50:00.000000',3),(4,1,'09:15:00.000000',4),(5,6,'20:40:00.000000',2),(6,4,'13:40:00.000000',5),(7,3,'13:40:00.000000',2);
+INSERT INTO `rutas_horarios` VALUES (1,1,'09:20:00',3),(2,2,'10:20:00',3),(3,3,'12:50:00',3),(4,1,'09:15:00',4),(5,6,'20:40:00',2),(6,4,'13:40:00',5),(7,3,'13:40:00',2);
 /*!40000 ALTER TABLE `rutas_horarios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `viajeros`
+--
+
+DROP TABLE IF EXISTS `viajeros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `viajeros` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nif` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `asiento` int(11) NOT NULL,
+  `idViaje` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_viaje_idx` (`idViaje`),
+  CONSTRAINT `id_viaje` FOREIGN KEY (`idViaje`) REFERENCES `viajes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `viajeros`
+--
+
+LOCK TABLES `viajeros` WRITE;
+/*!40000 ALTER TABLE `viajeros` DISABLE KEYS */;
+/*!40000 ALTER TABLE `viajeros` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `viajes`
+--
+
+DROP TABLE IF EXISTS `viajes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `viajes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idViaje` int(11) NOT NULL,
+  `precio` double NOT NULL,
+  `idCliente` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cliente_id_idx` (`idCliente`),
+  CONSTRAINT `cliente_id` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `viajes`
+--
+
+LOCK TABLES `viajes` WRITE;
+/*!40000 ALTER TABLE `viajes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `viajes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -193,4 +278,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-21 19:02:19
+-- Dump completed on 2018-02-28 22:19:02
