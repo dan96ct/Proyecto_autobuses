@@ -11,6 +11,17 @@ package DAO;
  */
 import java.sql.*;
 
+
+    /**
+     * Clase que devuelve una variable Connection de la base de datos que hemos especificado.
+     * <PRE> ConexionBBDD nombre = new ConexionBBDD();</PRE>
+     * @author Daniel Cebrián
+     * @return Connection variable que será utilizada como conexion
+     * @exception La excepcion saltará cuando no haya ninguna conexion con la bd    
+     * @since incluido desde la version 1.0
+     */
+
+
 public class ConexionBBDD {
 
     private static ConexionBBDD UnicaConexion = null;

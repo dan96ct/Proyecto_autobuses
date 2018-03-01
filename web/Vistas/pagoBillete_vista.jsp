@@ -24,7 +24,6 @@
     <%
         Billete billete = new Billete();
         billete = (Billete) session.getAttribute("billete");
-        session.invalidate();
     %>
     <main id="contenido">
         <section id="resumenDatos">
@@ -38,7 +37,7 @@
         </section>
         <section id="formulario_pago">
             <h2>Rellene el formulario para completar el pago</h2>
-            <form>
+            <form action="../guardarDatosViaje_controlador">
                 <div class="form-group">
                     <label for="Tipo de tarjeta">Tipo de tarjeta</label>
                     <select id="tipoTarjeta" name="tarjetas">
