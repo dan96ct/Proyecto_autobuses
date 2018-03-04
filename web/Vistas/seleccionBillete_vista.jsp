@@ -35,19 +35,30 @@
             <section class="info_viaje">
                 <label class="label_busqueda">Busqueda</label><label class="label_billetes"> Billetes:<b><% out.print(billete.getPersonas());%></b></label>
                 <hr>
-                <p id="p_infoViaje"><b><% out.print(billete.getDia()); %></b></p>
+                <p id="p_infoViaje"><b><%  out.print(billete.getDia()); %></b></p>
                 <p id="p_infoViaje">Origen: <strong><%out.print(billete.getOrigen()); %></strong> - Destino: <strong><%out.print(billete.getDestino()); %></strong></p>
             </section>
             <%  for (int i = 0; i < horarios.size(); i++) {
+                    if (billete.getPersonas() <= horarios.get(i).getPlazasLibres()) {
+
             %><article class="horario" id="<%out.print("horario" + i); %>"> <label class="datoHorario">H.Salida:<strong><% out.print(horarios.get(i).getHoraSalida()); %></strong> </label>
                 <label class="datoHorario"> H.llegada<strong><% out.print(horarios.get(i).getHoraLlegada()); %></strong></label>
                 <label class="datoHorario">Plazas:<b><% out.print(horarios.get(i).getPlazasLibres()); %></b></label>
                 <label class="datoHorario">Precio:<strong><% out.print(horarios.get(i).getPrecio()); %></strong></label><button name="<%out.print(i);%>" onclick="cogerDatosHorario(<% out.print("'" + horarios.get(i).getHoraSalida() + "'" + "," + "'" + horarios.get(i).getHoraLlegada() + "'" + "," + "'" + horarios.get(i).getPrecio() + "'"); %>)" id="boton_horario" class="btn btn-warning">Elegir horario</button></article>
                 <%
 
+                } else {%>
+            <article class="horario" id="<%out.print("horario" + i); %>"> <label class="datoHorario">H.Salida:<strong><% out.print(horarios.get(i).getHoraSalida()); %></strong> </label>
+                <label class="datoHorario"> H.llegada<strong><% out.print(horarios.get(i).getHoraLlegada()); %></strong></label>
+                <label class="datoHorario" style="color: red;">Plazas:<b><% out.print(horarios.get(i).getPlazasLibres()); %></b></label>
+                <label class="datoHorario">Precio:<strong><% out.print(horarios.get(i).getPrecio()); %></strong></label><button name="<%out.print(i);%>" onclick="cogerDatosHorario(<% out.print("'" + horarios.get(i).getHoraSalida() + "'" + "," + "'" + horarios.get(i).getHoraLlegada() + "'" + "," + "'" + horarios.get(i).getPrecio() + "'"); %>)" id="boton_horario" class="btn btn-warning" disabled>Elegir horario</button>
+                <label style="color: red;">Lo lamentamos, pero no hay suficientes plazas disponibles</label>
+            </article>
+            <%
                     }
+                }
 
-                %>
+            %>
         </section>
     </main>
     <footer id="footer_pagina">© 1960 - 2018 Varian SL Inc.</footer>

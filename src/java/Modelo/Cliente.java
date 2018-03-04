@@ -10,17 +10,27 @@ package Modelo;
  * @author Dani
  */
 public class Cliente {
-    private String nif, nombre, apellidos, email, tarjeta, fechaCaducidad;
+    private String nif, nombre, apellidos, email, tarjeta, fechaCaducidad,tipoTarjeta;
 
-    public Cliente(String nif, String nombre, String apellidos, String email, String tarjeta, String fechaCaducidad) {
+    public Cliente(String nif, String nombre, String apellidos, String email, String tarjeta, String fechaCaducidad, String tipoTarjeta) {
         this.nif = nif;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
         this.tarjeta = tarjeta;
         this.fechaCaducidad = fechaCaducidad;
+        this.tipoTarjeta = tipoTarjeta;
     }
 
+    public String getTipoTarjeta() {
+        return tipoTarjeta;
+    }
+
+    public void setTipoTarjeta(String tipoTarjeta) {
+        this.tipoTarjeta = tipoTarjeta;
+    }
+
+   
     public String getNif() {
         return nif;
     }

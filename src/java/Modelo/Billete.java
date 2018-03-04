@@ -6,6 +6,7 @@
 package Modelo;
 
 import Modelo.Pasajero;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +15,8 @@ import java.util.ArrayList;
  */
 public class Billete {
 
-    private String origen, destino, dia, horaSalida, horaLlegada;
+    private String origen, destino, horaSalida, horaLlegada;
+    private LocalDate dia;
     private double precio;
     private int personas;
     private ArrayList<Pasajero> arrayPasajeros = new ArrayList<>();
@@ -22,8 +24,6 @@ public class Billete {
     public ArrayList<Pasajero> getArrayPasajeros() {
         return arrayPasajeros;
     }
-    
-    
 
     public String getHoraSalida() {
         return horaSalida;
@@ -45,7 +45,15 @@ public class Billete {
         this.horaLlegada = horaLlegada;
     }
 
-    public Billete(String origen, String destino, String dia, int personas) {
+    public LocalDate getDia() {
+        return dia;
+    }
+
+    public void setDia(LocalDate dia) {
+        this.dia = dia;
+    }
+
+    public Billete(String origen, String destino, LocalDate dia, int personas) {
         this.origen = origen;
         this.destino = destino;
         this.dia = dia;
@@ -68,13 +76,6 @@ public class Billete {
         this.destino = destino;
     }
 
-    public String getDia() {
-        return dia;
-    }
-
-    public void setDia(String dia) {
-        this.dia = dia;
-    }
 
     public double getPrecio() {
         return precio;

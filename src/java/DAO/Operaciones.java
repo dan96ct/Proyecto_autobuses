@@ -34,7 +34,7 @@ public class Operaciones {
 
     public void guardarViaje(Connection conn, Billete billete, Cliente cliente) throws SQLException {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>" + cliente);
-        String ordensql = "INSERT INTO `clientes` (`nif`, `nombre`, `apellidos`, `email`, `tarjeta`, `fechaCaducidad`) VALUES (?,?,?,?,?,?);";
+        String ordensql = "INSERT INTO `clientes` (`nif`, `nombre`, `apellidos`, `email`, `tarjeta`, `fechaCaducidad`,`tipoTarjeta`) VALUES (?,?,?,?,?,?,?);";
         PreparedStatement PrepStm = conn.prepareStatement(ordensql);
         PrepStm.setString(1, cliente.getNif());
         PrepStm.setString(2, cliente.getNombre());
@@ -42,6 +42,7 @@ public class Operaciones {
         PrepStm.setString(4, cliente.getEmail());
         PrepStm.setString(5, cliente.getTarjeta());
         PrepStm.setString(6, cliente.getFechaCaducidad());
+        PrepStm.setString(7, cliente.getTipoTarjeta());
         PrepStm.executeUpdate();
 
         String ordensqlCliente = "SELECT * FROM clientes WHERE nif=?";
@@ -59,26 +60,25 @@ public class Operaciones {
         rs.next();
         int idRutaHorario = rs.getInt("idRuta");
         System.out.println(idRutaHorario);
-        
-        String ordensql3 = "INSERT INTO `viajes` (`idRutaHorarios`, `precio`, `idCliente`, `fecha`) VALUES (?,?,?,?);";
+
+        String ordensql3 = "INSERT INTO `viajes` (`idViaje`, `precio`, `idCliente`, `fecha`) VALUES (?,?,?,?);";
         PreparedStatement PrepStm3 = conn.prepareStatement(ordensql3);
         PrepStm3.setInt(1, idRutaHorario);
         PrepStm3.setDouble(2, billete.getPrecio());
         PrepStm3.setInt(3, idCliente);
-        PrepStm3.setString(4, billete.getDia());
+        PrepStm3.setDate(4, java.sql.Date.valueOf(billete.getDia()));
         PrepStm3.executeUpdate();
-        
-        
-        String ordensqlViaje = "SELECT * FROM viajes WHERE idRutaHorarios=? AND precio=? AND idCliente=? AND fecha=?";
+
+        String ordensqlViaje = "SELECT * FROM viajes WHERE idViaje=? AND precio=? AND idCliente=? AND fecha=?";
         PreparedStatement PrepStmViaje = conn.prepareStatement(ordensqlViaje);
         PrepStmViaje.setInt(1, idRutaHorario);
         PrepStmViaje.setDouble(2, billete.getPrecio());
         PrepStmViaje.setInt(3, idCliente);
-        PrepStmViaje.setString(4, billete.getDia());
+        PrepStmViaje.setDate(4, java.sql.Date.valueOf(billete.getDia()));
         ResultSet rsViaje = PrepStmViaje.executeQuery();
         rsViaje.next();
         int idViaje = rsViaje.getInt("id");
-        
+
         ArrayList<Pasajero> arrayPasajeros = new ArrayList<>();
         arrayPasajeros = billete.getArrayPasajeros();
 
@@ -92,15 +92,31 @@ public class Operaciones {
             PrepStmvViajero.setString(5, arrayPasajeros.get(i).getIdentificador());
             PrepStmvViajero.executeUpdate();
         }
-         
- 
-        String ordensqlPlazasOcupadas = "INSERT INTO `plazas_ocupadas` (`dia`, `plazasOcupadas`, `rutas_horarios`) VALUES (?, (`plazasOcupadas` + ?), ?);";
-        PreparedStatement PrepStmvPlazas = conn.prepareStatement(ordensqlPlazasOcupadas);
-        PrepStmvPlazas.setString(1, billete.getDia());
-        PrepStmvPlazas.setInt(2, billete.getPersonas());
-        PrepStmvPlazas.setInt(3, idRutaHorario);
-        PrepStmvPlazas.executeUpdate();
-         
+
+        String ordensqlAsientos = "SELECT * FROM plazas_ocupadas WHERE dia=? AND rutas_horarios=?";
+        PreparedStatement PrepStmAsientos = conn.prepareStatement(ordensqlAsientos);
+        PrepStmAsientos.setDate(1, java.sql.Date.valueOf(billete.getDia()));
+        PrepStmAsientos.setInt(2, idRutaHorario);
+        ResultSet rsAsientos = PrepStmAsientos.executeQuery();
+        if (rsAsientos.next()) {
+            int idViaje_asientos = rsAsientos.getInt("id");
+            System.out.println("ENTRAAAAAAAAA");
+            String ordensqlViajero = "UPDATE `bd_autobuses`.`plazas_ocupadas` SET `plazasOcupadas`=`plazasOcupadas`+? WHERE `id`=?;";
+            PreparedStatement PrepStmvViajero = conn.prepareStatement(ordensqlViajero);
+            PrepStmvViajero.setInt(1, billete.getPersonas());
+            PrepStmvViajero.setInt(2, idViaje_asientos);
+            PrepStmvViajero.executeUpdate();
+
+        } else {
+            String ordensqlViajero = "INSERT INTO `plazas_ocupadas` (`dia`, `plazasOcupadas`, `rutas_horarios`) VALUES (?,?,?);";
+            PreparedStatement PrepStmvViajero = conn.prepareStatement(ordensqlViajero);
+            PrepStmvViajero.setDate(1, java.sql.Date.valueOf(billete.getDia()));
+            PrepStmvViajero.setInt(2, billete.getPersonas());
+            PrepStmvViajero.setInt(3, idRutaHorario);
+            PrepStmvViajero.executeUpdate();
+
+        }
+
     }
 
     public ArrayList getRutas(Connection conn, String estacion) throws SQLException {
@@ -161,7 +177,18 @@ public class Operaciones {
         PrepStm3.setString(2, idDestino);
         ResultSet rs3 = PrepStm3.executeQuery();
         while (rs3.next()) {
-            Horario horario = new Horario(rs3.getString("hora"), rs3.getString("horaLLegada"), 8, rs3.getDouble("precio"));
+            String ordensqlPlazas = "SELECT * FROM plazas_ocupadas WHERE rutas_horarios=? AND dia=?;";
+            PreparedStatement PrepStmPlazas = conn.prepareStatement(ordensqlPlazas);
+            PrepStmPlazas.setInt(1, rs3.getInt("idRuta"));
+            PrepStmPlazas.setDate(2, java.sql.Date.valueOf(billete.getDia()));
+            ResultSet rsP = PrepStmPlazas.executeQuery();
+            int plazasOcupadas = 0;
+            while (rsP.next()) {
+                 plazasOcupadas = rsP.getInt("plazasOcupadas");
+                
+            }
+            int plazasLibres = 8 - plazasOcupadas;
+            Horario horario = new Horario(rs3.getString("hora"), rs3.getString("horaLLegada"), plazasLibres, rs3.getDouble("precio"));
             horario.setId(rs3.getInt("idRuta"));
             System.out.println(horario.toString());
             horarios.add(horario);

@@ -30,6 +30,7 @@
             <h2>Resumen de datos</h2>
             <label><b>Origen:</b> <% out.print(billete.getOrigen());%></label><br>
             <label><b>Destino:</b> <% out.print(billete.getDestino());%></label><br>
+            <label><b>Fecha</b> <% out.print(billete.getDia());%></label><br>
             <label><b>Hora salida:</b> <% out.print(billete.getHoraSalida());%></label><br>
             <label><b>Hora llegada:</b> <% out.print(billete.getHoraLlegada());%></label><br>
             <label><b>Numero de pasajeros:</b> <% out.print(billete.getPersonas());%></label><br>

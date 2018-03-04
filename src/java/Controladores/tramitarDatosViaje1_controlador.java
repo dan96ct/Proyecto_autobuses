@@ -12,6 +12,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -58,10 +62,13 @@ public class tramitarDatosViaje1_controlador extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String origen = (String) request.getParameter("origen");
         String destino = (String) request.getParameter("destino");
-        String fecha = (String) request.getParameter("fecha");
+        String fechaString = (String) request.getParameter("fecha");
         int numPersonas = Integer.valueOf(request.getParameter("numPersonas"));
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate fechaDate = LocalDate.parse(fechaString, formatter);
+        Billete billete = new Billete(origen, destino, fechaDate, numPersonas);
 
-        Billete billete = new Billete(origen, destino, fecha, numPersonas);
         System.out.print(billete.toString());
         Operaciones operaciones = new Operaciones();
 
