@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `bd_autobuses` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci */;
 USE `bd_autobuses`;
--- MySQL dump 10.16  Distrib 10.1.28-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.20, for macos10.12 (x86_64)
 --
 -- Host: 127.0.0.1    Database: bd_autobuses
 -- ------------------------------------------------------
--- Server version	10.1.28-MariaDB
+-- Server version	5.7.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,30 +16,6 @@ USE `bd_autobuses`;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `autobuses`
---
-
-DROP TABLE IF EXISTS `autobuses`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `autobuses` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `numPlazas` int(11) NOT NULL,
-  `matricula` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `autobuses`
---
-
-LOCK TABLES `autobuses` WRITE;
-/*!40000 ALTER TABLE `autobuses` DISABLE KEYS */;
-/*!40000 ALTER TABLE `autobuses` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `clientes`
@@ -54,8 +30,9 @@ CREATE TABLE `clientes` (
   `nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +41,6 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (16,'ascasc','ascas','ascasc','ascascsa@gmail.com'),(17,'21312','ascas','ascasc','sacascsa@gmail.com'),(18,'213','','','');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,13 +94,13 @@ INSERT INTO `horarios` VALUES (1,'09:00:00'),(2,'10:00:00'),(3,'12:30:00'),(4,'1
 UNLOCK TABLES;
 
 --
--- Table structure for table `plazas_ocupadas`
+-- Table structure for table `ocupacion`
 --
 
-DROP TABLE IF EXISTS `plazas_ocupadas`;
+DROP TABLE IF EXISTS `ocupacion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `plazas_ocupadas` (
+CREATE TABLE `ocupacion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dia` date NOT NULL,
   `plazasOcupadas` int(11) NOT NULL,
@@ -132,17 +108,16 @@ CREATE TABLE `plazas_ocupadas` (
   PRIMARY KEY (`id`),
   KEY `id_rutaHorario_idx` (`rutas_horarios`),
   CONSTRAINT `id_rutaPlazasOcupadas` FOREIGN KEY (`rutas_horarios`) REFERENCES `rutas_horarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `plazas_ocupadas`
+-- Dumping data for table `ocupacion`
 --
 
-LOCK TABLES `plazas_ocupadas` WRITE;
-/*!40000 ALTER TABLE `plazas_ocupadas` DISABLE KEYS */;
-INSERT INTO `plazas_ocupadas` VALUES (2,'2018-03-05',3,5);
-/*!40000 ALTER TABLE `plazas_ocupadas` ENABLE KEYS */;
+LOCK TABLES `ocupacion` WRITE;
+/*!40000 ALTER TABLE `ocupacion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ocupacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -220,7 +195,7 @@ CREATE TABLE `tarjetas` (
   PRIMARY KEY (`id`),
   KEY `id_cliente_idx` (`idCliente`),
   CONSTRAINT `id_cliente` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,7 +204,6 @@ CREATE TABLE `tarjetas` (
 
 LOCK TABLES `tarjetas` WRITE;
 /*!40000 ALTER TABLE `tarjetas` DISABLE KEYS */;
-INSERT INTO `tarjetas` VALUES (1,'213123','2018-03','MasterCard',16),(2,'21321','2018-03','MasterCard',17),(3,'','','MasterCard',18);
 /*!40000 ALTER TABLE `tarjetas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,7 +224,7 @@ CREATE TABLE `viajeros` (
   PRIMARY KEY (`id`),
   KEY `id_viaje_idx` (`idViaje`),
   CONSTRAINT `id_viaje` FOREIGN KEY (`idViaje`) REFERENCES `viajes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,7 +233,6 @@ CREATE TABLE `viajeros` (
 
 LOCK TABLES `viajeros` WRITE;
 /*!40000 ALTER TABLE `viajeros` DISABLE KEYS */;
-INSERT INTO `viajeros` VALUES (9,'asc','asc','asc',1,13),(10,'sac','asc','asc',2,14),(11,'asc','asc','asc',3,14);
 /*!40000 ALTER TABLE `viajeros` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,7 +252,7 @@ CREATE TABLE `viajes` (
   PRIMARY KEY (`id`),
   KEY `cliente_id_idx` (`idCliente`),
   CONSTRAINT `cliente_id` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -288,7 +261,6 @@ CREATE TABLE `viajes` (
 
 LOCK TABLES `viajes` WRITE;
 /*!40000 ALTER TABLE `viajes` DISABLE KEYS */;
-INSERT INTO `viajes` VALUES (13,5,0,17,'2018-03-05'),(14,5,0,18,'2018-03-05');
 /*!40000 ALTER TABLE `viajes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,4 +281,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-05  1:15:17
+-- Dump completed on 2018-03-05 10:18:10

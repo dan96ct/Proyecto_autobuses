@@ -37,46 +37,55 @@
             <label><b>Precio:</b> <% out.print(billete.getPrecio());%></label><br>
         </section>
         <section id="formulario_pago">
+            <button type="button" onclick="cargarRegistro();" class="btn btn-secondary btn-lg btn-block">Registro</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block">Login</button>
+
+            <!--
             <h2>Rellene el formulario para completar el pago</h2>
             <form action="../guardarDatosViaje_controlador">
-                <div class="form-group">
-                    <label for="NIF">NIF del titular de la tarjeta</label>
-                    <input type="text" onchange="comprobarNIF();"  class="form-control" name="NIF" id="NIFPago" placeholder="Introduce tu NIF">
-                </div>
-                <div class="form-group">
-                    <label for="Email">Email del titular de la tarjeta</label>
-                    <input type="email" class="form-control" name="Email" id="email" placeholder="Introduce tu correo electronico">
-                </div>
-                <div class="form-group">
-                    <label for="Nombre">Nombre del titular de la tarjeta</label>
-                    <input type="text" class="form-control" name="nombre" id="nombrePago" placeholder="Introduce tu nombre">
-                </div>
-                <div class="form-group">
-                    <label for="Apellidos">Apellidos del titular de la tarjeta</label>
-                    <input type="text" class="form-control" name="apellidos" id="apellidosPago" placeholder="Introduce tu nombre">
-                </div>
-                <div class="form-group">
-                    <label for="Tipo de tarjeta">Tipo de tarjeta</label>
-                    <select id="tipoTarjeta" name="tarjetas">
-                        <option>MasterCard</option>
-                        <option>Visa</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="NumeroTarjeta">Numero de tarjeta</label>
-                    <input type="number" class="form-control" name="numeroTarjeta" id="numeroTarjeta" placeholder="Numero de tarjeta">
-                </div>
-                <div class="form-group">
-                    <label for="Fecha de caducidad">Fecha de caducidad</label>
-                    <input type="month" class="form-control" name="caducidadTarjeta" id="caducidadTarjeta" placeholder="Fecha">
-                </div>
-                <div class="form-group">
-                    <label for="CVV">CVV</label>
-                    <input type="number" class="form-control" name="CVV" id="CVV" placeholder="CVV">
-                </div>
-
-                <button type="submit" class="btn btn-primary">Confirmar datos</button>
+            <div class="form-group">
+                <label for="NIF">NIF del titular de la tarjeta</label>
+                <input type="text" class="form-control" name="NIF" id="NIFPago" placeholder="Introduce tu NIF">
+            </div>
+            <div class="form-group">
+                <label for="Email">Email del titular de la tarjeta</label>
+                <input type="email" class="form-control" name="Email" id="email" placeholder="Introduce tu correo electronico">
+            </div>
+            <div class="form-group">
+                <label for="Nombre">Nombre del titular de la tarjeta</label>
+                <input type="text" class="form-control" name="nombre" id="nombrePago" placeholder="Introduce tu nombre">
+            </div>
+            <div class="form-group">
+                <label for="Apellidos">Apellidos del titular de la tarjeta</label>
+                <input type="text" class="form-control" name="apellidos" id="apellidosPago" placeholder="Introduce tu nombre">
+            </div><div class="form-group">
+                <label for="Contraseña">Contraseña</label>
+                <input type="password" class="form-control" name="psw" id="psw" placeholder="Introduce una contraseña">
+            </div>
+                            
+            <div class="form-group">
+                <label for="Tipo de tarjeta">Tipo de tarjeta</label>
+                <select id="tipoTarjeta" name="tarjetas">
+                    <option>MasterCard</option>
+                    <option>Visa</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="NumeroTarjeta">Numero de tarjeta</label>
+                <input type="number" class="form-control" name="numeroTarjeta" id="numeroTarjeta" placeholder="Numero de tarjeta">
+            </div>
+            <div class="form-group">
+                <label for="Fecha de caducidad">Fecha de caducidad</label>
+                <input type="month" class="form-control" name="caducidadTarjeta" id="caducidadTarjeta" placeholder="Fecha">
+            </div>
+            <div class="form-group">
+                <label for="CVV">CVV</label>
+                <input type="number" class="form-control" name="CVV" id="CVV" placeholder="CVV">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Confirmar datos</button>
             </form>
+            -->
         </section><br>
         <section id="pasajeros_datos">
             <div class="btn-group btn-group-lg" id="botones_formulario" role="group" aria-label="Large button group">

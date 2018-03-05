@@ -10,9 +10,17 @@ package Modelo;
  * @author Dani
  */
 public class Cliente {
-    private String nif, nombre, apellidos, email, tarjeta, fechaCaducidad,tipoTarjeta;
+    private String nif, nombre, apellidos, email, tarjeta, fechaCaducidad,tipoTarjeta,password;
 
-    public Cliente(String nif, String nombre, String apellidos, String email, String tarjeta, String fechaCaducidad, String tipoTarjeta) {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Cliente(String nif, String nombre, String apellidos, String email, String tarjeta, String fechaCaducidad, String tipoTarjeta, String password) {
         this.nif = nif;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -20,7 +28,10 @@ public class Cliente {
         this.tarjeta = tarjeta;
         this.fechaCaducidad = fechaCaducidad;
         this.tipoTarjeta = tipoTarjeta;
+        this.password = password;
     }
+
+  
 
     public String getTipoTarjeta() {
         return tipoTarjeta;

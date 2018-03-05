@@ -36,25 +36,6 @@ function comprobarAsientosOcupados() {
     }
 
 }
-function comprobarNIF() {
-    var nif = document.getElementById("NIFPago").value;
-    objetoAjax = AJAXCrearObjeto(); //crea el objeto
-    objetoAjax.open('GET', '/Proyecto_autobuses/comprobarNIF_AJAX?nif=' + nif);
-    objetoAjax.send();
-    objetoAjax.onreadystatechange = function () {
-        if (objetoAjax.readyState === 4 && objetoAjax.status === 200) {
-            var datos = objetoAjax.responseText;
-            alert(datos);
-            if (datos == "datos_encontrados") {
-                alert(datos);
-                if (confirm('Hemos detectado que el NIF introducido ya ha sido registrado ¿Desa utilizar una tarjeta introducida anteriormente?')) {
-                } else {
-                }
-            }
-        }
-    }
-
-}
 
 function cogerDatosHorario(horaS, horaLL, precio, idHorario) {
     location.href = '/Proyecto_autobuses/tramitarDatosViaje2_controlador?horaS=' + horaS + '&horaLL=' + horaLL + '&precio=' + precio + '&id=' + idHorario;
@@ -396,4 +377,46 @@ function datosPasajero(elemento) {
             $('#asiento').append('<b>Asiento </b>' + arrayPasajeros[i].asiento);
         }
     }
+}
+function cargarRegistro(){
+    $('#formulario_pago').empty();
+    var formulario_pago = document.getElementById("formulario_pago");
+    var h2 = document.createElement("h2");
+    h2.innerHTML = "Rellene el formulario para completar el pago";
+    formulario_pago.appendChild(h2);
+    
+    var form = document.createElement("form");
+    form.setAttribute("action","../guardarDatosViaje_controlador");
+    formulario_pago.appendChild(form);
+    
+    var div = document.createElement("div");
+    div.setAttribute("class","form-group");
+    var label = document.createElement("label");
+    label.setAttribute("for","NIF");
+    label.innerHTML = "NIF del titular de la tarjeta";
+    div.appendChild(label);
+    var input = document.createElement("input");
+    input.setAttribute("type","text");
+    input.setAttribute("class","form-control");
+    input.setAttribute("name","NIF");
+    input.setAttribute("id","NIFPago");
+    input.setAttribute("placeholder","Introduce tu NIF");
+    div.appendChild(input);
+    formulario_pago.appendChild(div);
+    
+    var div = document.createElement("div");
+    div.setAttribute("class","form-group");
+    var label = document.createElement("label");
+    label.setAttribute("for","Email");
+    label.innerHTML = "Email del titular de la tarjeta";
+    div.appendChild(label);
+    var input = document.createElement("input");
+    input.setAttribute("type","text");
+    input.setAttribute("class","form-control");
+    input.setAttribute("name","NIF");
+    input.setAttribute("id","NIFPago");
+    input.setAttribute("placeholder","Introduce tu NIF");
+    div.appendChild(input);
+    formulario_pago.appendChild(div);
+    
 }

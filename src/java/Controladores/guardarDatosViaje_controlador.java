@@ -64,9 +64,10 @@ public class guardarDatosViaje_controlador extends HttpServlet {
         String nombre = (String) request.getParameter("nombre");
         String apellidos = (String) request.getParameter("apellidos");
         String tipoTarjeta = (String) request.getParameter("tarjetas");
+        String pass = (String) request.getParameter("psw");
         
 
-        Cliente cliente = new Cliente(NIF, nombre, apellidos, Email, numeroTarjeta, caducidadTarjeta, tipoTarjeta);
+        Cliente cliente = new Cliente(NIF, nombre, apellidos, Email, numeroTarjeta, caducidadTarjeta, tipoTarjeta, pass);
         HttpSession session = request.getSession();
         Billete billete = new Billete();
         billete = (Billete) session.getAttribute("billete");

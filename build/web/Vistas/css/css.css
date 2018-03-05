@@ -48,6 +48,7 @@ and open the template in the editor.
     margin: 30px;
     background-color: white;
     padding: 2em;
+    min-height: 500px;
 }
 #botones_formulario{
     width: 100%;

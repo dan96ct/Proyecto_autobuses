@@ -24,10 +24,6 @@
         <servlet-name>guardarDatosViaje_controlador</servlet-name>
         <servlet-class>Controladores.guardarDatosViaje_controlador</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>comprobarNIF_AJAX</servlet-name>
-        <servlet-class>Controladores.comprobarNIF_AJAX</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>getRutas_controlador</servlet-name>
         <url-pattern>/getRutas_controlador</url-pattern>
@@ -51,10 +47,6 @@
     <servlet-mapping>
         <servlet-name>guardarDatosViaje_controlador</servlet-name>
         <url-pattern>/guardarDatosViaje_controlador</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>comprobarNIF_AJAX</servlet-name>
-        <url-pattern>/comprobarNIF_AJAX</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
