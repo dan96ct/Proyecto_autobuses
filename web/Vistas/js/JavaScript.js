@@ -16,9 +16,48 @@ function AJAXCrearObjeto() {
 }
 var arrayPasajeros = [];
 var arrayAsientos = [];
+var arrayAsientosOcupados = [];
 
-function cogerDatosHorario(horaS, horaLL, precio) {
-    location.href = '/Proyecto_autobuses/tramitarDatosViaje2_controlador?horaS=' + horaS + '&horaLL=' + horaLL + '&precio=' + precio;
+function addAsientoOcupado(asiento) {
+    arrayAsientosOcupados.push(asiento);
+}
+function comprobarAsientosOcupados() {
+    var todosLosAsientos = document.getElementsByTagName("td");
+    for (var i = 0; i < todosLosAsientos.length; i++) {
+        for (var j = 0; j < arrayAsientosOcupados.length; j++) {
+            if (todosLosAsientos[i].getAttribute("id") == arrayAsientosOcupados[j]) {
+                var th = document.createElement('th');
+                th.setAttribute("style", "color:red; font-size:20px;");
+                th.innerHTML = "[ ]";
+                todosLosAsientos[i].parentNode.replaceChild(th, todosLosAsientos[i]);
+            }
+
+        }
+    }
+
+}
+function comprobarNIF() {
+    var nif = document.getElementById("NIFPago").value;
+    objetoAjax = AJAXCrearObjeto(); //crea el objeto
+    objetoAjax.open('GET', '/Proyecto_autobuses/comprobarNIF_AJAX?nif=' + nif);
+    objetoAjax.send();
+    objetoAjax.onreadystatechange = function () {
+        if (objetoAjax.readyState === 4 && objetoAjax.status === 200) {
+            var datos = objetoAjax.responseText;
+            alert(datos);
+            if (datos == "datos_encontrados") {
+                alert(datos);
+                if (confirm('Hemos detectado que el NIF introducido ya ha sido registrado ¿Desa utilizar una tarjeta introducida anteriormente?')) {
+                } else {
+                }
+            }
+        }
+    }
+
+}
+
+function cogerDatosHorario(horaS, horaLL, precio, idHorario) {
+    location.href = '/Proyecto_autobuses/tramitarDatosViaje2_controlador?horaS=' + horaS + '&horaLL=' + horaLL + '&precio=' + precio + '&id=' + idHorario;
 }
 function comprobarDatosPasajero() {
     var numPasajero = document.getElementById("tituloFormulario_usuario").textContent;

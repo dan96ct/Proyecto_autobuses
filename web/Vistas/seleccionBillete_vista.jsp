@@ -44,14 +44,14 @@
             %><article class="horario" id="<%out.print("horario" + i); %>"> <label class="datoHorario">H.Salida:<strong><% out.print(horarios.get(i).getHoraSalida()); %></strong> </label>
                 <label class="datoHorario"> H.llegada<strong><% out.print(horarios.get(i).getHoraLlegada()); %></strong></label>
                 <label class="datoHorario">Plazas:<b><% out.print(horarios.get(i).getPlazasLibres()); %></b></label>
-                <label class="datoHorario">Precio:<strong><% out.print(horarios.get(i).getPrecio()); %></strong></label><button name="<%out.print(i);%>" onclick="cogerDatosHorario(<% out.print("'" + horarios.get(i).getHoraSalida() + "'" + "," + "'" + horarios.get(i).getHoraLlegada() + "'" + "," + "'" + horarios.get(i).getPrecio() + "'"); %>)" id="boton_horario" class="btn btn-warning">Elegir horario</button></article>
+                <label class="datoHorario">Precio:<strong><% out.print(horarios.get(i).getPrecio()); %></strong></label><button name="<%out.print(i);%>" onclick="cogerDatosHorario(<% out.print("'" + horarios.get(i).getHoraSalida() + "'" + "," + "'" + horarios.get(i).getHoraLlegada() + "'" + "," + "'" + horarios.get(i).getPrecio() + "'" + "," + "'" + horarios.get(i).getId()+ "'"); %>)" id="boton_horario" class="btn btn-warning">Elegir horario</button></article>
                 <%
 
                 } else {%>
             <article class="horario" id="<%out.print("horario" + i); %>"> <label class="datoHorario">H.Salida:<strong><% out.print(horarios.get(i).getHoraSalida()); %></strong> </label>
                 <label class="datoHorario"> H.llegada<strong><% out.print(horarios.get(i).getHoraLlegada()); %></strong></label>
                 <label class="datoHorario" style="color: red;">Plazas:<b><% out.print(horarios.get(i).getPlazasLibres()); %></b></label>
-                <label class="datoHorario">Precio:<strong><% out.print(horarios.get(i).getPrecio()); %></strong></label><button name="<%out.print(i);%>" onclick="cogerDatosHorario(<% out.print("'" + horarios.get(i).getHoraSalida() + "'" + "," + "'" + horarios.get(i).getHoraLlegada() + "'" + "," + "'" + horarios.get(i).getPrecio() + "'"); %>)" id="boton_horario" class="btn btn-warning" disabled>Elegir horario</button>
+                <label class="datoHorario">Precio:<strong><% out.print(horarios.get(i).getPrecio()); %></strong></label><button name="<%out.print(i);%>" onclick="cogerDatosHorario(<% out.print("'" + horarios.get(i).getHoraSalida() + "'" + "," + "'" + horarios.get(i).getHoraLlegada() + "'" + "," + "'" + horarios.get(i).getId()+ "'"); %>)" id="boton_horario" class="btn btn-warning" disabled>Elegir horario</button><br>
                 <label style="color: red;">Lo lamentamos, pero no hay suficientes plazas disponibles</label>
             </article>
             <%

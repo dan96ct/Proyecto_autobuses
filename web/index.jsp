@@ -57,7 +57,7 @@
                     <input type="date" class="form-control"  placeholder="Fecha de ida" name="fecha" required>
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control"  placeholder="Numero de personas" name="numPersonas" min="1" required>
+                    <input type="number" class="form-control"  placeholder="Numero de personas" name="numPersonas" min="1" max="5" required>
                 </div>
                 <button type="submit" class="btn btn-warning">Confirmar</button>
             </form>

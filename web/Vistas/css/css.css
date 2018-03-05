@@ -136,6 +136,9 @@ and open the template in the editor.
     border-style: solid;
     font-size: 20px;
 }
+#autobus tr{
+    cursor: pointer;
+}
 .bs-wizard {margin-top: 40px;}
 
 /*Form Wizard*/

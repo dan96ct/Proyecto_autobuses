@@ -7,7 +7,6 @@ package Controladores;
 
 import DAO.ConexionBBDD;
 import DAO.Operaciones;
-import Modelo.Billete;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -18,13 +17,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Dani
  */
-public class tramitarDatosViaje2_controlador extends HttpServlet {
+public class comprobarNIF_AJAX extends HttpServlet {
 
     Connection Conexion;
 
@@ -37,9 +35,9 @@ public class tramitarDatosViaje2_controlador extends HttpServlet {
             Conexion = ConexBD.GetCon();
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(tramitarDatosViaje2_controlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(comprobarNIF_AJAX.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(tramitarDatosViaje2_controlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(comprobarNIF_AJAX.class.getName()).log(Level.SEVERE, null, ex);
 
         }
     }
@@ -56,40 +54,14 @@ public class tramitarDatosViaje2_controlador extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String horaSalida = (String) request.getParameter("horaS");
-        String horaLL = (String) request.getParameter("horaLL");
-        double precio = Double.parseDouble(request.getParameter("precio"));
-        int idHorarioViaje = Integer.parseInt(request.getParameter("id"));
-
-        HttpSession session = request.getSession();
-        Billete billete = new Billete();
-        billete = (Billete) session.getAttribute("billete");
-        billete.setHoraSalida(horaSalida);
-        billete.setHoraLlegada(horaLL);
-        billete.setPrecio(precio);
-        billete.setIdViaje(idHorarioViaje);
-        session.setAttribute("billete", billete);
-
-        Operaciones operacion = new Operaciones();
-        try {
-            session.setAttribute("asientos", operacion.getAsientosOcupados(Conexion, billete));
-        } catch (SQLException ex) {
-            Logger.getLogger(tramitarDatosViaje2_controlador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        response.sendRedirect("Vistas/formulariosBillete_vista.jsp");
-
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet tramitarDatosViaje2_controlador</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet tramitarDatosViaje2_controlador at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            Operaciones operacion = new Operaciones();
+            String nif = (String) request.getParameter("nif");
+            try {
+                out.println(operacion.compruebaNIF(Conexion, nif));
+            } catch (SQLException ex) {
+                Logger.getLogger(comprobarNIF_AJAX.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

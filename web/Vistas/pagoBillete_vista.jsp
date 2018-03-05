@@ -40,6 +40,22 @@
             <h2>Rellene el formulario para completar el pago</h2>
             <form action="../guardarDatosViaje_controlador">
                 <div class="form-group">
+                    <label for="NIF">NIF del titular de la tarjeta</label>
+                    <input type="text" onchange="comprobarNIF();"  class="form-control" name="NIF" id="NIFPago" placeholder="Introduce tu NIF">
+                </div>
+                <div class="form-group">
+                    <label for="Email">Email del titular de la tarjeta</label>
+                    <input type="email" class="form-control" name="Email" id="email" placeholder="Introduce tu correo electronico">
+                </div>
+                <div class="form-group">
+                    <label for="Nombre">Nombre del titular de la tarjeta</label>
+                    <input type="text" class="form-control" name="nombre" id="nombrePago" placeholder="Introduce tu nombre">
+                </div>
+                <div class="form-group">
+                    <label for="Apellidos">Apellidos del titular de la tarjeta</label>
+                    <input type="text" class="form-control" name="apellidos" id="apellidosPago" placeholder="Introduce tu nombre">
+                </div>
+                <div class="form-group">
                     <label for="Tipo de tarjeta">Tipo de tarjeta</label>
                     <select id="tipoTarjeta" name="tarjetas">
                         <option>MasterCard</option>
@@ -58,29 +74,14 @@
                     <label for="CVV">CVV</label>
                     <input type="number" class="form-control" name="CVV" id="CVV" placeholder="CVV">
                 </div>
-                <div class="form-group">
-                    <label for="NIF">NIF del titular de la tarjeta</label>
-                    <input type="text" class="form-control" name="NIF" id="NIFPago" placeholder="Introduce tu NIF">
-                </div>
-                <div class="form-group">
-                    <label for="Email">Email del titular de la tarjeta</label>
-                    <input type="email" class="form-control" name="Email" id="email" placeholder="Introduce tu correo electronico">
-                </div>
-                <div class="form-group">
-                    <label for="Nombre">Nombre del titular de la tarjeta</label>
-                    <input type="text" class="form-control" name="nombre" id="nombrePago" placeholder="Introduce tu nombre">
-                </div>
-                <div class="form-group">
-                    <label for="Apellidos">Apellidos del titular de la tarjeta</label>
-                    <input type="text" class="form-control" name="apellidos" id="apellidosPago" placeholder="Introduce tu nombre">
-                </div>
+
                 <button type="submit" class="btn btn-primary">Confirmar datos</button>
             </form>
         </section><br>
         <section id="pasajeros_datos">
             <div class="btn-group btn-group-lg" id="botones_formulario" role="group" aria-label="Large button group">
                 <%for (int i = 0; i < billete.getArrayPasajeros().size(); i++) {
-                    System.out.println(billete.getArrayPasajeros().get(i).toString());
+                        System.out.println(billete.getArrayPasajeros().get(i).toString());
                 %>
                 <script>
                     var pasajero = {"numPasajero": <% out.print("'" + i + "'"); %>, "nif": <% out.print("'" + billete.getArrayPasajeros().get(i).getIdentificador() + "'"); %>, "nombre": <% out.print("'" + billete.getArrayPasajeros().get(i).getNombre() + "'"); %>, "apellidos": <% out.print("'" + billete.getArrayPasajeros().get(i).getApellido() + "'"); %>, "email": <% out.print("'" + billete.getArrayPasajeros().get(i).getCorreo() + "'"); %>, "asiento": <% out.print("'" + billete.getArrayPasajeros().get(i).getAsiento() + "'"); %>, "id": <% out.print("'" + billete.getArrayPasajeros().get(i).getId() + "'"); %>};

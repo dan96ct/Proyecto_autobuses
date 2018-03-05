@@ -18,12 +18,21 @@ public class Billete {
     private String origen, destino, horaSalida, horaLlegada;
     private LocalDate dia;
     private double precio;
-    private int personas;
+    private int personas, idViaje;
     private ArrayList<Pasajero> arrayPasajeros = new ArrayList<>();
 
     public ArrayList<Pasajero> getArrayPasajeros() {
         return arrayPasajeros;
     }
+
+    public int getIdViaje() {
+        return idViaje;
+    }
+
+    public void setIdViaje(int idViaje) {
+        this.idViaje = idViaje;
+    }
+    
 
     public String getHoraSalida() {
         return horaSalida;
@@ -91,8 +100,9 @@ public class Billete {
 
     @Override
     public String toString() {
-        return "Billete{" + "origen=" + origen + ", destino=" + destino + ", dia=" + dia + ", horaSalida=" + horaSalida + ", horaLlegada=" + horaLlegada + ", precio=" + precio + ", personas=" + personas + '}';
+        return "Billete{" + "origen=" + origen + ", destino=" + destino + ", horaSalida=" + horaSalida + ", horaLlegada=" + horaLlegada + ", dia=" + dia + ", precio=" + precio + ", personas=" + personas + ", idViaje=" + idViaje + ", arrayPasajeros=" + arrayPasajeros + '}';
     }
+
 
     public void setPersonas(int personas) {
         this.personas = personas;

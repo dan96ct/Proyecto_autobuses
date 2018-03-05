@@ -4,6 +4,7 @@
     Author     : Dani
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="Modelo.Billete"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,6 +27,15 @@
         <% }
             Billete billete = new Billete();
             billete = (Billete) session.getAttribute("billete");
+            ArrayList asientosOcupados = new ArrayList();
+            asientosOcupados = (ArrayList) session.getAttribute("asientos");
+            for (int i = 0; i < asientosOcupados.size(); i++) {
+                    %>
+                    <script>
+                        addAsientoOcupado(<% out.print(asientosOcupados.get(i));%>)
+                    </script>
+        <%
+                }
         %><section id="formulario_billetes">
             <ul class="nav nav-tabs">
                 <%for (int i = 1; i < billete.getPersonas() + 1; i++) {%>
@@ -54,13 +64,23 @@
                 </div>
                 <table id="autobus">
                     <tr><td colspan="2" id="tituloTabla">Elige el asiento</td></tr>
-                    <tr><td id="1" onclick="elegirAsiento(this);">[  ]</td><td id="2" onclick="elegirAsiento(this);">[  ]</td></tr>
-                    <tr><td id="3" onclick="elegirAsiento(this);">[  ]</td><td id="4" onclick="elegirAsiento(this);">[  ]</td></tr>
-                    <tr><td id="5" onclick="elegirAsiento(this);">[  ]</td><td id="6" onclick="elegirAsiento(this);">[  ]</td></tr>
-                    <tr><td id="7" onclick="elegirAsiento(this);">[  ]</td><td id="8" onclick="elegirAsiento(this);">[  ]</td></tr>
+
+                    <tr><td id="1" onclick="elegirAsiento(this);">[  ]</td>
+                        <td id="2" onclick="elegirAsiento(this);">[  ]</td></tr>
+                    <tr><td id="3" onclick="elegirAsiento(this);">[  ]</td>
+                        <td id="4" onclick="elegirAsiento(this);">[  ]</td></tr>
+                    <tr><td id="5" onclick="elegirAsiento(this);">[  ]</td>
+                        <td id="6" onclick="elegirAsiento(this);">[  ]</td></tr>
+                    <tr><td id="7" onclick="elegirAsiento(this);">[  ]</td>
+                        <td id="8" onclick="elegirAsiento(this);">[  ]</td></tr>
+
+ 
                 </table>
+                <script>
+                    comprobarAsientosOcupados();
+                </script>
                 <button type="button" class="btn btn-success" onclick="comprobarDatosPasajero();">Confirmar pasajero</button>
-                <button type="button" class="btn btn-success" onclick="confirmarTodosLosDatos('<% out.print(billete.getPersonas()); %>')">Confirmar todos los datos</button>
+                <button type="button" class="btn btn-success" onclick="confirmarTodosLosDatos('<% out.print(billete.getPersonas());%>')">Confirmar todos los datos</button>
             </form>
         </section>
     </main>
