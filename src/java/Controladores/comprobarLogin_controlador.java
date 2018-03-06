@@ -70,6 +70,7 @@ public class comprobarLogin_controlador extends HttpServlet {
             Operaciones operacion = new Operaciones();
             Cliente cliente = new Cliente();
             try {
+                operacion.compruebaLogin(Conexion, email, pass);
                 System.out.println(operacion.compruebarLogin(Conexion, email, pass));
                 cliente = operacion.compruebarLogin(Conexion, email, pass);
 
@@ -79,13 +80,18 @@ public class comprobarLogin_controlador extends HttpServlet {
 
             } catch (SQLException ex) {
                 Logger.getLogger(comprobarLogin_controlador.class.getName()).log(Level.SEVERE, null, ex);
+
+            } catch (Excepciones.Excepcion exc) {
+                HttpSession session = request.getSession();
+                session.setAttribute("error", exc.getMessage());
+                response.sendRedirect("/Proyecto_autobuses/Vistas/Error_vista.jsp");
             }
             out.println("</body>");
             out.println("</html>");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

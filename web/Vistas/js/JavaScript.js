@@ -581,7 +581,6 @@ function cargaLogin() {
     form.appendChild(div);
 
     var button = document.createElement("button");
-    button.setAttribute("onclick", "comprobarLogin();");
     button.setAttribute("class", "btn btn-primary");
     button.innerHTML = "Confirmar datos";
     form.appendChild(button);
@@ -604,9 +603,5 @@ function darFechaMinima(elemento) {
     }
     today = yyyy + '-' + mm + '-' + dd;
     elemento.setAttribute("min", today);
-
-}
-function borrarViaje(idViaje){
-      location.href = '/Proyecto_autobuses/borrarViaje_controlador?idViaje=' + idViaje;
 
 }

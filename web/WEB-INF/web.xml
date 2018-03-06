@@ -48,10 +48,6 @@
         <servlet-name>mostrarViajes_controlador</servlet-name>
         <servlet-class>Controladores.mostrarViajes_controlador</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>borrarViaje_controlador</servlet-name>
-        <servlet-class>Controladores.borrarViaje_controlador</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>getRutas_controlador</servlet-name>
         <url-pattern>/getRutas_controlador</url-pattern>
@@ -99,10 +95,6 @@
     <servlet-mapping>
         <servlet-name>mostrarViajes_controlador</servlet-name>
         <url-pattern>/mostrarViajes_controlador</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>borrarViaje_controlador</servlet-name>
-        <url-pattern>/borrarViaje_controlador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

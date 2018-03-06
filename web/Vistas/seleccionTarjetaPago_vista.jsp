@@ -4,7 +4,6 @@
     Author     : Dani
 --%>
 
-<%@page import="Modelo.Tarjeta"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Modelo.Cliente"%>
 <%@page import="Modelo.Billete"%>
@@ -25,11 +24,9 @@
 </head>
 <body>
     
-    <% Billete billete = new Billete();
-        billete = (Billete) session.getAttribute("billete");
+    <% Billete billete = (Billete) session.getAttribute("billete");
         
-        Cliente cliente = new Cliente();
-        cliente = (Cliente) session.getAttribute("cliente");%>
+        Cliente cliente =  (Cliente) session.getAttribute("cliente");%>
     <main id="contenido">
         <section id="resumenDatos">
             <h2>Resumen de datos</h2>
@@ -62,7 +59,7 @@
                         System.out.println(billete.getArrayPasajeros().get(i).toString());
                 %>
                 <script>
-                    var pasajero = {"numPasajero": <% out.print("'" + i + "'"); %>, "nif": <% out.print("'" + billete.getArrayPasajeros().get(i).getIdentificador() + "'"); %>, "nombre": <% out.print("'" + billete.getArrayPasajeros().get(i).getNombre() + "'"); %>, "apellidos": <% out.print("'" + billete.getArrayPasajeros().get(i).getApellido() + "'"); %>, "asiento": <% out.print("'" + billete.getArrayPasajeros().get(i).getAsiento() + "'"); %>, "id": <% out.print("'" + billete.getArrayPasajeros().get(i).getId() + "'"); %>};
+                    var pasajero = {"numPasajero": <% out.print("'" + i + "'"); %>, "nif": <% out.print("'" + billete.getArrayPasajeros().get(i).getIdentificador() + "'"); %>, "nombre": <% out.print("'" + billete.getArrayPasajeros().get(i).getNombre() + "'"); %>, "apellidos": <% out.print("'" + billete.getArrayPasajeros().get(i).getApellido() + "'"); %>, "email": <% out.print("'" + billete.getArrayPasajeros().get(i).getCorreo() + "'"); %>, "asiento": <% out.print("'" + billete.getArrayPasajeros().get(i).getAsiento() + "'"); %>, "id": <% out.print("'" + billete.getArrayPasajeros().get(i).getId() + "'"); %>};
                     añadirPasajero(pasajero);
                 </script>
                 <button type="button" onclick="datosPasajero(this);" name="<% out.print(billete.getArrayPasajeros().get(i).getId()); %>" class="btn btn-secondary btn-lg btn-block">Pasajero<% out.print(i + 1); %></button><%

@@ -79,13 +79,14 @@ public class guardarDatosViajeLogin_controlador extends HttpServlet {
 
             } catch (SQLException ex) {
                 Logger.getLogger(guardarDatosViajeLogin_controlador.class.getName()).log(Level.SEVERE, null, ex);
+
             }
             out.println("</body>");
             out.println("</html>");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
