@@ -5,17 +5,9 @@
  */
 package Controladores;
 
-import DAO.ConexionBBDD;
-import DAO.Operaciones;
-import Modelo.Billete;
 import Modelo.Cliente;
-import Modelo.Tarjeta;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,25 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Dani
  */
-public class guardarDatosViaje_controlador extends HttpServlet {
-
-    private Connection Conexion;
-
-    @Override
-    public void init() throws ServletException {
-        super.init(); //To change body of generated methods, choose Tools | Templates.
-        ConexionBBDD ConexBD;
-        try {
-            ConexBD = ConexionBBDD.GetConexion();
-            Conexion = ConexBD.GetCon();
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(guardarDatosViaje_controlador.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(guardarDatosViaje_controlador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+public class comprobarTarjeta_controlador extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,42 +32,29 @@ public class guardarDatosViaje_controlador extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String numeroTarjeta = (String) request.getParameter("numeroTarjeta");
-        String caducidadTarjeta = (String) request.getParameter("caducidadTarjeta");
-        String NIF = (String) request.getParameter("NIF");
-        String Email = (String) request.getParameter("Email");
-        String nombre = (String) request.getParameter("nombre");
-        String apellidos = (String) request.getParameter("apellidos");
-        String tipoTarjeta = (String) request.getParameter("tarjetas");
-        String pass = (String) request.getParameter("psw");
-        
-        Tarjeta tarjeta = new Tarjeta(numeroTarjeta, tipoTarjeta, caducidadTarjeta);
-        Cliente cliente = new Cliente(NIF, nombre, apellidos, Email, pass);
-        cliente.addTarjeta(tarjeta);
-        HttpSession session = request.getSession();
-        Billete billete = new Billete();
-        billete = (Billete) session.getAttribute("billete");
-        session.invalidate();
-        Operaciones operacion = new Operaciones();
-        try {
-            Conexion.setAutoCommit(false);
-            operacion.guardarViaje(Conexion, billete, cliente);
-            Conexion.commit();
-            response.sendRedirect("Vistas/confirmacionPago_vista.jsp");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(guardarDatosViaje_controlador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet guardarDatosViaje_controlador</title>");
+            out.println("<title>Servlet comprobarTarjeta_controlador</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet guardarDatosViaje_controlador at " + billete + "</h1>");
+            int idTarjeta = Integer.parseInt(request.getParameter("idTarjeta"));
+            HttpSession session = request.getSession();
+            
+            Cliente cliente = new Cliente();
+            cliente = (Cliente) session.getAttribute("cliente");
+            
+            for (int i = 0; i < cliente.getTarjetas().size(); i++) {
+                if (cliente.getTarjetas().get(i).getId() == idTarjeta) {
+                    cliente.getTarjetas().get(i).setSeleccionada(true);
+                }
+            }
+            session.setAttribute("cliente", cliente);
+            
+            response.sendRedirect("Vistas/confirmacionFinal_vista.jsp");
+
             out.println("</body>");
             out.println("</html>");
         }

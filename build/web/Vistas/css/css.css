@@ -50,6 +50,24 @@ and open the template in the editor.
     padding: 2em;
     min-height: 500px;
 }
+#seleccionTarjeta{
+    float:right;
+    width: 50%;
+    margin: 30px;
+    padding: 2em;
+    min-height: 500px;
+    text-align: center;
+}
+.tarjeta{
+    background-color: white;
+    padding: 2em;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px; 
+}
+.tarjeta:hover{
+    background-color: #fbbd19;
+}
 #botones_formulario{
     width: 100%;
 }
@@ -85,7 +103,7 @@ and open the template in the editor.
 #contenido{
     background-color: #f3f3f3;
     font-size: 19px;
-    min-height: 900px;
+    min-height: 1100px;
 }
 .info_viaje{
     margin: 0 auto;

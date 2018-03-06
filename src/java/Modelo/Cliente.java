@@ -5,12 +5,42 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Dani
  */
 public class Cliente {
-    private String nif, nombre, apellidos, email, tarjeta, fechaCaducidad,tipoTarjeta,password;
+    private String nif, nombre, apellidos, email,password;
+    private ArrayList<Tarjeta> tarjetas;
+
+    public Cliente(String nif, String nombre, String apellidos, String email, String password) {
+        this.nif = nif;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.password = password;
+        tarjetas = new ArrayList<>();
+    }
+
+    public Cliente() {
+    }
+
+    public ArrayList<Tarjeta> getTarjetas() {
+        return tarjetas;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "nif=" + nif + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email + ", password=" + password + ", tarjetas=" + tarjetas + '}';
+    }
+    
+   
+    public void setTarjetas(ArrayList<Tarjeta> tarjetas) {
+        this.tarjetas = tarjetas;
+    }
+    
 
     public String getPassword() {
         return password;
@@ -19,26 +49,8 @@ public class Cliente {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Cliente(String nif, String nombre, String apellidos, String email, String tarjeta, String fechaCaducidad, String tipoTarjeta, String password) {
-        this.nif = nif;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.email = email;
-        this.tarjeta = tarjeta;
-        this.fechaCaducidad = fechaCaducidad;
-        this.tipoTarjeta = tipoTarjeta;
-        this.password = password;
-    }
-
-  
-
-    public String getTipoTarjeta() {
-        return tipoTarjeta;
-    }
-
-    public void setTipoTarjeta(String tipoTarjeta) {
-        this.tipoTarjeta = tipoTarjeta;
+    public void addTarjeta(Tarjeta tarjeta){
+        this.tarjetas.add(tarjeta);
     }
 
    
@@ -75,27 +87,5 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getTarjeta() {
-        return tarjeta;
-    }
-
-    public void setTarjeta(String tarjeta) {
-        this.tarjeta = tarjeta;
-    }
-
-    public String getFechaCaducidad() {
-        return fechaCaducidad;
-    }
-
-    public void setFechaCaducidad(String fechaCaducidad) {
-        this.fechaCaducidad = fechaCaducidad;
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente{" + "nif=" + nif + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email + ", tarjeta=" + tarjeta + ", fechaCaducidad=" + fechaCaducidad + '}';
-    }
-    
     
 }

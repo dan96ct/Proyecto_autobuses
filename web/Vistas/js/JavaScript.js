@@ -229,6 +229,8 @@ function getEstaciones() {
             mostrarEstaciones();
         }
     }
+    var calendario = document.getElementById("fechaIda");
+    darFechaMinima(calendario);
 }
 function getRutas(estacion) {
     objetoAjax = AJAXCrearObjeto(); //crea el objeto
@@ -253,8 +255,6 @@ function activarFormulario(element) {
     document.getElementById("identificador").value = "";
     document.getElementById("nombre").value = "";
     document.getElementById("apellidos").value = "";
-
-
 
     formularioNormal();
 
@@ -378,45 +378,231 @@ function datosPasajero(elemento) {
         }
     }
 }
-function cargarRegistro(){
+function cargarRegistro() {
     $('#formulario_pago').empty();
     var formulario_pago = document.getElementById("formulario_pago");
     var h2 = document.createElement("h2");
     h2.innerHTML = "Rellene el formulario para completar el pago";
     formulario_pago.appendChild(h2);
-    
+
     var form = document.createElement("form");
-    form.setAttribute("action","../guardarDatosViaje_controlador");
+    form.setAttribute("action", "../guardarDatosViaje_controlador");
     formulario_pago.appendChild(form);
-    
+
     var div = document.createElement("div");
-    div.setAttribute("class","form-group");
+    div.setAttribute("class", "form-group");
     var label = document.createElement("label");
-    label.setAttribute("for","NIF");
+    label.setAttribute("for", "NIF");
     label.innerHTML = "NIF del titular de la tarjeta";
     div.appendChild(label);
     var input = document.createElement("input");
-    input.setAttribute("type","text");
-    input.setAttribute("class","form-control");
-    input.setAttribute("name","NIF");
-    input.setAttribute("id","NIFPago");
-    input.setAttribute("placeholder","Introduce tu NIF");
+    input.setAttribute("type", "text");
+    input.setAttribute("class", "form-control");
+    input.setAttribute("name", "NIF");
+    input.setAttribute("id", "NIFPago");
+    input.setAttribute("placeholder", "Introduce tu NIF");
     div.appendChild(input);
-    formulario_pago.appendChild(div);
-    
+    form.appendChild(div);
+
     var div = document.createElement("div");
-    div.setAttribute("class","form-group");
+    div.setAttribute("class", "form-group");
     var label = document.createElement("label");
-    label.setAttribute("for","Email");
+    label.setAttribute("for", "Email");
     label.innerHTML = "Email del titular de la tarjeta";
     div.appendChild(label);
     var input = document.createElement("input");
-    input.setAttribute("type","text");
-    input.setAttribute("class","form-control");
-    input.setAttribute("name","NIF");
-    input.setAttribute("id","NIFPago");
-    input.setAttribute("placeholder","Introduce tu NIF");
+    input.setAttribute("type", "email");
+    input.setAttribute("class", "form-control");
+    input.setAttribute("name", "Email");
+    input.setAttribute("id", "email");
+    input.setAttribute("placeholder", "Introduce tu correo electronico");
     div.appendChild(input);
-    formulario_pago.appendChild(div);
-    
+    form.appendChild(div);
+
+    var div = document.createElement("div");
+    div.setAttribute("class", "form-group");
+    var label = document.createElement("label");
+    label.setAttribute("for", "Nombre");
+    label.innerHTML = "Nombre del titular de la tarjeta";
+    div.appendChild(label);
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("class", "form-control");
+    input.setAttribute("name", "nombre");
+    input.setAttribute("id", "nombrePago");
+    input.setAttribute("placeholder", "Introduce tu nombre");
+    div.appendChild(input);
+    form.appendChild(div);
+
+    var div = document.createElement("div");
+    div.setAttribute("class", "form-group");
+    var label = document.createElement("label");
+    label.setAttribute("for", "Apellidos");
+    label.innerHTML = "Apellidos del titular de la tarjeta";
+    div.appendChild(label);
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("class", "form-control");
+    input.setAttribute("name", "apellidos");
+    input.setAttribute("id", "apellidosPago");
+    input.setAttribute("placeholder", "Introduce tu apellido");
+    div.appendChild(input);
+    form.appendChild(div);
+
+    var div = document.createElement("div");
+    div.setAttribute("class", "form-group");
+    var label = document.createElement("label");
+    label.setAttribute("for", "Contraseña");
+    label.innerHTML = "Contraseña";
+    div.appendChild(label);
+    var input = document.createElement("input");
+    input.setAttribute("type", "password");
+    input.setAttribute("class", "form-control");
+    input.setAttribute("name", "psw");
+    input.setAttribute("id", "psw");
+    input.setAttribute("placeholder", "Introduce una contraseña");
+    div.appendChild(input);
+    form.appendChild(div);
+
+    var div = document.createElement("div");
+    div.setAttribute("class", "form-group");
+    var label = document.createElement("label");
+    label.setAttribute("for", "Tipo de tarjeta");
+    label.innerHTML = "Tipo de tarjeta";
+    div.appendChild(label);
+    div.appendChild(document.createElement("br"));
+
+    var select = document.createElement("select");
+    select.setAttribute("name", "tarjetas");
+    select.setAttribute("id", "tipoTarjeta");
+
+    var option = document.createElement("option");
+    option.innerHTML = "MasterCard";
+    select.appendChild(option);
+
+    var option = document.createElement("option");
+    option.innerHTML = "Visa";
+    select.appendChild(option);
+    div.appendChild(select);
+    form.appendChild(div);
+
+    var div = document.createElement("div");
+    div.setAttribute("class", "form-group");
+    var label = document.createElement("label");
+    label.setAttribute("for", "NumeroTarjeta");
+    label.innerHTML = "Numero de tarjeta";
+    div.appendChild(label);
+    var input = document.createElement("input");
+    input.setAttribute("type", "number");
+    input.setAttribute("class", "form-control");
+    input.setAttribute("name", "numeroTarjeta");
+    input.setAttribute("id", "numeroTarjeta");
+    input.setAttribute("placeholder", "Numero de tarjeta");
+    div.appendChild(input);
+    form.appendChild(div);
+
+    var div = document.createElement("div");
+    div.setAttribute("class", "form-group");
+    var label = document.createElement("label");
+    label.setAttribute("for", "Fecha de caducidad");
+    label.innerHTML = "Fecha de caducidad";
+    div.appendChild(label);
+    var input = document.createElement("input");
+    input.setAttribute("type", "month");
+    input.setAttribute("class", "form-control");
+    input.setAttribute("name", "caducidadTarjeta");
+    input.setAttribute("id", "caducidadTarjeta");
+    input.setAttribute("placeholder", "Fecha");
+    div.appendChild(input);
+    form.appendChild(div);
+
+    var div = document.createElement("div");
+    div.setAttribute("class", "form-group");
+    var label = document.createElement("label");
+    label.setAttribute("for", "CVV");
+    label.innerHTML = "CVV";
+    div.appendChild(label);
+    var input = document.createElement("input");
+    input.setAttribute("type", "number");
+    input.setAttribute("class", "form-control");
+    input.setAttribute("name", "CVV");
+    input.setAttribute("id", "CVV");
+    input.setAttribute("placeholder", "CVV");
+    div.appendChild(input);
+    form.appendChild(div);
+
+    var button = document.createElement("button");
+    button.setAttribute("type", "submit");
+    button.setAttribute("class", "btn btn-primary");
+    button.innerHTML = "Confirmar datos";
+    form.appendChild(button);
+
+}
+function cargaLogin() {
+
+    $('#formulario_pago').empty();
+    var formulario_pago = document.getElementById("formulario_pago");
+    var h2 = document.createElement("h2");
+    h2.innerHTML = "Rellene el formulario para completar el pago";
+    formulario_pago.appendChild(h2);
+
+    var form = document.createElement("form");
+    form.setAttribute("action", "../comprobarLogin_controlador");
+    formulario_pago.appendChild(form);
+
+    var div = document.createElement("div");
+    div.setAttribute("class", "form-group");
+    var label = document.createElement("label");
+    label.setAttribute("for", "Email");
+    label.innerHTML = "Email del titular de la tarjeta";
+    div.appendChild(label);
+    var input = document.createElement("input");
+    input.setAttribute("type", "email");
+    input.setAttribute("class", "form-control");
+    input.setAttribute("name", "Email");
+    input.setAttribute("id", "email");
+    input.setAttribute("placeholder", "Introduce tu correo electronico");
+    div.appendChild(input);
+    form.appendChild(div);
+
+    var div = document.createElement("div");
+    div.setAttribute("class", "form-group");
+    var label = document.createElement("label");
+    label.setAttribute("for", "Contraseña");
+    label.innerHTML = "Contraseña";
+    div.appendChild(label);
+    var input = document.createElement("input");
+    input.setAttribute("type", "password");
+    input.setAttribute("class", "form-control");
+    input.setAttribute("name", "psw");
+    input.setAttribute("id", "psw");
+    input.setAttribute("placeholder", "Introduce una contraseña");
+    div.appendChild(input);
+    form.appendChild(div);
+
+    var button = document.createElement("button");
+    button.setAttribute("onclick", "comprobarLogin();");
+    button.setAttribute("class", "btn btn-primary");
+    button.innerHTML = "Confirmar datos";
+    form.appendChild(button);
+}
+function confirmarTarjeta(elemento) {
+    var idTarjeta = elemento.getAttribute("id");
+    location.href = '/Proyecto_autobuses/comprobarTarjeta_controlador?idTarjeta=' + idTarjeta;
+
+}
+function darFechaMinima(elemento) {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+    today = yyyy + '-' + mm + '-' + dd;
+    elemento.setAttribute("min", today);
+
 }

@@ -24,6 +24,26 @@
         <servlet-name>guardarDatosViaje_controlador</servlet-name>
         <servlet-class>Controladores.guardarDatosViaje_controlador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>comprobarLogin_AJAX</servlet-name>
+        <servlet-class>Controladores.comprobarLogin_AJAX</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>comprobarLogin_controlador</servlet-name>
+        <servlet-class>Controladores.comprobarLogin_controlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>comprobarTarjeta_controlador</servlet-name>
+        <servlet-class>Controladores.comprobarTarjeta_controlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>guardarDatosViajeLogin_controlador</servlet-name>
+        <servlet-class>Controladores.guardarDatosViajeLogin_controlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>guardarDatosTarjetaNueva_controlador</servlet-name>
+        <servlet-class>Controladores.guardarDatosTarjetaNueva_controlador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>getRutas_controlador</servlet-name>
         <url-pattern>/getRutas_controlador</url-pattern>
@@ -47,6 +67,26 @@
     <servlet-mapping>
         <servlet-name>guardarDatosViaje_controlador</servlet-name>
         <url-pattern>/guardarDatosViaje_controlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>comprobarLogin_AJAX</servlet-name>
+        <url-pattern>/comprobarLogin_AJAX</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>comprobarLogin_controlador</servlet-name>
+        <url-pattern>/comprobarLogin_controlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>comprobarTarjeta_controlador</servlet-name>
+        <url-pattern>/comprobarTarjeta_controlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>guardarDatosViajeLogin_controlador</servlet-name>
+        <url-pattern>/guardarDatosViajeLogin_controlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>guardarDatosTarjetaNueva_controlador</servlet-name>
+        <url-pattern>/guardarDatosTarjetaNueva_controlador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

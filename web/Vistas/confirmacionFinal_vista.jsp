@@ -1,9 +1,11 @@
 <%-- 
-    Document   : pagoBillete_vista
+    Document   : confirmacioinFinal_vista
     Created on : 02-feb-2018, 9:48:33
     Author     : dani
 --%>
 
+<%@page import="Modelo.Tarjeta"%>
+<%@page import="Modelo.Cliente"%>
 <%@page import="Modelo.Billete"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,6 +26,9 @@
     <%
         Billete billete = new Billete();
         billete = (Billete) session.getAttribute("billete");
+        Cliente cliente = new Cliente();
+        cliente = (Cliente) session.getAttribute("cliente");
+
     %>
     <main id="contenido">
         <section id="resumenDatos">
@@ -37,8 +42,29 @@
             <label><b>Precio:</b> <% out.print(billete.getPrecio());%></label><br>
         </section>
         <section id="formulario_pago">
-            <button type="button" onclick="cargarRegistro();" class="btn btn-secondary btn-lg btn-block">Registro</button>
-            <button type="button" onclick="cargaLogin();" class="btn btn-primary btn-lg btn-block">Login</button>
+            <h2>Informacion</h2>
+            <form action="../guardarDatosViajeLogin_controlador">
+                <label>Nombre del cliente</label><br>
+                <strong><%out.print(cliente.getNombre());%></strong><br>
+                <label>Apellidos del cliente</label><br>
+                <strong><%out.print(cliente.getApellidos());%></strong><br>
+                <label>NIF</label><br>
+                <strong><%out.print(cliente.getNif());%></strong><br>
+
+                <%for (int i = 0; i < cliente.getTarjetas().size(); i++) {
+                        if (cliente.getTarjetas().get(i).isSeleccionada()) {%>
+                        <label>Tarjeta</label><br>
+                        <strong><%out.print(cliente.getTarjetas().get(i).getTipo());%></strong><br>
+                <label>Numero</label><br>
+                <strong><%out.print(cliente.getTarjetas().get(i).getNumero());%></strong><br>
+                <label>Fecha de caducidad</label><br>
+                <strong><%out.print(cliente.getTarjetas().get(i).getFechaCaducidad());%></strong><br>
+                <label>CVV</label><br>
+                <input type="number" class="form-control" name="CVV" id="CVV" placeholder="CVV">
+                <%}
+                    }%>
+                <button type="submit" class="btn btn-primary">Confirmar datos</button>
+            </form>
         </section><br>
         <section id="pasajeros_datos">
             <div class="btn-group btn-group-lg" id="botones_formulario" role="group" aria-label="Large button group">

@@ -9,7 +9,6 @@ import DAO.ConexionBBDD;
 import DAO.Operaciones;
 import Modelo.Billete;
 import Modelo.Cliente;
-import Modelo.Tarjeta;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -26,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Dani
  */
-public class guardarDatosViaje_controlador extends HttpServlet {
+public class guardarDatosViajeLogin_controlador extends HttpServlet {
 
     private Connection Conexion;
 
@@ -39,11 +38,10 @@ public class guardarDatosViaje_controlador extends HttpServlet {
             Conexion = ConexBD.GetCon();
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(guardarDatosViaje_controlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(guardarDatosViajeLogin_controlador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(guardarDatosViaje_controlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(guardarDatosViajeLogin_controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**
@@ -58,42 +56,28 @@ public class guardarDatosViaje_controlador extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String numeroTarjeta = (String) request.getParameter("numeroTarjeta");
-        String caducidadTarjeta = (String) request.getParameter("caducidadTarjeta");
-        String NIF = (String) request.getParameter("NIF");
-        String Email = (String) request.getParameter("Email");
-        String nombre = (String) request.getParameter("nombre");
-        String apellidos = (String) request.getParameter("apellidos");
-        String tipoTarjeta = (String) request.getParameter("tarjetas");
-        String pass = (String) request.getParameter("psw");
-        
-        Tarjeta tarjeta = new Tarjeta(numeroTarjeta, tipoTarjeta, caducidadTarjeta);
-        Cliente cliente = new Cliente(NIF, nombre, apellidos, Email, pass);
-        cliente.addTarjeta(tarjeta);
-        HttpSession session = request.getSession();
-        Billete billete = new Billete();
-        billete = (Billete) session.getAttribute("billete");
-        session.invalidate();
-        Operaciones operacion = new Operaciones();
-        try {
-            Conexion.setAutoCommit(false);
-            operacion.guardarViaje(Conexion, billete, cliente);
-            Conexion.commit();
-            response.sendRedirect("Vistas/confirmacionPago_vista.jsp");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(guardarDatosViaje_controlador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet guardarDatosViaje_controlador</title>");
+            out.println("<title>Servlet guardarDatosViajeLogin_controlador</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet guardarDatosViaje_controlador at " + billete + "</h1>");
+            HttpSession session = request.getSession();
+            Billete billete = new Billete();
+            Cliente cliente = new Cliente();
+            billete = (Billete) session.getAttribute("billete");
+            cliente = (Cliente) session.getAttribute("cliente");
+
+            Operaciones operacion = new Operaciones();
+            try {
+                operacion.guardarViajeLogin(Conexion, billete, cliente);
+                response.sendRedirect("Vistas/confirmacionPago_vista.jsp");
+
+            } catch (SQLException ex) {
+                Logger.getLogger(guardarDatosViajeLogin_controlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
             out.println("</body>");
             out.println("</html>");
         }

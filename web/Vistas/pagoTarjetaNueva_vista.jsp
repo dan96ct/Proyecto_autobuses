@@ -36,9 +36,21 @@
             <label><b>Numero de pasajeros:</b> <% out.print(billete.getPersonas());%></label><br>
             <label><b>Precio:</b> <% out.print(billete.getPrecio());%></label><br>
         </section>
-        <section id="formulario_pago">
-            <button type="button" onclick="cargarRegistro();" class="btn btn-secondary btn-lg btn-block">Registro</button>
-            <button type="button" onclick="cargaLogin();" class="btn btn-primary btn-lg btn-block">Login</button>
+        <section id="formulario_pago" >
+            <h2>Introduzca los datos de la nueva tarjeta</h2>
+            <form action="../guardarDatosTarjetaNueva_controlador">
+                <div class="form-group">
+                    <label for="Tipo de tarjeta">Tipo de tarjeta</label><br>
+                    <select name="tarjetas" id="tipoTarjeta">
+                        <option>MasterCard</option>
+                        <option>Visa</option>
+                    </select>
+                </div>
+                <div class="form-group"><label for="NumeroTarjeta">Numero de tarjeta</label><input type="number" class="form-control" name="numeroTarjeta" id="numeroTarjeta" placeholder="Numero de tarjeta"></div>
+                <div class="form-group"><label for="Fecha de caducidad">Fecha de caducidad</label><input type="month" class="form-control" name="caducidadTarjeta" id="caducidadTarjeta" placeholder="Fecha"></div>
+                <div class="form-group"><label for="CVV">CVV</label><input type="number" class="form-control" name="CVV" id="CVV" placeholder="CVV"></div>
+                <button type="submit" class="btn btn-warning" style="margin-top: 20px;">Confirmar</button>
+            </form>
         </section><br>
         <section id="pasajeros_datos">
             <div class="btn-group btn-group-lg" id="botones_formulario" role="group" aria-label="Large button group">

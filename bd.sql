@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `bd_autobuses` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci */;
 USE `bd_autobuses`;
--- MySQL dump 10.13  Distrib 5.7.20, for macos10.12 (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.28-MariaDB, for Win32 (AMD64)
 --
 -- Host: 127.0.0.1    Database: bd_autobuses
 -- ------------------------------------------------------
--- Server version	5.7.20
+-- Server version	10.1.28-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,8 +31,10 @@ CREATE TABLE `clientes` (
   `apellidos` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nif_UNIQUE` (`nif`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +43,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+INSERT INTO `clientes` VALUES (8,'1231223','daniel','cebrian','basketanbasket@gmail.com','abcd');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +68,7 @@ CREATE TABLE `estaciones` (
 
 LOCK TABLES `estaciones` WRITE;
 /*!40000 ALTER TABLE `estaciones` DISABLE KEYS */;
-INSERT INTO `estaciones` VALUES (1,'Albacete',NULL),(2,'Almansa',NULL),(3,'Cenizate',NULL),(4,'Casas Ibañez',NULL),(5,'Fuentealbilla',NULL),(6,'Chinchilla',NULL),(7,'Alacalá del Jucar',NULL),(8,'Madrid',NULL),(9,'Barcelona',NULL),(10,'Valencia',NULL);
+INSERT INTO `estaciones` VALUES (1,'Albacete',NULL),(2,'Almansa',NULL),(3,'Cenizate',NULL),(4,'Casas Ibañez',NULL),(5,'Fuentealbilla',NULL),(6,'Chinchilla',NULL),(7,'Alacalá del Jucar',NULL),(8,'Villarta',NULL),(9,'Iniesta',NULL),(10,'Valencia',NULL);
 /*!40000 ALTER TABLE `estaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,7 +140,7 @@ CREATE TABLE `rutas` (
   KEY `id_destino_idx` (`destino`),
   CONSTRAINT `id_destino` FOREIGN KEY (`destino`) REFERENCES `estaciones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `id_origen` FOREIGN KEY (`origen`) REFERENCES `estaciones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +149,7 @@ CREATE TABLE `rutas` (
 
 LOCK TABLES `rutas` WRITE;
 /*!40000 ALTER TABLE `rutas` DISABLE KEYS */;
-INSERT INTO `rutas` VALUES (1,1,2,NULL),(2,2,1,NULL),(3,3,4,NULL),(4,5,3,NULL),(5,3,5,NULL),(6,7,8,NULL),(7,7,9,NULL),(8,1,9,NULL);
+INSERT INTO `rutas` VALUES (1,1,2,14.94),(10,1,4,10.72),(11,1,6,3.14),(12,2,10,27.8),(13,2,8,23.2),(14,2,3,22.4),(15,3,1,9.6),(16,3,5,2.68),(17,3,2,22),(18,3,4,4.32),(19,4,1,10.66),(20,4,6,13.32),(21,4,7,4.54),(22,4,10,5),(23,5,6,12.42),(24,5,3,2.68),(25,5,8,25),(26,5,1,9.2),(27,6,7,10.44),(28,6,4,13.2),(29,6,2,12.52),(30,6,1,3.42),(31,7,1,12.74),(32,7,2,10.62),(33,7,9,10.66),(34,7,4,4.44),(35,8,9,26.8),(36,8,10,25.4),(37,8,1,38.4),(38,8,4,28.4),(39,9,10,2.3),(40,9,8,27),(41,9,3,25.6),(42,9,5,6.6),(43,10,9,2.3),(44,10,1,13.52),(45,10,5,5.06),(46,10,6,16.52);
 /*!40000 ALTER TABLE `rutas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +169,7 @@ CREATE TABLE `rutas_horarios` (
   KEY `id_rutaHorario_idx` (`ruta`),
   KEY `id_horaHorario_idx` (`horaSalida`),
   CONSTRAINT `id_rutaHorario` FOREIGN KEY (`ruta`) REFERENCES `rutas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +178,7 @@ CREATE TABLE `rutas_horarios` (
 
 LOCK TABLES `rutas_horarios` WRITE;
 /*!40000 ALTER TABLE `rutas_horarios` DISABLE KEYS */;
-INSERT INTO `rutas_horarios` VALUES (1,1,'09:20:00',3),(2,2,'10:20:00',3),(3,3,'12:50:00',3),(4,1,'09:15:00',4),(5,6,'20:40:00',2),(6,4,'13:40:00',5),(7,3,'13:40:00',2);
+INSERT INTO `rutas_horarios` VALUES (1,1,'10:00:00',1),(2,3,'11:00:00',1),(3,3,'13:15:00',10),(4,5,'17:15:00',10),(5,7,'22:00:00',10),(6,2,'10:27:00',11),(7,4,'13:40:00',11),(8,6,'19:40:00',11),(9,1,'08:19:00',12),(10,3,'13:40:00',12),(11,6,'20:40:00',12),(12,2,'11:30:00',13),(13,5,'19:40:00',13),(14,2,'11:23:00',14),(15,5,'19:40:00',14),(16,4,'13:40:00',15),(17,7,'21:50:00',15),(18,4,'13:32:00',16),(19,6,'19:42:00',16),(20,1,'10:23:00',17),(21,2,'11:23:00',17),(22,4,'13:40:00',18),(23,5,'18:50:00',18),(24,1,'09:45:00',19),(25,3,'13:15:00',19),(26,5,'19:15:00',20),(27,6,'20:20:00',20),(28,2,'10:30:00',21),(29,4,'23:50:00',21),(30,5,'20:00:00',22),(31,7,'22:50:00',22),(32,4,'14:15:00',23),(33,5,'19:15:00',23),(34,2,'10:13:00',24),(35,4,'13:35:00',24),(36,2,'10:23:00',25),(37,4,'13:45:00',25),(38,6,'20:10:00',26),(39,7,'21:45:00',26);
 /*!40000 ALTER TABLE `rutas_horarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,7 +198,7 @@ CREATE TABLE `tarjetas` (
   PRIMARY KEY (`id`),
   KEY `id_cliente_idx` (`idCliente`),
   CONSTRAINT `id_cliente` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,6 +207,7 @@ CREATE TABLE `tarjetas` (
 
 LOCK TABLES `tarjetas` WRITE;
 /*!40000 ALTER TABLE `tarjetas` DISABLE KEYS */;
+INSERT INTO `tarjetas` VALUES (3,'1234','2018-03','MasterCard',8),(4,'213213213','2018-03','MasterCard',8);
 /*!40000 ALTER TABLE `tarjetas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -247,11 +251,11 @@ CREATE TABLE `viajes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idViaje` int(11) NOT NULL,
   `precio` double NOT NULL,
-  `idCliente` int(11) NOT NULL,
+  `metodoPago` int(11) NOT NULL,
   `fecha` date NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `cliente_id_idx` (`idCliente`),
-  CONSTRAINT `cliente_id` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `cliente_id_idx` (`metodoPago`),
+  CONSTRAINT `cliente_id` FOREIGN KEY (`metodoPago`) REFERENCES `tarjetas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -281,4 +285,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-05 10:18:10
+-- Dump completed on 2018-03-06 13:40:48
