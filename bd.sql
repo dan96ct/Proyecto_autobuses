@@ -34,7 +34,7 @@ CREATE TABLE `clientes` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nif_UNIQUE` (`nif`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,6 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (8,'1231223','daniel','cebrian','basketanbasket@gmail.com','abcd');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,7 +110,7 @@ CREATE TABLE `ocupacion` (
   PRIMARY KEY (`id`),
   KEY `id_rutaHorario_idx` (`rutas_horarios`),
   CONSTRAINT `id_rutaPlazasOcupadas` FOREIGN KEY (`rutas_horarios`) REFERENCES `rutas_horarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +197,7 @@ CREATE TABLE `tarjetas` (
   PRIMARY KEY (`id`),
   KEY `id_cliente_idx` (`idCliente`),
   CONSTRAINT `id_cliente` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +206,6 @@ CREATE TABLE `tarjetas` (
 
 LOCK TABLES `tarjetas` WRITE;
 /*!40000 ALTER TABLE `tarjetas` DISABLE KEYS */;
-INSERT INTO `tarjetas` VALUES (3,'1234','2018-03','MasterCard',8),(4,'213213213','2018-03','MasterCard',8);
 /*!40000 ALTER TABLE `tarjetas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,12 +221,9 @@ CREATE TABLE `viajeros` (
   `nif` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `asiento` int(11) NOT NULL,
-  `idViaje` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_viaje_idx` (`idViaje`),
-  CONSTRAINT `id_viaje` FOREIGN KEY (`idViaje`) REFERENCES `viajes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  UNIQUE KEY `nif_UNIQUE` (`nif`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,6 +233,35 @@ CREATE TABLE `viajeros` (
 LOCK TABLES `viajeros` WRITE;
 /*!40000 ALTER TABLE `viajeros` DISABLE KEYS */;
 /*!40000 ALTER TABLE `viajeros` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `viajeros_viajes`
+--
+
+DROP TABLE IF EXISTS `viajeros_viajes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `viajeros_viajes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idViaje` int(11) NOT NULL,
+  `idViajero` int(11) NOT NULL,
+  `asiento` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_viajero_idx` (`idViajero`),
+  KEY `id_viaje_idx` (`idViaje`),
+  CONSTRAINT `id_viajeros` FOREIGN KEY (`idViajero`) REFERENCES `viajeros` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `id_viajes` FOREIGN KEY (`idViaje`) REFERENCES `viajes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `viajeros_viajes`
+--
+
+LOCK TABLES `viajeros_viajes` WRITE;
+/*!40000 ALTER TABLE `viajeros_viajes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `viajeros_viajes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -256,7 +280,7 @@ CREATE TABLE `viajes` (
   PRIMARY KEY (`id`),
   KEY `cliente_id_idx` (`metodoPago`),
   CONSTRAINT `cliente_id` FOREIGN KEY (`metodoPago`) REFERENCES `tarjetas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -285,4 +309,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-06 13:40:48
+-- Dump completed on 2018-03-06 16:24:13

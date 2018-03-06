@@ -30,7 +30,7 @@
                     <a class="nav-link" href="#">Tarifas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Promociones</a>
+                    <a class="nav-link" href="mostrarViajes_controlador">Viajar</a>
                 </li>
             </ul>
         </div>
