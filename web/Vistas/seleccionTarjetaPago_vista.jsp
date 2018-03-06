@@ -62,7 +62,7 @@
                         System.out.println(billete.getArrayPasajeros().get(i).toString());
                 %>
                 <script>
-                    var pasajero = {"numPasajero": <% out.print("'" + i + "'"); %>, "nif": <% out.print("'" + billete.getArrayPasajeros().get(i).getIdentificador() + "'"); %>, "nombre": <% out.print("'" + billete.getArrayPasajeros().get(i).getNombre() + "'"); %>, "apellidos": <% out.print("'" + billete.getArrayPasajeros().get(i).getApellido() + "'"); %>, "email": <% out.print("'" + billete.getArrayPasajeros().get(i).getCorreo() + "'"); %>, "asiento": <% out.print("'" + billete.getArrayPasajeros().get(i).getAsiento() + "'"); %>, "id": <% out.print("'" + billete.getArrayPasajeros().get(i).getId() + "'"); %>};
+                    var pasajero = {"numPasajero": <% out.print("'" + i + "'"); %>, "nif": <% out.print("'" + billete.getArrayPasajeros().get(i).getIdentificador() + "'"); %>, "nombre": <% out.print("'" + billete.getArrayPasajeros().get(i).getNombre() + "'"); %>, "apellidos": <% out.print("'" + billete.getArrayPasajeros().get(i).getApellido() + "'"); %>, "asiento": <% out.print("'" + billete.getArrayPasajeros().get(i).getAsiento() + "'"); %>, "id": <% out.print("'" + billete.getArrayPasajeros().get(i).getId() + "'"); %>};
                     añadirPasajero(pasajero);
                 </script>
                 <button type="button" onclick="datosPasajero(this);" name="<% out.print(billete.getArrayPasajeros().get(i).getId()); %>" class="btn btn-secondary btn-lg btn-block">Pasajero<% out.print(i + 1); %></button><%

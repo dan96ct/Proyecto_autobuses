@@ -606,3 +606,7 @@ function darFechaMinima(elemento) {
     elemento.setAttribute("min", today);
 
 }
+function borrarViaje(idViaje){
+      location.href = '/Proyecto_autobuses/borrarViaje_controlador?idViaje=' + idViaje;
+
+}

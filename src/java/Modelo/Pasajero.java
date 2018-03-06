@@ -10,7 +10,7 @@ package Modelo;
  * @author dani
  */
 public class Pasajero {
-    private String nombre,apellido,correo,identificador,id;//El id no tiene ninguna relacion con la base de datos, sirve para evitar que se introduzca dos veces el mismo pasajero
+    private String nombre,apellido,identificador,id;//El id no tiene ninguna relacion con la base de datos, sirve para evitar que se introduzca dos veces el mismo pasajero
     private int asiento;
 
     public String getId() {
@@ -30,10 +30,9 @@ public class Pasajero {
     }
     
 
-    public Pasajero(String nombre, String apellido, String correo, String identificador) {
+    public Pasajero(String nombre, String apellido, String identificador) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.correo = correo;
         this.identificador = identificador;
     }
 
@@ -42,8 +41,10 @@ public class Pasajero {
 
     @Override
     public String toString() {
-        return "Pasajero{" + "nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", identificador=" + identificador + ", id=" + id + ", asiento=" + asiento + '}';
+        return "Pasajero{" + "nombre=" + nombre + ", apellido=" + apellido + ", identificador=" + identificador + ", id=" + id + ", asiento=" + asiento + '}';
     }
+
+   
 
   
 
@@ -63,14 +64,7 @@ public class Pasajero {
         this.apellido = apellido;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
+  
     public String getIdentificador() {
         return identificador;
     }

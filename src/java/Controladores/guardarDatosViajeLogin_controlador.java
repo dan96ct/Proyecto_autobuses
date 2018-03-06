@@ -72,7 +72,9 @@ public class guardarDatosViajeLogin_controlador extends HttpServlet {
 
             Operaciones operacion = new Operaciones();
             try {
+                Conexion.setAutoCommit(false);
                 operacion.guardarViajeLogin(Conexion, billete, cliente);
+                Conexion.commit();
                 response.sendRedirect("Vistas/confirmacionPago_vista.jsp");
 
             } catch (SQLException ex) {

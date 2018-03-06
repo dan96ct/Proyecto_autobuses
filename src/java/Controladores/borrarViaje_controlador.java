@@ -7,9 +7,6 @@ package Controladores;
 
 import DAO.ConexionBBDD;
 import DAO.Operaciones;
-import Modelo.Billete;
-import Modelo.Cliente;
-import Modelo.Tarjeta;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -20,15 +17,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Dani
  */
-public class guardarDatosTarjetaNueva_controlador extends HttpServlet {
+public class borrarViaje_controlador extends HttpServlet {
 
-    private Connection Conexion;
+    Connection Conexion;
 
     @Override
     public void init() throws ServletException {
@@ -39,9 +35,10 @@ public class guardarDatosTarjetaNueva_controlador extends HttpServlet {
             Conexion = ConexBD.GetCon();
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(guardarDatosViajeLogin_controlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(borrarViaje_controlador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(guardarDatosViajeLogin_controlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(borrarViaje_controlador.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }
 
@@ -62,31 +59,18 @@ public class guardarDatosTarjetaNueva_controlador extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet guardarDatosTarjetaNueva_controlador</title>");
+            out.println("<title>Servlet borrarViaje_controlador</title>");
             out.println("</head>");
             out.println("<body>");
-            String numeroTarjeta = (String) request.getParameter("numeroTarjeta");
-            String caducidadTarjeta = (String) request.getParameter("caducidadTarjeta");
-            String tipoTarjeta = (String) request.getParameter("tarjetas");
+            int idViaje = Integer.parseInt(request.getParameter("idViaje"));
             
-            Tarjeta tarjeta = new Tarjeta(numeroTarjeta, tipoTarjeta, caducidadTarjeta);
-            
-            HttpSession session = request.getSession();
-            Billete billete = new Billete();
-            Cliente cliente = new Cliente();
-            billete = (Billete) session.getAttribute("billete");
-            cliente = (Cliente) session.getAttribute("cliente");
-            cliente.addTarjeta(tarjeta);
-
             Operaciones operacion = new Operaciones();
             try {
                 Conexion.setAutoCommit(false);
-                operacion.guardarViajeNuevaTarjeta(Conexion, billete, cliente);
+                operacion.borrarViaje(Conexion, idViaje);
                 Conexion.commit();
-                response.sendRedirect("Vistas/confirmacionPago_vista.jsp");
-
             } catch (SQLException ex) {
-                Logger.getLogger(guardarDatosViajeLogin_controlador.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(borrarViaje_controlador.class.getName()).log(Level.SEVERE, null, ex);
             }
             out.println("</body>");
             out.println("</html>");

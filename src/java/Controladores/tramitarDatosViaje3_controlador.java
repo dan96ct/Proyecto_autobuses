@@ -52,7 +52,6 @@ public class tramitarDatosViaje3_controlador extends HttpServlet {
             if (billete.getArrayPasajeros().get(i).getId().equals(id)) {
                 billete.getArrayPasajeros().get(i).setNombre(nombre);
                 billete.getArrayPasajeros().get(i).setApellido(apellidos);
-                billete.getArrayPasajeros().get(i).setCorreo(email);
                 billete.getArrayPasajeros().get(i).setIdentificador(nif);
                 billete.getArrayPasajeros().get(i).setAsiento(Integer.parseInt(asiento));
                 validar = false;
@@ -60,7 +59,7 @@ public class tramitarDatosViaje3_controlador extends HttpServlet {
             }
         }
         if (validar) {
-            Pasajero pasajero = new Pasajero(nombre, apellidos, email, nif);
+            Pasajero pasajero = new Pasajero(nombre, apellidos, nif);
             pasajero.setAsiento(Integer.parseInt(asiento));
             pasajero.setId(id);
             billete.addPasajero(pasajero);

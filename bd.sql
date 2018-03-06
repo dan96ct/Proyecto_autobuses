@@ -34,7 +34,7 @@ CREATE TABLE `clientes` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nif_UNIQUE` (`nif`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +43,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+INSERT INTO `clientes` VALUES (10,'12345','dani','cebrian','basketanbasket@gmail.com','abcd'),(11,'213123','daascas','sacsac','asc@gmail.com','1234');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +68,7 @@ CREATE TABLE `estaciones` (
 
 LOCK TABLES `estaciones` WRITE;
 /*!40000 ALTER TABLE `estaciones` DISABLE KEYS */;
-INSERT INTO `estaciones` VALUES (1,'Albacete',NULL),(2,'Almansa',NULL),(3,'Cenizate',NULL),(4,'Casas Ibañez',NULL),(5,'Fuentealbilla',NULL),(6,'Chinchilla',NULL),(7,'Alacalá del Jucar',NULL),(8,'Villarta',NULL),(9,'Iniesta',NULL),(10,'Valencia',NULL);
+INSERT INTO `estaciones` VALUES (1,'Albacete',NULL),(2,'Almansa',NULL),(3,'Cenizate',NULL),(4,'Villamalea',NULL),(5,'Fuentealbilla',NULL),(6,'Chinchilla',NULL),(7,'Alacalá del Jucar',NULL),(8,'Villarta',NULL),(9,'Iniesta',NULL),(10,'Valencia',NULL);
 /*!40000 ALTER TABLE `estaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +111,7 @@ CREATE TABLE `ocupacion` (
   PRIMARY KEY (`id`),
   KEY `id_rutaHorario_idx` (`rutas_horarios`),
   CONSTRAINT `id_rutaPlazasOcupadas` FOREIGN KEY (`rutas_horarios`) REFERENCES `rutas_horarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,6 +120,7 @@ CREATE TABLE `ocupacion` (
 
 LOCK TABLES `ocupacion` WRITE;
 /*!40000 ALTER TABLE `ocupacion` DISABLE KEYS */;
+INSERT INTO `ocupacion` VALUES (4,'2018-03-06',2,1);
 /*!40000 ALTER TABLE `ocupacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,7 +199,7 @@ CREATE TABLE `tarjetas` (
   PRIMARY KEY (`id`),
   KEY `id_cliente_idx` (`idCliente`),
   CONSTRAINT `id_cliente` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -206,6 +208,7 @@ CREATE TABLE `tarjetas` (
 
 LOCK TABLES `tarjetas` WRITE;
 /*!40000 ALTER TABLE `tarjetas` DISABLE KEYS */;
+INSERT INTO `tarjetas` VALUES (6,'123454','2018-03','MasterCard',10),(7,'123123123','2018-03','MasterCard',11);
 /*!40000 ALTER TABLE `tarjetas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,7 +226,7 @@ CREATE TABLE `viajeros` (
   `apellidos` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nif_UNIQUE` (`nif`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,7 +235,37 @@ CREATE TABLE `viajeros` (
 
 LOCK TABLES `viajeros` WRITE;
 /*!40000 ALTER TABLE `viajeros` DISABLE KEYS */;
+INSERT INTO `viajeros` VALUES (5,'123123213','ascasc','ascasc'),(6,'123124123123','abcd','ascasc');
 /*!40000 ALTER TABLE `viajeros` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `viajeros_backup`
+--
+
+DROP TABLE IF EXISTS `viajeros_backup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `viajeros_backup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nif` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `idViaje` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idViajeBackup_idx` (`idViaje`),
+  CONSTRAINT `id_viajerosBackUp` FOREIGN KEY (`idViaje`) REFERENCES `viajes_backup` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `viajeros_backup`
+--
+
+LOCK TABLES `viajeros_backup` WRITE;
+/*!40000 ALTER TABLE `viajeros_backup` DISABLE KEYS */;
+INSERT INTO `viajeros_backup` VALUES (4,'123123213','ascasc','ascasc',13),(5,'123124123123','abcd','ascasc',13);
+/*!40000 ALTER TABLE `viajeros_backup` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -252,7 +285,7 @@ CREATE TABLE `viajeros_viajes` (
   KEY `id_viaje_idx` (`idViaje`),
   CONSTRAINT `id_viajeros` FOREIGN KEY (`idViajero`) REFERENCES `viajeros` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `id_viajes` FOREIGN KEY (`idViaje`) REFERENCES `viajes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -261,6 +294,7 @@ CREATE TABLE `viajeros_viajes` (
 
 LOCK TABLES `viajeros_viajes` WRITE;
 /*!40000 ALTER TABLE `viajeros_viajes` DISABLE KEYS */;
+INSERT INTO `viajeros_viajes` VALUES (6,9,5,1),(7,9,6,2);
 /*!40000 ALTER TABLE `viajeros_viajes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,7 +314,7 @@ CREATE TABLE `viajes` (
   PRIMARY KEY (`id`),
   KEY `cliente_id_idx` (`metodoPago`),
   CONSTRAINT `cliente_id` FOREIGN KEY (`metodoPago`) REFERENCES `tarjetas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -289,7 +323,35 @@ CREATE TABLE `viajes` (
 
 LOCK TABLES `viajes` WRITE;
 /*!40000 ALTER TABLE `viajes` DISABLE KEYS */;
+INSERT INTO `viajes` VALUES (9,1,14.94,6,'2018-03-06'),(10,1,14.94,6,'2018-03-06');
 /*!40000 ALTER TABLE `viajes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `viajes_backup`
+--
+
+DROP TABLE IF EXISTS `viajes_backup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `viajes_backup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `origen` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `destino` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `viajes_backup`
+--
+
+LOCK TABLES `viajes_backup` WRITE;
+/*!40000 ALTER TABLE `viajes_backup` DISABLE KEYS */;
+INSERT INTO `viajes_backup` VALUES (13,'Almansa','Valencia','2018-03-06','12:30:00');
+/*!40000 ALTER TABLE `viajes_backup` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -309,4 +371,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-06 16:24:13
+-- Dump completed on 2018-03-06 19:41:00

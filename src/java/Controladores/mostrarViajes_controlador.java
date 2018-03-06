@@ -65,9 +65,15 @@ public class mostrarViajes_controlador extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             Operaciones operacion = new Operaciones();
-            
+
             HttpSession session = request.getSession();
-            
+            try {
+                session.setAttribute("viajes", operacion.getViajes(Conexion));
+                response.sendRedirect("Vistas/seleccionViaje_vista.jsp");
+
+            } catch (SQLException ex) {
+                Logger.getLogger(mostrarViajes_controlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
             out.println("</body>");
             out.println("</html>");
         }
