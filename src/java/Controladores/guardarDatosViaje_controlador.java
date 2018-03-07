@@ -66,14 +66,13 @@ public class guardarDatosViaje_controlador extends HttpServlet {
         String apellidos = (String) request.getParameter("apellidos");
         String tipoTarjeta = (String) request.getParameter("tarjetas");
         String pass = (String) request.getParameter("psw");
-        
+
         Tarjeta tarjeta = new Tarjeta(numeroTarjeta, tipoTarjeta, caducidadTarjeta);
         Cliente cliente = new Cliente(NIF, nombre, apellidos, Email, pass);
         cliente.addTarjeta(tarjeta);
         HttpSession session = request.getSession();
         Billete billete = new Billete();
         billete = (Billete) session.getAttribute("billete");
-        session.invalidate();
         Operaciones operacion = new Operaciones();
         try {
             Conexion.setAutoCommit(false);
@@ -83,6 +82,9 @@ public class guardarDatosViaje_controlador extends HttpServlet {
 
         } catch (SQLException ex) {
             Logger.getLogger(guardarDatosViaje_controlador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Excepciones.Excepcion exc) {
+            session.setAttribute("error", exc.getMessage());
+            response.sendRedirect("/Proyecto_autobuses/Vistas/Error_vista.jsp");
         }
 
         try (PrintWriter out = response.getWriter()) {

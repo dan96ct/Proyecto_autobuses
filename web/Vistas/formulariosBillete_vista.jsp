@@ -22,9 +22,8 @@
 </head>
 <body>
     <main id="contenido">
-        <% if (session.getAttribute("horarios") == null) {
-        %>
-        <% }
+
+        <% 
             Billete billete = new Billete();
             billete = (Billete) session.getAttribute("billete");
             ArrayList asientosOcupados = new ArrayList();

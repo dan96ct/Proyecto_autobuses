@@ -4,6 +4,8 @@
     Author     : Dani
 --%>
 
+<%@page import="Modelo.Cliente"%>
+<%@page import="Modelo.Billete"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,9 +24,8 @@
     </head>
     <body>
         <div style="margin: 0 auto; width:50%; " class="alert alert-danger">
-            <% String mensaje = session.getAttribute("error").toString();
-            session.invalidate(); %>
-            <strong>¡Ups!</strong> <% out.print(mensaje);%>
+            <% String mensaje = session.getAttribute("error").toString();%>
+            <strong>Error</strong> <% out.print(mensaje);%>
         </div>
     </body>
 </html>

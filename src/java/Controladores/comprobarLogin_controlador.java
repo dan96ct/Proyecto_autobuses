@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  */
 public class comprobarLogin_controlador extends HttpServlet {
 
-    Connection Conexion;
+    private Connection Conexion;
 
     @Override
     public void init() throws ServletException {
@@ -74,7 +74,7 @@ public class comprobarLogin_controlador extends HttpServlet {
                 System.out.println(operacion.compruebarLogin(Conexion, email, pass));
                 cliente = operacion.compruebarLogin(Conexion, email, pass);
 
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession(true);
                 session.setAttribute("cliente", cliente);
                 response.sendRedirect("Vistas/seleccionTarjetaPago_vista.jsp");
 

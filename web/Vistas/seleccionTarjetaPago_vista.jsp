@@ -25,6 +25,7 @@
 <body>
     
     <% Billete billete = (Billete) session.getAttribute("billete");
+        System.out.println(billete);
         
         Cliente cliente =  (Cliente) session.getAttribute("cliente");%>
     <main id="contenido">

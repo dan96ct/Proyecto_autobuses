@@ -22,9 +22,7 @@
     <div id="barra_superior"><a href="../index.jsp"><img src="Imagenes/Logo.png" class="logo" alt="Logo"/></a></div>
 </head>
 <body>
-    <% if (session.getAttribute("horarios") == null || session.getAttribute("billetes") == null) {
-    %>
-    <% }
+    <% 
         ArrayList<Horario> horarios = (ArrayList<Horario>) session.getAttribute("horarios");
         Billete billete = new Billete();
         billete = (Billete) session.getAttribute("billete");
