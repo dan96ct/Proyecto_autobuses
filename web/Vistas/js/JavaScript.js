@@ -166,42 +166,43 @@ function guardarDatosPasajero(numero) {
     var numIdentificacion = document.getElementById("identificador").value;
     var nombre = document.getElementById("nombre").value;
     var apellidos = document.getElementById("apellidos").value;
-
-    var asiento = 0;
-    var todosLosAsientos = document.getElementsByTagName("td");
-    for (var i = 0; i < todosLosAsientos.length; i++) {
-        if (todosLosAsientos[i].getAttribute("name") == "activado") {
-            asiento = todosLosAsientos[i].getAttribute("id");
-            var asientoObjeto = {'numeroAsiento': asiento, 'ocupante': numero};
-            arrayAsientos.push(asientoObjeto);
+    if (compruebaPasajero(numIdentificacion)) {
+        var asiento = 0;
+        var todosLosAsientos = document.getElementsByTagName("td");
+        for (var i = 0; i < todosLosAsientos.length; i++) {
+            if (todosLosAsientos[i].getAttribute("name") == "activado") {
+                asiento = todosLosAsientos[i].getAttribute("id");
+                var asientoObjeto = {'numeroAsiento': asiento, 'ocupante': numero};
+                arrayAsientos.push(asientoObjeto);
+            }
         }
-    }
-    var datosIntroducidos = false;
-    for (var i = 0; i < arrayPasajeros.length; i++) {
-        if (arrayPasajeros[i].numPasajero == numero) {
-            arrayPasajeros[i] = {"numPasajero": numero, "nif": numIdentificacion, "nombre": nombre, "apellidos": apellidos, "asiento": asiento, "id": arrayPasajeros[i].id};
-            datosIntroducidos = true;
+        var datosIntroducidos = false;
+        for (var i = 0; i < arrayPasajeros.length; i++) {
+            if (arrayPasajeros[i].numPasajero == numero) {
+                arrayPasajeros[i] = {"numPasajero": numero, "nif": numIdentificacion, "nombre": nombre, "apellidos": apellidos, "asiento": asiento, "id": arrayPasajeros[i].id};
+                datosIntroducidos = true;
+                objetoAjax = AJAXCrearObjeto(); //crea el objeto
+                objetoAjax.open('GET', '/Proyecto_autobuses/tramitarDatosViaje3_controlador?nif=' + numIdentificacion + '&nombre=' + nombre + '&apellidos=' + apellidos + '&asiento=' + asiento + '&id=' + arrayPasajeros[i].id);
+                objetoAjax.send();
+                objetoAjax.onreadystatechange = function () {
+                    if (objetoAjax.readyState === 4 && objetoAjax.status === 200) {
+                    }
+                }
+            }
+        }
+        if (datosIntroducidos == false) {
+            var pasajero = {"numPasajero": numero, "nif": numIdentificacion, "nombre": nombre, "apellidos": apellidos, "asiento": asiento, "id": generarID()};
             objetoAjax = AJAXCrearObjeto(); //crea el objeto
-            objetoAjax.open('GET', '/Proyecto_autobuses/tramitarDatosViaje3_controlador?nif=' + numIdentificacion + '&nombre=' + nombre + '&apellidos=' + apellidos + '&asiento=' + asiento + '&id=' + arrayPasajeros[i].id);
+            objetoAjax.open('GET', '/Proyecto_autobuses/tramitarDatosViaje3_controlador?nif=' + numIdentificacion + '&nombre=' + nombre + '&apellidos=' + apellidos + '&asiento=' + asiento + '&id=' + pasajero.id);
             objetoAjax.send();
             objetoAjax.onreadystatechange = function () {
                 if (objetoAjax.readyState === 4 && objetoAjax.status === 200) {
                 }
             }
+            arrayPasajeros.push(pasajero);
         }
+        formularioConfirmado();
     }
-    if (datosIntroducidos == false) {
-        var pasajero = {"numPasajero": numero, "nif": numIdentificacion, "nombre": nombre, "apellidos": apellidos, "asiento": asiento, "id": generarID()};
-        objetoAjax = AJAXCrearObjeto(); //crea el objeto
-        objetoAjax.open('GET', '/Proyecto_autobuses/tramitarDatosViaje3_controlador?nif=' + numIdentificacion + '&nombre=' + nombre + '&apellidos=' + apellidos + '&asiento=' + asiento + '&id=' + pasajero.id);
-        objetoAjax.send();
-        objetoAjax.onreadystatechange = function () {
-            if (objetoAjax.readyState === 4 && objetoAjax.status === 200) {
-            }
-        }
-        arrayPasajeros.push(pasajero);
-    }
-    formularioConfirmado();
 
 }
 function comprobarFormularios(numPersonas) {
@@ -261,6 +262,9 @@ function activarFormulario(element) {
     comprobarFormularioCompleto(numForm);
 
 
+}
+function añadirPasajero(pasajero){
+    arrayPasajeros.push(pasajero);
 }
 function comprobarFormularioCompleto(numForm) {
     for (var i = 0; i < arrayPasajeros.length; i++) {
@@ -360,8 +364,16 @@ function generarID() {
     }
     return id;
 }
-function añadirPasajero(pasajero) {
-    arrayPasajeros.push(pasajero);
+function compruebaPasajero(nif) {
+    var validar = true;
+    for (var i = 0; i < arrayPasajeros.length; i++) {
+        if (arrayPasajeros[i].nif == nif) {
+            alert("El dni coincide con otro de los pasajeros.");
+            validar = false;
+            break;
+        }
+    }
+    return validar;
 }
 function datosPasajero(elemento) {
     var id = elemento.getAttribute("name");

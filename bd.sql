@@ -34,7 +34,7 @@ CREATE TABLE `clientes` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nif_UNIQUE` (`nif`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `estaciones` (
 
 LOCK TABLES `estaciones` WRITE;
 /*!40000 ALTER TABLE `estaciones` DISABLE KEYS */;
-INSERT INTO `estaciones` VALUES (1,'Albacete',NULL),(2,'Almansa',NULL),(3,'Cenizate',NULL),(4,'Casas Ibañez',NULL),(5,'Fuentealbilla',NULL),(6,'Chinchilla',NULL),(7,'Alacalá del Jucar',NULL),(8,'Villarta',NULL),(9,'Iniesta',NULL),(10,'Valencia',NULL);
+INSERT INTO `estaciones` VALUES (1,'Albacete',NULL),(2,'Almansa',NULL),(3,'Cenizate',NULL),(4,'Villamalea',NULL),(5,'Fuentealbilla',NULL),(6,'Chinchilla',NULL),(7,'Alcala del Jucar',NULL),(8,'Villarta',NULL),(9,'Iniesta',NULL),(10,'Valencia',NULL);
 /*!40000 ALTER TABLE `estaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +110,7 @@ CREATE TABLE `ocupacion` (
   PRIMARY KEY (`id`),
   KEY `id_rutaHorario_idx` (`rutas_horarios`),
   CONSTRAINT `id_rutaPlazasOcupadas` FOREIGN KEY (`rutas_horarios`) REFERENCES `rutas_horarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `rutas_horarios` (
   KEY `id_rutaHorario_idx` (`ruta`),
   KEY `id_horaHorario_idx` (`horaSalida`),
   CONSTRAINT `id_rutaHorario` FOREIGN KEY (`ruta`) REFERENCES `rutas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +177,7 @@ CREATE TABLE `rutas_horarios` (
 
 LOCK TABLES `rutas_horarios` WRITE;
 /*!40000 ALTER TABLE `rutas_horarios` DISABLE KEYS */;
-INSERT INTO `rutas_horarios` VALUES (1,1,'10:00:00',1),(2,3,'11:00:00',1),(3,3,'13:15:00',10),(4,5,'17:15:00',10),(5,7,'22:00:00',10),(6,2,'10:27:00',11),(7,4,'13:40:00',11),(8,6,'19:40:00',11),(9,1,'08:19:00',12),(10,3,'13:40:00',12),(11,6,'20:40:00',12),(12,2,'11:30:00',13),(13,5,'19:40:00',13),(14,2,'11:23:00',14),(15,5,'19:40:00',14),(16,4,'13:40:00',15),(17,7,'21:50:00',15),(18,4,'13:32:00',16),(19,6,'19:42:00',16),(20,1,'10:23:00',17),(21,2,'11:23:00',17),(22,4,'13:40:00',18),(23,5,'18:50:00',18),(24,1,'09:45:00',19),(25,3,'13:15:00',19),(26,5,'19:15:00',20),(27,6,'20:20:00',20),(28,2,'10:30:00',21),(29,4,'23:50:00',21),(30,5,'20:00:00',22),(31,7,'22:50:00',22),(32,4,'14:15:00',23),(33,5,'19:15:00',23),(34,2,'10:13:00',24),(35,4,'13:35:00',24),(36,2,'10:23:00',25),(37,4,'13:45:00',25),(38,6,'20:10:00',26),(39,7,'21:45:00',26);
+INSERT INTO `rutas_horarios` VALUES (1,1,'10:00:00',1),(2,3,'11:00:00',1),(3,3,'13:15:00',10),(4,5,'17:15:00',10),(5,7,'22:00:00',10),(6,2,'10:27:00',11),(7,4,'13:40:00',11),(8,6,'19:40:00',11),(9,1,'08:19:00',12),(10,3,'13:40:00',12),(11,6,'20:40:00',12),(12,2,'11:30:00',13),(13,5,'19:40:00',13),(14,2,'11:23:00',14),(15,5,'19:40:00',14),(16,4,'13:40:00',15),(17,7,'21:50:00',15),(18,4,'13:32:00',16),(19,6,'19:42:00',16),(20,1,'10:23:00',17),(21,2,'11:23:00',17),(22,4,'13:40:00',18),(23,5,'18:50:00',18),(24,1,'09:45:00',19),(25,3,'13:15:00',19),(26,5,'19:15:00',20),(27,6,'20:20:00',20),(28,2,'10:30:00',21),(29,4,'23:50:00',21),(30,5,'20:00:00',22),(31,7,'22:50:00',22),(32,4,'14:15:00',23),(33,5,'19:15:00',23),(34,2,'10:13:00',24),(35,4,'13:35:00',24),(36,2,'10:23:00',25),(37,4,'13:45:00',25),(38,6,'20:10:00',26),(39,7,'21:45:00',26),(40,1,'09:45:00',27),(41,2,'10:45:00',27),(42,4,'14:00:00',28),(43,6,'20:15:00',28),(44,3,'13:05:00',29),(45,6,'20:05:00',29),(46,4,'13:50:00',30),(47,7,'21:50:00',30),(48,2,'10:52:00',31),(49,5,'19:20:00',31),(50,1,'09:43:00',32),(51,5,'19:10:00',32),(52,2,'10:54:00',33),(53,5,'00:00:19',33),(54,7,'09:28:00',34),(55,4,'13:40:00',34),(56,1,'09:12:00',35),(57,4,'13:35:00',35),(58,1,'10:30:00',36),(59,3,'14:00:00',36),(60,2,'11:00:00',37),(61,7,'22:20:00',37),(62,3,'12:50:00',38),(63,4,'13:55:00',38),(64,1,'10:27:00',39),(65,7,'23:00:00',39),(66,3,'12:40:00',40),(67,5,'18:45:00',40),(68,1,'09:11:00',41),(69,2,'10:11:00',41),(70,4,'13:52:00',42),(71,5,'18:55:00',42),(72,1,'10:28:00',43),(73,3,'14:00:00',43),(74,1,'11:00:00',44),(75,5,'20:00:00',44),(76,6,'20:30:00',45),(77,3,'14:00:00',45),(78,1,'11:00:00',46),(79,2,'12:00:00',46);
 /*!40000 ALTER TABLE `rutas_horarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,7 +197,7 @@ CREATE TABLE `tarjetas` (
   PRIMARY KEY (`id`),
   KEY `id_cliente_idx` (`idCliente`),
   CONSTRAINT `id_cliente` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -223,7 +223,7 @@ CREATE TABLE `viajeros` (
   `apellidos` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nif_UNIQUE` (`nif`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,7 +252,7 @@ CREATE TABLE `viajeros_viajes` (
   KEY `id_viaje_idx` (`idViaje`),
   CONSTRAINT `id_viajeros` FOREIGN KEY (`idViajero`) REFERENCES `viajeros` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `id_viajes` FOREIGN KEY (`idViaje`) REFERENCES `viajes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -280,7 +280,7 @@ CREATE TABLE `viajes` (
   PRIMARY KEY (`id`),
   KEY `cliente_id_idx` (`metodoPago`),
   CONSTRAINT `cliente_id` FOREIGN KEY (`metodoPago`) REFERENCES `tarjetas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -309,4 +309,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-06 16:24:13
+-- Dump completed on 2018-03-07 23:19:45

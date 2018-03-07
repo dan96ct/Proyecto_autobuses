@@ -39,7 +39,8 @@
             <label><b>Hora salida:</b> <% out.print(billete.getHoraSalida());%></label><br>
             <label><b>Hora llegada:</b> <% out.print(billete.getHoraLlegada());%></label><br>
             <label><b>Numero de pasajeros:</b> <% out.print(billete.getPersonas());%></label><br>
-            <label><b>Precio:</b> <% out.print(billete.getPrecio());%></label><br>
+            <label><b>Precio billete:</b> <% out.print(billete.getPrecio());%></label><br>
+            <label><b>Precio TOTAL:</b> <% out.print(billete.getPrecio() * billete.getArrayPasajeros().size());%></label><br>
         </section>
         <section id="formulario_pago">
             <h2>Informacion</h2>
@@ -53,8 +54,8 @@
 
                 <%for (int i = 0; i < cliente.getTarjetas().size(); i++) {
                         if (cliente.getTarjetas().get(i).isSeleccionada()) {%>
-                        <label>Tarjeta</label><br>
-                        <strong><%out.print(cliente.getTarjetas().get(i).getTipo());%></strong><br>
+                <label>Tarjeta</label><br>
+                <strong><%out.print(cliente.getTarjetas().get(i).getTipo());%></strong><br>
                 <label>Numero</label><br>
                 <strong><%out.print(cliente.getTarjetas().get(i).getNumero());%></strong><br>
                 <label>Fecha de caducidad</label><br>

@@ -79,7 +79,8 @@ public class Operaciones {
             String ordensql3 = "INSERT INTO `viajes` (`idViaje`, `precio`, `metodoPago`, `fecha`) VALUES (?,?,?,?);";
             PreparedStatement PrepStm3 = conn.prepareStatement(ordensql3);
             PrepStm3.setInt(1, idRutaHorario);
-            PrepStm3.setDouble(2, billete.getPrecio());
+            double totalPrecio = billete.getPrecio() * billete.getArrayPasajeros().size();
+            PrepStm3.setDouble(2, totalPrecio);
             PrepStm3.setInt(3, idTarjeta);
             PrepStm3.setDate(4, java.sql.Date.valueOf(billete.getDia()));
             PrepStm3.executeUpdate();
@@ -87,7 +88,7 @@ public class Operaciones {
             String ordensqlViaje = "SELECT * FROM viajes WHERE idViaje=? AND precio=? AND metodoPago=? AND fecha=?";
             PreparedStatement PrepStmViaje = conn.prepareStatement(ordensqlViaje);
             PrepStmViaje.setInt(1, idRutaHorario);
-            PrepStmViaje.setDouble(2, billete.getPrecio());
+            PrepStmViaje.setDouble(2, totalPrecio);
             PrepStmViaje.setInt(3, idTarjeta);
             PrepStmViaje.setDate(4, java.sql.Date.valueOf(billete.getDia()));
             ResultSet rsViaje = PrepStmViaje.executeQuery();
@@ -95,7 +96,7 @@ public class Operaciones {
             while (rsViaje.next()) {
                 idViaje = rsViaje.getInt("id");
             }
-
+            System.err.println(">>>>>>>>>>>>>>>>>" + idViaje);
             ArrayList<Pasajero> arrayPasajeros = new ArrayList<>();
             arrayPasajeros = billete.getArrayPasajeros();
 
@@ -175,7 +176,8 @@ public class Operaciones {
         String ordensql3 = "INSERT INTO `viajes` (`idViaje`, `precio`, `metodoPago`, `fecha`) VALUES (?,?,?,?);";
         PreparedStatement PrepStm3 = conn.prepareStatement(ordensql3);
         PrepStm3.setInt(1, idRutaHorario);
-        PrepStm3.setDouble(2, billete.getPrecio());
+        double totalPrecio = billete.getPrecio() * billete.getArrayPasajeros().size();
+        PrepStm3.setDouble(2, totalPrecio);
         PrepStm3.setInt(3, idTarjeta);
         PrepStm3.setDate(4, java.sql.Date.valueOf(billete.getDia()));
         PrepStm3.executeUpdate();
@@ -183,7 +185,7 @@ public class Operaciones {
         String ordensqlViaje = "SELECT * FROM viajes WHERE idViaje=? AND precio=? AND metodoPago=? AND fecha=?";
         PreparedStatement PrepStmViaje = conn.prepareStatement(ordensqlViaje);
         PrepStmViaje.setInt(1, idRutaHorario);
-        PrepStmViaje.setDouble(2, billete.getPrecio());
+        PrepStmViaje.setDouble(2, totalPrecio);
         PrepStmViaje.setInt(3, idTarjeta);
         PrepStmViaje.setDate(4, java.sql.Date.valueOf(billete.getDia()));
         ResultSet rsViaje = PrepStmViaje.executeQuery();
@@ -270,7 +272,8 @@ public class Operaciones {
         String ordensql3 = "INSERT INTO `viajes` (`idViaje`, `precio`, `metodoPago`, `fecha`) VALUES (?,?,?,?);";
         PreparedStatement PrepStm3 = conn.prepareStatement(ordensql3);
         PrepStm3.setInt(1, idRutaHorario);
-        PrepStm3.setDouble(2, billete.getPrecio());
+        double totalPrecio = billete.getPrecio() * billete.getArrayPasajeros().size();
+        PrepStm3.setDouble(2, totalPrecio);
         PrepStm3.setInt(3, idTarjeta);
         PrepStm3.setDate(4, java.sql.Date.valueOf(billete.getDia()));
         PrepStm3.executeUpdate();
@@ -278,7 +281,7 @@ public class Operaciones {
         String ordensqlViaje = "SELECT * FROM viajes WHERE idViaje=? AND precio=? AND metodoPago=? AND fecha=?";
         PreparedStatement PrepStmViaje = conn.prepareStatement(ordensqlViaje);
         PrepStmViaje.setInt(1, idRutaHorario);
-        PrepStmViaje.setDouble(2, billete.getPrecio());
+        PrepStmViaje.setDouble(2, totalPrecio);
         PrepStmViaje.setInt(3, idTarjeta);
         PrepStmViaje.setDate(4, java.sql.Date.valueOf(billete.getDia()));
         ResultSet rsViaje = PrepStmViaje.executeQuery();
