@@ -263,7 +263,7 @@ function activarFormulario(element) {
 
 
 }
-function añadirPasajero(pasajero){
+function añadirPasajero(pasajero) {
     arrayPasajeros.push(pasajero);
 }
 function comprobarFormularioCompleto(numForm) {
@@ -601,6 +601,10 @@ function confirmarTarjeta(elemento) {
     var idTarjeta = elemento.getAttribute("id");
     location.href = '/Proyecto_autobuses/comprobarTarjeta_controlador?idTarjeta=' + idTarjeta;
 
+}
+
+function borrarViaje(idViaje, fecha) {
+    location.href = '/Proyecto_autobuses/borrarViaje_controlador?idViaje=' + idViaje + '&fecha=' + fecha;
 }
 function darFechaMinima(elemento) {
     var today = new Date();

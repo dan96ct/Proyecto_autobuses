@@ -4,6 +4,7 @@
     Author     : dani
 --%>
 
+<%@page import="Modelo.Viaje"%>
 <%@page import="Modelo.Billete"%>
 <%@page import="Modelo.Horario"%>
 <%@page import="java.util.ArrayList"%>
@@ -24,7 +25,7 @@
 <body>
 
     <%
-        ArrayList<Billete> viajes = (ArrayList<Billete>) session.getAttribute("viajes");
+        ArrayList<Viaje> viajes = (ArrayList<Viaje>) session.getAttribute("viajes");
     %>
 
     <main id="contenido">
@@ -32,11 +33,10 @@
             <%for (int i = 0; i < viajes.size(); i++) {
 
             %>
-            <article class="horario" id="<%out.print("horario" + i); %>"> <label class="datoHorario">H.Salida:<strong><% out.print(viajes.get(i).getHoraSalida()); %></strong> </label>
-                <label class="datoHorario"> H.llegada<strong><% out.print(viajes.get(i).getHoraLlegada()); %></strong></label>
-                <label class="datoHorario">Origen<b><% out.print(viajes.get(i).getOrigen()); %></b></label>
-                <label class="datoHorario">Destino:<strong><% out.print(viajes.get(i).getDestino()); %></strong></label>
-                <label class="datoHorario">Dia:<strong><% out.print(viajes.get(i).getDia()); %></strong></label><button name="<%out.print(i);%>" onclick="borrarViaje(<% out.print("'" + viajes.get(i).getIdViaje()+ "'"); %>)" id="boton_horario" class="btn btn-warning">Elegir viaje</button></article>
+            <article class="horario" id="<%out.print("viaje" + i); %>"> <label class="datoHorario">H.Salida: <strong><% out.print(viajes.get(i).getHoraSalida()); %></strong> </label>
+                <label class="datoHorario"> H.llegada: <strong><% out.print(viajes.get(i).getHoraLLegada()); %></strong></label>
+                <label class="datoHorario">Origen: <b><% out.print(viajes.get(i).getOrigen()); %></b></label>
+                <label class="datoHorario">Dia: <strong><% out.print(viajes.get(i).getFecha()); %></strong></label><button name="<%out.print(i);%>" onclick="borrarViaje(<% out.print("'" + viajes.get(i).getIdViaje()+ "'"); %> <% out.print(",'" + viajes.get(i).getFecha()+ "'"); %>)" id="boton_horario" class="btn btn-warning">Elegir viaje</button></article>
                 <%}%>
         </section>
     </main>

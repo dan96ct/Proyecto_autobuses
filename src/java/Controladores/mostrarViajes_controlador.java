@@ -57,17 +57,16 @@ public class mostrarViajes_controlador extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet mostrarViajes_controlador</title>");
-            out.println("</head>");
-            out.println("<body>");
             Operaciones operacion = new Operaciones();
-            
+
             HttpSession session = request.getSession();
-            
+            try {
+                session.setAttribute("viajes", operacion.getViajesBackup(Conexion));
+                response.sendRedirect("Vistas/seleccionViaje_vista.jsp");
+            } catch (SQLException ex) {
+                Logger.getLogger(mostrarViajes_controlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             out.println("</body>");
             out.println("</html>");
         }

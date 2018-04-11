@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `bd_autobuses` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci */;
 USE `bd_autobuses`;
--- MySQL dump 10.16  Distrib 10.1.28-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.20, for macos10.12 (x86_64)
 --
 -- Host: 127.0.0.1    Database: bd_autobuses
 -- ------------------------------------------------------
--- Server version	10.1.28-MariaDB
+-- Server version	5.7.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -277,9 +277,12 @@ CREATE TABLE `viajes` (
   `precio` double NOT NULL,
   `metodoPago` int(11) NOT NULL,
   `fecha` date NOT NULL,
+  `codigo` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `cliente_id_idx` (`metodoPago`),
-  CONSTRAINT `cliente_id` FOREIGN KEY (`metodoPago`) REFERENCES `tarjetas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `rutas_horarios_id_idx` (`idViaje`),
+  CONSTRAINT `cliente_id` FOREIGN KEY (`metodoPago`) REFERENCES `tarjetas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `rutas_horarios_id` FOREIGN KEY (`idViaje`) REFERENCES `rutas_horarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -309,4 +312,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-07 23:19:45
+-- Dump completed on 2018-04-08 17:38:50
