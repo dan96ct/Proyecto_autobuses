@@ -524,8 +524,10 @@ public class Operaciones {
         PrepStm.setDate(2, java.sql.Date.valueOf(fecha));
         ResultSet rs = PrepStm.executeQuery();
         ArrayList<Integer> idViajes = new ArrayList();
+        ArrayList<Integer> idTarjetas = new ArrayList();
         while (rs.next()) {
             idViajes.add(rs.getInt("id"));
+            idTarjetas.add(rs.getInt("metodoPago"));
         }
 
         ArrayList<Integer> idViajeros = new ArrayList();
@@ -561,13 +563,13 @@ public class Operaciones {
             }
 
         }
-        
+
         String ordenSQL7 = "SELECT * FROM viajes_backup";
         PreparedStatement PrepStm7 = conn.prepareStatement(ordenSQL7);
         ResultSet rs4 = PrepStm7.executeQuery();
         rs4.last();
         int idViaje_backUp = rs4.getInt("id");
-        
+
         for (int i = 0; i < viajeros.size(); i++) {
             String ordenSQL5 = "INSERT IGNORE INTO `viajeros_backup` (`nif`, `nombre`, `apellidos`) VALUES (?,?,?);";
             PreparedStatement PrepStm5 = conn.prepareStatement(ordenSQL5);
@@ -575,7 +577,7 @@ public class Operaciones {
             PrepStm5.setString(2, viajeros.get(i).getNombre());
             PrepStm5.setString(3, viajeros.get(i).getApellido());
             PrepStm5.executeUpdate();
-            
+
             String ordenSQL6 = "INSERT INTO `viajeros_viajes_backup` (`idViaje_backup`, `idViajero_backup`) VALUES (?,?);";
             PreparedStatement PrepStm6 = conn.prepareStatement(ordenSQL6);
             PrepStm6.setInt(1, idViaje_backUp);
@@ -583,6 +585,49 @@ public class Operaciones {
             PrepStm6.executeUpdate();
         }
 
+        for (int i = 0; i < idTarjetas.size(); i++) {
+            String ordenSQL8 = "INSERT INTO `facturas` (`viajebackup`, `tarjeta`) VALUES (?,?);";
+            PreparedStatement PrepStm8 = conn.prepareStatement(ordenSQL8);
+            PrepStm8.setInt(1, idViaje_backUp);
+            PrepStm8.setInt(2, idTarjetas.get(i));
+            PrepStm8.executeUpdate();
+        }
+
+        for (int i = 0; i < idViajes.size(); i++) {
+            String ordenSQL9 = "DELETE FROM `viajeros_viajes` WHERE `idViaje`=?";
+            PreparedStatement PrepStm9 = conn.prepareStatement(ordenSQL9);
+            PrepStm9.setInt(1, idViajes.get(i));
+            PrepStm9.executeUpdate();
+        }
+        String ordenSQL10 = "DELETE FROM `viajes` WHERE `idViaje`=?";
+        PreparedStatement PrepStm10 = conn.prepareStatement(ordenSQL10);
+        PrepStm10.setInt(1, idViaje);
+        PrepStm10.executeUpdate();
+
+        for (int i = 0; i < viajeros.size(); i++) {
+            boolean validar = true;
+
+            String ordenSQL11 = "SELECT * FROM viajeros_viajes WHERE idViajero=?";
+            PreparedStatement PrepStm11 = conn.prepareStatement(ordenSQL11);
+            PrepStm11.setString(1, viajeros.get(i).getId());
+            ResultSet rs11 = PrepStm11.executeQuery();
+            if (rs11.getRow() > 0) {
+                validar = false;
+            }
+
+            if (validar) {
+                String ordenSQL12 = "DELETE FROM `viajeros` WHERE `id`=?";
+                PreparedStatement PrepStm12 = conn.prepareStatement(ordenSQL12);
+                PrepStm12.setString(1, viajeros.get(i).getId());
+                PrepStm12.executeUpdate();
+            }
+        }
+
+        String ordenSQL13 = "DELETE FROM `ocupacion` WHERE `dia`=? AND `rutas_horarios`=?";
+        PreparedStatement PrepStm13 = conn.prepareStatement(ordenSQL13);
+        PrepStm13.setDate(1, java.sql.Date.valueOf(fecha));
+        PrepStm13.setInt(2, idViaje);
+        PrepStm13.executeUpdate();
     }
 
     public String generarCodigo() {
