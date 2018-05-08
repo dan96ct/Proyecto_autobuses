@@ -42,30 +42,62 @@ function cogerDatosHorario(horaS, horaLL, precio, idHorario) {
 }
 function comprobarDatosPasajero() {
     var numPasajero = document.getElementById("tituloFormulario_usuario").textContent;
-
+    var dni = document.getElementById("identificador").value;
     if (comprobarCamposVacios() === true) {
+        if (comprobarDNI(dni)) {
 
-        switch (numPasajero) {
-            case 'Datos de pasajero 1':
-                guardarDatosPasajero(1);
-                break;
-            case 'Datos de pasajero 2':
-                guardarDatosPasajero(2);
-                break;
-            case 'Datos de pasajero 3':
-                guardarDatosPasajero(3);
-                break;
-            case 'Datos de pasajero 4':
-                guardarDatosPasajero(4);
-                break;
-            case 'Datos de pasajero 5':
-                guardarDatosPasajero(5);
-                break;
-            default:
+            switch (numPasajero) {
+                case 'Datos de pasajero 1':
+                    guardarDatosPasajero(1);
+                    break;
+                case 'Datos de pasajero 2':
+                    guardarDatosPasajero(2);
+                    break;
+                case 'Datos de pasajero 3':
+                    guardarDatosPasajero(3);
+                    break;
+                case 'Datos de pasajero 4':
+                    guardarDatosPasajero(4);
+                    break;
+                case 'Datos de pasajero 5':
+                    guardarDatosPasajero(5);
+                    break;
+                default:
+            }
         }
     }
+
 }
 
+function comprobarDNI(dni) {
+    var validar = true;
+    var numero;
+    var letr;
+    var letra;
+    var expresion_regular_dni;
+
+    expresion_regular_dni = /^\d{8}[a-zA-Z]$/;
+
+    if (expresion_regular_dni.test(dni) == true) {
+        numero = dni.substr(0, dni.length - 1);
+        letr = dni.substr(dni.length - 1, 1);
+        numero = numero % 23;
+        letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
+        letra = letra.substring(numero, numero + 1);
+        if (letra != letr.toUpperCase()) {
+            if (validar = true) {
+                validar = false;
+            }
+            alert('Dni erroneo, la letra del NIF no se corresponde');
+        }
+    } else {
+        if (validar = true) {
+            validar = false;
+        }
+        alert('Dni erroneo, formato no válido');
+    }
+    return validar;
+}
 function elegirAsiento(elemento) {
     var todosLosAsientos = document.getElementsByTagName("td");
     var validar = true;

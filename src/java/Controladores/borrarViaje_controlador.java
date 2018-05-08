@@ -60,7 +60,9 @@ public class borrarViaje_controlador extends HttpServlet {
             String fecha = (String) request.getParameter("fecha");
             Operaciones operacion = new Operaciones();
             try {
+                Conexion.setAutoCommit(false);
                 operacion.borrarViaje(idViaje, fecha, Conexion);
+                Conexion.commit();
                 response.sendRedirect("Vistas/confirmacionBorrarViaje.jsp");
             } catch (SQLException ex) {
                 Logger.getLogger(borrarViaje_controlador.class.getName()).log(Level.SEVERE, null, ex);

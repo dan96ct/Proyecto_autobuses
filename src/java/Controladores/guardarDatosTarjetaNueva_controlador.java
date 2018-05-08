@@ -68,9 +68,9 @@ public class guardarDatosTarjetaNueva_controlador extends HttpServlet {
             String numeroTarjeta = (String) request.getParameter("numeroTarjeta");
             String caducidadTarjeta = (String) request.getParameter("caducidadTarjeta");
             String tipoTarjeta = (String) request.getParameter("tarjetas");
-            
+
             Tarjeta tarjeta = new Tarjeta(numeroTarjeta, tipoTarjeta, caducidadTarjeta);
-            
+
             HttpSession session = request.getSession();
             Billete billete = new Billete();
             Cliente cliente = new Cliente();
@@ -85,6 +85,9 @@ public class guardarDatosTarjetaNueva_controlador extends HttpServlet {
 
             } catch (SQLException ex) {
                 Logger.getLogger(guardarDatosViajeLogin_controlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Excepciones.Excepcion exc) {
+                session.setAttribute("error", exc.getMessage());
+                response.sendRedirect("/Proyecto_autobuses/Vistas/Error_vista.jsp");
             }
             out.println("</body>");
             out.println("</html>");

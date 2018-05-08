@@ -10,7 +10,8 @@ package Modelo;
  * @author Dani
  */
 public class Tarjeta {
-    private String numero,tipo, fechaCaducidad;
+
+    private String numero, tipo, fechaCaducidad;
     private boolean seleccionada = false;
 
     public boolean isSeleccionada() {
@@ -24,6 +25,21 @@ public class Tarjeta {
 
     public String getNumero() {
         return numero;
+    }
+
+    public String getNumCifrado() {
+        char[] charNum = this.numero.toCharArray();
+        String numString = "";
+
+        for (int i = 0; i < charNum.length; i++) {
+            if (i < charNum.length - 3) {
+                numString = numString + "*";
+            } else {
+                numString = numString + charNum[i];
+            }
+        }
+
+        return numString;
     }
 
     public void setNumero(String numero) {
@@ -70,13 +86,9 @@ public class Tarjeta {
     public Tarjeta() {
     }
 
-    
-
-    
-
     @Override
     public String toString() {
         return "Tarjeta{" + "numero=" + numero + ", tipo=" + tipo + ", fechaCaducidad=" + fechaCaducidad + '}';
     }
-    
+
 }

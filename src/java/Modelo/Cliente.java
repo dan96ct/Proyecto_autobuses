@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Dani
  */
 public class Cliente {
-    private String nif, nombre, apellidos, email,password;
+    private String nif, nombre, apellidos, email, password;
     private ArrayList<Tarjeta> tarjetas;
 
     public Cliente(String nif, String nombre, String apellidos, String email, String password) {

@@ -46,7 +46,7 @@
             %>
             <div id="<%out.print(cliente.getTarjetas().get(i).getId()); %>" onclick="confirmarTarjeta(this);" class="tarjeta">
                 <label> <% out.print(cliente.getTarjetas().get(i).getTipo()); %></label><br>
-                <label><% out.print(cliente.getTarjetas().get(i).getNumero()); %></label><br>
+                <label><% out.print(cliente.getTarjetas().get(i).getNumCifrado()); %></label><br>
                 <label><% out.print(cliente.getTarjetas().get(i).getFechaCaducidad()); %></label><br>
             </div>
             <%
