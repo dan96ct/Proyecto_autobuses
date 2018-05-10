@@ -647,16 +647,18 @@ public class Operaciones {
             PrepStm8.setInt(2, idTarjetas.get(i));
             PrepStm8.executeUpdate();
         }
-
+        System.out.println("NUmero de id de viajes a borrar >>>>>>>>>>>>>>" + idViajes.size());
         for (int i = 0; i < idViajes.size(); i++) {
             String ordenSQL9 = "DELETE FROM `viajeros_viajes` WHERE `idViaje`=?";
             PreparedStatement PrepStm9 = conn.prepareStatement(ordenSQL9);
+            System.out.println("ID del viaje a borrar >>>>>>>>>>>>>><" + idViajes.get(i));
             PrepStm9.setInt(1, idViajes.get(i));
             PrepStm9.executeUpdate();
         }
-        String ordenSQL10 = "DELETE FROM `viajes` WHERE `idViaje`=?";
+        String ordenSQL10 = "DELETE FROM `viajes` WHERE `idViaje`=? AND `fecha`=?";
         PreparedStatement PrepStm10 = conn.prepareStatement(ordenSQL10);
         PrepStm10.setInt(1, idViaje);
+        PrepStm10.setDate(2, java.sql.Date.valueOf(fecha));
         PrepStm10.executeUpdate();
 
         for (int i = 0; i < viajeros.size(); i++) {
@@ -666,8 +668,6 @@ public class Operaciones {
             PreparedStatement PrepStm11 = conn.prepareStatement(ordenSQL11);
             PrepStm11.setString(1, viajeros.get(i).getId());
             ResultSet rs11 = PrepStm11.executeQuery();
-            System.out.println("ID DEL VIAJERO>>>>>>>>>>>>>" + viajeros.get(i).getId());
-            System.out.println("NUMERO DE FILAS>>>>>>>>>>>>>" + rs11.getRow());
             if (rs11.next()) {
                 int resultado = rs11.getInt("suma");
                 if (resultado > 0) {
