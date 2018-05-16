@@ -636,7 +636,7 @@ public class Operaciones {
             String ordenSQL6 = "INSERT INTO `viajeros_viajes_backup` (`idViaje_backup`, `idViajero_backup`) VALUES (?,?);";
             PreparedStatement PrepStm6 = conn.prepareStatement(ordenSQL6);
             PrepStm6.setInt(1, idViaje_backUp);
-            PrepStm6.setString(2, viajeros.get(i).getId());
+            PrepStm6.setInt(2, Integer.parseInt(viajeros.get(i).getId()));
             PrepStm6.executeUpdate();
         }
 

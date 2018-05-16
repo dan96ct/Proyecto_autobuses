@@ -328,10 +328,12 @@ DROP TABLE IF EXISTS `viajeros_viajes_backup`;
 CREATE TABLE `viajeros_viajes_backup` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idViaje_backup` int(11) NOT NULL,
-  `idViajero_backup` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `idViajero_backup` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_viaje_back_idx` (`idViaje_backup`),
-  CONSTRAINT `id_viaje_back` FOREIGN KEY (`idViaje_backup`) REFERENCES `viajes_backup` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `id_viajero_back_idx` (`idViajero_backup`),
+  CONSTRAINT `id_viaje_back` FOREIGN KEY (`idViaje_backup`) REFERENCES `viajes_backup` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `id_viajero_back` FOREIGN KEY (`idViajero_backup`) REFERENCES `viajeros_backup` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -418,4 +420,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-08 21:10:15
+-- Dump completed on 2018-05-10 11:19:54
