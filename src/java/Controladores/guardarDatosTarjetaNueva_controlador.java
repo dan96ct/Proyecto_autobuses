@@ -80,7 +80,9 @@ public class guardarDatosTarjetaNueva_controlador extends HttpServlet {
 
             Operaciones operacion = new Operaciones();
             try {
+                Conexion.setAutoCommit(false);
                 operacion.guardarViajeNuevaTarjeta(Conexion, billete, cliente);
+                Conexion.commit();
                 response.sendRedirect("Vistas/confirmacionPago_vista.jsp");
 
             } catch (SQLException ex) {

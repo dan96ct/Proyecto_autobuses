@@ -59,7 +59,7 @@ public class tramitarDatosViaje2_controlador extends HttpServlet {
         String horaSalida = (String) request.getParameter("horaS");
         String horaLL = (String) request.getParameter("horaLL");
         double precio = Double.parseDouble(request.getParameter("precio"));
-        int idHorarioViaje = Integer.parseInt(request.getParameter("id"));
+        int idViaje = Integer.parseInt(request.getParameter("id"));
 
         HttpSession session = request.getSession();
         Billete billete = new Billete();
@@ -67,7 +67,7 @@ public class tramitarDatosViaje2_controlador extends HttpServlet {
         billete.setHoraSalida(horaSalida);
         billete.setHoraLlegada(horaLL);
         billete.setPrecio(precio);
-        billete.setIdViaje(idHorarioViaje);
+        billete.setIdViaje(idViaje);
         session.setAttribute("billete", billete);
 
         Operaciones operacion = new Operaciones();
