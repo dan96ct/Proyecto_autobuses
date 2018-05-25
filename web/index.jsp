@@ -30,7 +30,7 @@
                     <a class="nav-link" href="#">Tarifas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="mostrarViajes_controlador">Viajar</a>
+                    <a class="nav-link" href="Vistas/buscarViaje_vista.jsp">Viajar</a>
                 </li>
             </ul>
         </div>

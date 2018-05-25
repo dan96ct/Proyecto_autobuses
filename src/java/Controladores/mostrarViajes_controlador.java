@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -58,10 +60,16 @@ public class mostrarViajes_controlador extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             Operaciones operacion = new Operaciones();
+            String origen = (String) request.getParameter("origen");
+            String destino = (String) request.getParameter("destino");
+            String fecha = (String) request.getParameter("fecha");
 
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate fechaDate = LocalDate.parse(fecha, formatter);
+            
             HttpSession session = request.getSession();
             try {
-                session.setAttribute("viajes", operacion.getViajesBackup(Conexion));
+                session.setAttribute("viajes", operacion.getViajesBackup(Conexion, origen, destino, fechaDate));
                 response.sendRedirect("Vistas/seleccionViaje_vista.jsp");
             } catch (SQLException ex) {
                 Logger.getLogger(mostrarViajes_controlador.class.getName()).log(Level.SEVERE, null, ex);

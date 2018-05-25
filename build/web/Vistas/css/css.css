@@ -28,6 +28,28 @@ and open the template in the editor.
     float: left;
 
 }
+#billete_viajero{
+    margin: 0 auto;
+    width: 50%;
+    margin-top: 50px;
+    font-size: 20px;
+    border: solid 2px;
+    padding: 1em;
+    background-color: #f3f3f3;
+}
+#datos_viaje{
+    display: inline-block;
+    margin-left: 30%;
+
+}
+#datos_pasajero{
+    display: inline-block;
+
+}
+#formulario_filtrarViajes{
+    width: 50%;
+    margin: 0 auto;
+}
 #info_empresa{
     margin-top: 40px;
 }

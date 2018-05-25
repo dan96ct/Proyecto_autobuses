@@ -4,6 +4,7 @@
     Author     : Dani
 --%>
 
+<%@page import="Modelo.Billete"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,8 +20,34 @@
     <div id="barra_superior"><a href="../index.jsp"><img src="Imagenes/Logo.png" class="logo" alt="Logo"/></a></div>
 </head>
 <body>
+    <% Billete billete = new Billete();
+        billete = (Billete) session.getAttribute("billete");
+         
+    %>
     <div class="alert alert-success" role="alert" style="width: 50%; text-align: center; margin: 0 auto; margin-top: 50px;">
         <strong>¡Gracias!</strong> Su pago esta siendo tramitado
     </div>
+    <%for (int i = 0; i < billete.getArrayPasajeros().size(); i++) {
+    %>
+    <div id="billete_viajero"> 
+        <img width="200px" height="50px" src="Imagenes/Logo.png"><br>
+        <div id="datos_pasajero">
+            <h3><%out.print(billete.getArrayPasajeros().get(i).getNombre());%></h3>
+            <h3><%out.print(billete.getArrayPasajeros().get(i).getApellido());%></h3>
+            <h3>Asiento <%out.print(billete.getArrayPasajeros().get(i).getAsiento());%></h3>
+        </div>
+        <div id="datos_viaje">
+            <b>Fecha: </b><%out.print(billete.getDia());%><br>
+            <b>Origen:</b><%out.print(billete.getOrigen());%><br>
+            <b>Destino:</b><%out.print(billete.getDestino());%><br>
+            <b>Hora de salida: </b><%out.print(billete.getHoraSalida());%><br>
+            <b>Hora de llegada: </b><%out.print(billete.getHoraLlegada());%><br>
+        </div>
+
+    </div>
+    <%
+        }
+    %>
+
 </body>
 </html>

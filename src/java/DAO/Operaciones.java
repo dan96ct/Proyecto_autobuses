@@ -468,10 +468,12 @@ public class Operaciones {
 
     }
 
-    public ArrayList getViajesBackup(Connection conn) throws SQLException {
-        String ordensql = "SELECT viajes.id AS 'idViajes', estaciones.nombre AS 'nombreEstacion', rutas_horarios.horaSalida AS 'horaSalida', rutas_horarios.horaLLegada AS 'horaLLegada', viajes.fecha AS 'fecha'   FROM viajes, rutas_horarios, rutas, estaciones WHERE rutas_horarios.id = viajes.id_rutas_horarios AND rutas.id = rutas_horarios.ruta AND estaciones.id = rutas.origen;";
+    public ArrayList getViajesBackup(Connection conn, String origen, String destino, LocalDate fecha) throws SQLException {
+        String ordensql = "SELECT viajes.id AS 'idViajes', estaciones.nombre AS 'nombreEstacion', rutas_horarios.horaSalida AS 'horaSalida', rutas_horarios.horaLLegada AS 'horaLLegada', viajes.fecha AS 'fecha'   FROM viajes, rutas_horarios, rutas, estaciones WHERE rutas_horarios.id = viajes.id_rutas_horarios AND rutas.id = rutas_horarios.ruta AND estaciones.id = rutas.origen AND viajes.fecha = ? AND estaciones.nombre = ?;";
         ArrayList<Viaje> viajes = new ArrayList<>();
         PreparedStatement PrepStm = conn.prepareStatement(ordensql);
+        PrepStm.setDate(1, java.sql.Date.valueOf(fecha));
+        PrepStm.setString(2, origen);
         ResultSet rs = PrepStm.executeQuery();
         while (rs.next()) {
             Viaje viaje = new Viaje(rs.getString("nombreEstacion"), rs.getString("horaSalida"), rs.getString("horaLLegada"), rs.getInt("idViajes"), rs.getDate("fecha").toLocalDate());
