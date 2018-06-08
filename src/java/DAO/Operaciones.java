@@ -36,7 +36,6 @@ public class Operaciones {
         }
         return estaciones;
     }
-
     public void guardarViaje(Connection conn, Billete billete, Cliente cliente) throws SQLException, Excepcion {
         if (compruebaNifCorreoCliente(conn, cliente)) {
             ValidadorDNI validador = new ValidadorDNI(cliente.getNif());

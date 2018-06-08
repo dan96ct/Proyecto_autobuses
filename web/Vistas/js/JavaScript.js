@@ -445,6 +445,7 @@ function cargarRegistro() {
     input.setAttribute("name", "NIF");
     input.setAttribute("id", "NIFPago");
     input.setAttribute("placeholder", "Introduce tu NIF");
+    input.setAttribute("required", "true");
     div.appendChild(input);
     form.appendChild(div);
 
@@ -460,6 +461,7 @@ function cargarRegistro() {
     input.setAttribute("name", "Email");
     input.setAttribute("id", "email");
     input.setAttribute("placeholder", "Introduce tu correo electronico");
+    input.setAttribute("required", "true");
     div.appendChild(input);
     form.appendChild(div);
 
@@ -475,6 +477,8 @@ function cargarRegistro() {
     input.setAttribute("name", "nombre");
     input.setAttribute("id", "nombrePago");
     input.setAttribute("placeholder", "Introduce tu nombre");
+    input.setAttribute("required", "true");
+
     div.appendChild(input);
     form.appendChild(div);
 
@@ -490,6 +494,8 @@ function cargarRegistro() {
     input.setAttribute("name", "apellidos");
     input.setAttribute("id", "apellidosPago");
     input.setAttribute("placeholder", "Introduce tu apellido");
+    input.setAttribute("required", "true");
+
     div.appendChild(input);
     form.appendChild(div);
 
@@ -505,6 +511,25 @@ function cargarRegistro() {
     input.setAttribute("name", "psw");
     input.setAttribute("id", "psw");
     input.setAttribute("placeholder", "Introduce una contraseña");
+    input.setAttribute("required", "true");
+
+    div.appendChild(input);
+    form.appendChild(div);
+
+    var div = document.createElement("div");
+    div.setAttribute("class", "form-group");
+    var label = document.createElement("label");
+    label.setAttribute("for", "Contraseña2");
+    label.innerHTML = "Confirme la contraseña";
+    div.appendChild(label);
+    var input = document.createElement("input");
+    input.setAttribute("type", "password");
+    input.setAttribute("class", "form-control");
+    input.setAttribute("name", "psw2");
+    input.setAttribute("id", "psw2");
+    input.setAttribute("placeholder", "Introduzca de nuevo la contraseña");
+    input.setAttribute("required", "true");
+
     div.appendChild(input);
     form.appendChild(div);
 
@@ -542,6 +567,8 @@ function cargarRegistro() {
     input.setAttribute("name", "numeroTarjeta");
     input.setAttribute("id", "numeroTarjeta");
     input.setAttribute("placeholder", "Numero de tarjeta");
+    input.setAttribute("required", "true");
+
     div.appendChild(input);
     form.appendChild(div);
 
@@ -557,6 +584,8 @@ function cargarRegistro() {
     input.setAttribute("name", "caducidadTarjeta");
     input.setAttribute("id", "caducidadTarjeta");
     input.setAttribute("placeholder", "Fecha");
+    input.setAttribute("required", "true");
+
     div.appendChild(input);
     form.appendChild(div);
 
@@ -572,6 +601,8 @@ function cargarRegistro() {
     input.setAttribute("name", "CVV");
     input.setAttribute("id", "CVV");
     input.setAttribute("placeholder", "CVV");
+    input.setAttribute("required", "true");
+
     div.appendChild(input);
     form.appendChild(div);
 

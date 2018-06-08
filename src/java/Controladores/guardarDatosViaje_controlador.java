@@ -66,6 +66,7 @@ public class guardarDatosViaje_controlador extends HttpServlet {
         String apellidos = (String) request.getParameter("apellidos");
         String tipoTarjeta = (String) request.getParameter("tarjetas");
         String pass = (String) request.getParameter("psw");
+        String pass2 = (String) request.getParameter("psw2");
 
         Tarjeta tarjeta = new Tarjeta(numeroTarjeta, tipoTarjeta, caducidadTarjeta);
         Cliente cliente = new Cliente(NIF, nombre, apellidos, Email, pass);
@@ -75,10 +76,14 @@ public class guardarDatosViaje_controlador extends HttpServlet {
         billete = (Billete) session.getAttribute("billete");
         Operaciones operacion = new Operaciones();
         try {
-            Conexion.setAutoCommit(false);
-            operacion.guardarViaje(Conexion, billete, cliente);
-            Conexion.commit();
-            response.sendRedirect("Vistas/confirmacionPago_vista.jsp");
+            if (pass2.equals(pass)) {
+                Conexion.setAutoCommit(false);
+                operacion.guardarViaje(Conexion, billete, cliente);
+                Conexion.commit();
+                response.sendRedirect("Vistas/confirmacionPago_vista.jsp");
+            }else{
+                throw new Excepciones.Excepcion("Las contraseñas no coinciden.");
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(guardarDatosViaje_controlador.class.getName()).log(Level.SEVERE, null, ex);
