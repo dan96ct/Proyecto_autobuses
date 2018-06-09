@@ -36,6 +36,8 @@
             <article class="horario" id="<%out.print("viaje" + i); %>"> <label class="datoHorario">H.Salida: <strong><% out.print(viajes.get(i).getHoraSalida()); %></strong> </label>
                 <label class="datoHorario"> H.llegada: <strong><% out.print(viajes.get(i).getHoraLLegada()); %></strong></label>
                 <label class="datoHorario">Origen: <b><% out.print(viajes.get(i).getOrigen()); %></b></label>
+                <label class="datoHorario">Destino: <b><% out.print(viajes.get(i).getDestino()); %></b></label>
+
                 <label class="datoHorario">Dia: <strong><% out.print(viajes.get(i).getFecha()); %></strong></label><button name="<%out.print(i);%>" onclick="borrarViaje(<% out.print("'" + viajes.get(i).getIdViaje()+ "'"); %> <% out.print(",'" + viajes.get(i).getFecha()+ "'"); %>)" id="boton_horario" class="btn btn-warning">Elegir viaje</button></article>
                 <%}%>
         </section>

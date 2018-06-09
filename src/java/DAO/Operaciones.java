@@ -73,7 +73,7 @@ public class Operaciones {
                     rsTarjeta1.next();
                     int idTarjeta = rsTarjeta1.getInt("id");
 
-                    String codigo = generarCodigo();
+                    String codigo = billete.getCodigo();
 
                     String ordensql3 = "INSERT INTO `reservas` (`id_viaje`, `id_tarjeta`, `precio`, `codigo`) VALUES (?,?,?,?);";
                     PreparedStatement PrepStm3 = conn.prepareStatement(ordensql3);
@@ -468,14 +468,35 @@ public class Operaciones {
     }
 
     public ArrayList getViajesBackup(Connection conn, String origen, String destino, LocalDate fecha) throws SQLException {
-        String ordensql = "SELECT viajes.id AS 'idViajes', estaciones.nombre AS 'nombreEstacion', rutas_horarios.horaSalida AS 'horaSalida', rutas_horarios.horaLLegada AS 'horaLLegada', viajes.fecha AS 'fecha'   FROM viajes, rutas_horarios, rutas, estaciones WHERE rutas_horarios.id = viajes.id_rutas_horarios AND rutas.id = rutas_horarios.ruta AND estaciones.id = rutas.origen AND viajes.fecha = ? AND estaciones.nombre = ?;";
+        String ordensqlOrigen = "SELECT * FROM estaciones WHERE nombre=?;";
+        PreparedStatement PrepStmOrigen = conn.prepareStatement(ordensqlOrigen);
+        PrepStmOrigen.setString(1, origen);
+        ResultSet rsOrigen = PrepStmOrigen.executeQuery();
+        int origenID = 0;
+        while (rsOrigen.next()) {
+            origenID = rsOrigen.getInt("id");
+        }
+        
+        String ordenSqlDestino = "SELECT * FROM estaciones WHERE nombre=?;";
+        PreparedStatement PrepStmDestino = conn.prepareStatement(ordenSqlDestino);
+        PrepStmDestino.setString(1, destino);
+        ResultSet rsDestino = PrepStmDestino.executeQuery();
+        int destinoID = 0;
+        while (rsDestino.next()) {
+            destinoID = rsDestino.getInt("id");
+        }
+        
+        
+        String ordensql = "SELECT viajes.id AS 'idViajes', estaciones.nombre AS 'nombreEstacion', rutas_horarios.horaSalida AS 'horaSalida', rutas_horarios.horaLLegada AS 'horaLLegada', viajes.fecha AS 'fecha'   FROM viajes, rutas_horarios, rutas, estaciones WHERE rutas_horarios.id = viajes.id_rutas_horarios AND rutas.id = rutas_horarios.ruta AND estaciones.id = rutas.origen AND viajes.fecha = ? AND rutas.origen = ? AND rutas.destino = ?;";
         ArrayList<Viaje> viajes = new ArrayList<>();
         PreparedStatement PrepStm = conn.prepareStatement(ordensql);
         PrepStm.setDate(1, java.sql.Date.valueOf(fecha));
-        PrepStm.setString(2, origen);
+        PrepStm.setInt(2, origenID);
+        PrepStm.setInt(3, destinoID);
         ResultSet rs = PrepStm.executeQuery();
         while (rs.next()) {
             Viaje viaje = new Viaje(rs.getString("nombreEstacion"), rs.getString("horaSalida"), rs.getString("horaLLegada"), rs.getInt("idViajes"), rs.getDate("fecha").toLocalDate());
+            viaje.setDestino(destino);
             viajes.add(viaje);
 
         }

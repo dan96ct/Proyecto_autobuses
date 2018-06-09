@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Billete {
 
-    private String origen, destino, horaSalida, horaLlegada;
+    private String origen, destino, horaSalida, horaLlegada,codigo;
     private LocalDate dia;
     private double precio;
     private int personas, idViaje;
@@ -44,6 +44,14 @@ public class Billete {
 
     public void setHoraSalida(String horaSalida) {
         this.horaSalida = horaSalida;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getHoraLlegada() {

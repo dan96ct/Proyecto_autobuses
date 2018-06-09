@@ -22,7 +22,7 @@
 <body>
     <% Billete billete = new Billete();
         billete = (Billete) session.getAttribute("billete");
-         
+
     %>
     <div class="alert alert-success" role="alert" style="width: 50%; text-align: center; margin: 0 auto; margin-top: 50px;">
         <strong>¡Gracias!</strong> Su pago esta siendo tramitado
@@ -30,7 +30,7 @@
     <%for (int i = 0; i < billete.getArrayPasajeros().size(); i++) {
     %>
     <div id="billete_viajero"> 
-        <img width="200px" height="50px" src="Imagenes/Logo.png"><br>
+        <img width="200px" height="50px" src="Imagenes/Logo.png"> <h2 style="float: right;"><%out.print(billete.getCodigo());%></h2><br>
         <div id="datos_pasajero">
             <h3><%out.print(billete.getArrayPasajeros().get(i).getNombre());%></h3>
             <h3><%out.print(billete.getArrayPasajeros().get(i).getApellido());%></h3>

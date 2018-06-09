@@ -98,30 +98,8 @@ function comprobarDNI(dni) {
     }
     return validar;
 }
-function elegirAsiento(elemento) {
-    var todosLosAsientos = document.getElementsByTagName("td");
+function comprobarAsientoSeleccionado(elemento) {
     var validar = true;
-    for (var i = 0; i < todosLosAsientos.length; i++) {
-        for (var f = 0; f < arrayAsientos.length; f++) {
-            if (todosLosAsientos[i].getAttribute("id") === arrayAsientos[f].numeroAsiento) {
-                todosLosAsientos[i].setAttribute("style", "color:red;");
-                todosLosAsientos[i].setAttribute("name", "ocupado");
-                validar = false;
-            }
-        }
-        if (validar === true) {
-            todosLosAsientos[i].setAttribute("style", "color:black;");
-            todosLosAsientos[i].setAttribute("name", "");
-            if (todosLosAsientos[i].getAttribute("id") == elemento.getAttribute("id")) {
-                elemento.setAttribute("style", "color:green;");
-                elemento.setAttribute("name", "activado");
-            }
-
-        } else {
-            validar = true;
-        }
-    }
-
     var numPasajero = document.getElementById("tituloFormulario_usuario").textContent;
     var num = 0;
     switch (numPasajero) {
@@ -142,14 +120,69 @@ function elegirAsiento(elemento) {
             break;
         default:
     }
-    for (var i = 0; i < arrayAsientos.length; i++) {
-        if (arrayAsientos[i].ocupante == num) {
-            for (var f = 0; f < todosLosAsientos.length; f++) {
-                if (todosLosAsientos[f].getAttribute("id") == arrayAsientos[i].numAsiento) {
-                    todosLosAsientos[f].setAttribute("style", "color:black;");
+    for (var i = 0; i < arrayPasajeros.length; i++) {
+        if (arrayPasajeros[i].numPasajero == num) {
+            validar = false;
+            break;
+        }
+    }
+    return validar;
+}
+function elegirAsiento(elemento) {
+    if (comprobarAsientoSeleccionado(elemento)) {
+        var validar = true;
+        var todosLosAsientos = document.getElementsByTagName("td");
+        for (var i = 0; i < todosLosAsientos.length; i++) {
+            for (var f = 0; f < arrayAsientos.length; f++) {
+                if (todosLosAsientos[i].getAttribute("id") === arrayAsientos[f].numeroAsiento) {
+                    todosLosAsientos[i].setAttribute("style", "color:red;");
+                    todosLosAsientos[i].setAttribute("name", "ocupado");
+                    validar = false;
+                }
+            }
+            if (validar === true) {
+                todosLosAsientos[i].setAttribute("style", "color:black;");
+                todosLosAsientos[i].setAttribute("name", "");
+                if (todosLosAsientos[i].getAttribute("id") == elemento.getAttribute("id")) {
+                    elemento.setAttribute("style", "color:green;");
+                    elemento.setAttribute("name", "activado");
+                }
+
+            } else {
+                validar = true;
+            }
+        }
+        var numPasajero = document.getElementById("tituloFormulario_usuario").textContent;
+        var num = 0;
+        switch (numPasajero) {
+            case 'Datos de pasajero 1':
+                num = 1;
+                break;
+            case 'Datos de pasajero 2':
+                num = 2;
+                break;
+            case 'Datos de pasajero 3':
+                num = 3;
+                break;
+            case 'Datos de pasajero 4':
+                num = 4;
+                break;
+            case 'Datos de pasajero 5':
+                num = 5;
+                break;
+            default:
+        }
+        for (var i = 0; i < arrayAsientos.length; i++) {
+            if (arrayAsientos[i].ocupante == num) {
+                for (var f = 0; f < todosLosAsientos.length; f++) {
+                    if (todosLosAsientos[f].getAttribute("id") == arrayAsientos[i].numAsiento) {
+                        todosLosAsientos[f].setAttribute("style", "color:black;");
+                    }
                 }
             }
         }
+    } else {
+        alert("Lo sentimos pero no se puede cambiar el asiento seleccionado.");
     }
 }
 function comprobarCamposVacios() {

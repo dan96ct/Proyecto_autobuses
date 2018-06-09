@@ -64,7 +64,7 @@ public class tramitarDatosViaje1_controlador extends HttpServlet {
         String destino = (String) request.getParameter("destino");
         String fechaString = (String) request.getParameter("fecha");
         int numPersonas = Integer.valueOf(request.getParameter("numPersonas"));
-        
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fechaDate = LocalDate.parse(fechaString, formatter);
         Billete billete = new Billete(origen, destino, fechaDate, numPersonas);
@@ -74,9 +74,9 @@ public class tramitarDatosViaje1_controlador extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        session.setAttribute("billete", billete);
-
         try {
+            billete.setCodigo(operaciones.generarCodigo());
+            session.setAttribute("billete", billete);
             session.setAttribute("horarios", operaciones.getHorariosRuta(billete, Conexion));
         } catch (SQLException ex) {
             Logger.getLogger(tramitarDatosViaje1_controlador.class.getName()).log(Level.SEVERE, null, ex);
