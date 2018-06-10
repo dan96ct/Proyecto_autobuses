@@ -71,8 +71,8 @@ public class comprobarLogin_controlador extends HttpServlet {
             Cliente cliente = new Cliente();
             try {
                 operacion.compruebaLogin(Conexion, email, pass);
-                System.out.println(operacion.compruebarLogin(Conexion, email, pass));
-                cliente = operacion.compruebarLogin(Conexion, email, pass);
+                System.out.println(operacion.recuperarDatosCliente(Conexion, email, pass));
+                cliente = operacion.recuperarDatosCliente(Conexion, email, pass);
 
                 HttpSession session = request.getSession(true);
                 session.setAttribute("cliente", cliente);

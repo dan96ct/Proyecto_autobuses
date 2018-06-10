@@ -26,6 +26,12 @@ import java.util.Arrays;
  */
 public class Operaciones {
 
+    /**
+     * Metodo que devuelve todas las estaciones de la base de datos
+     * @param conn Parametro de conexion
+     * @return Devuelve un array con todas las estaciones que hay en la base de datos como ArrayList
+     * @throws SQLException
+     */
     public ArrayList getEstaciones(Connection conn) throws SQLException {
         ArrayList<String> estaciones = new ArrayList<>();
         String ordensql = "SELECT * FROM estaciones;";
@@ -36,6 +42,15 @@ public class Operaciones {
         }
         return estaciones;
     }
+    
+    /**
+     * Introduce todos los datos de los usuarios y la compra desde el registro.
+     * @param conn Parametro de conexion
+     * @param billete Objeto billete para introducir en la base de datos
+     * @param cliente Objeto cliente con todos sus datos
+     * @throws SQLException
+     * @throws Excepcion 
+     */
     public void guardarViaje(Connection conn, Billete billete, Cliente cliente) throws SQLException, Excepcion {
         if (compruebaNifCorreoCliente(conn, cliente)) {
             ValidadorDNI validador = new ValidadorDNI(cliente.getNif());
@@ -130,6 +145,15 @@ public class Operaciones {
         }
 
     }
+    
+   /**
+    * Comprueba el login del usuario en la base de datos con la contraseña y el correo electronico, en caso de que sea erroneo devuelve una excepcion
+    * @param conn Parametro de conexion
+    * @param email Email del usuario, parametro String
+    * @param pass  Contraseña introducida por el usuario, parametro String
+    * @throws SQLException
+    * @throws Excepcion 
+    */
 
     public void compruebaLogin(Connection conn, String email, String pass) throws SQLException, Excepcion {
         String ordensql = "SELECT * FROM clientes WHERE email=? AND AES_DECRYPT(password,'sorbete')=?";
@@ -141,7 +165,14 @@ public class Operaciones {
             throw new Excepciones.Excepcion("Datos incorrectos");
         }
     }
-
+   
+    /**
+     * Guarda los datos del viaje en la bd a traves del login del usuario, es decir que ya no guarda los datos del cliente porque estan en la bd
+     * @param conn Parametro de conexion
+     * @param billete Billete del viaje con todos los datos
+     * @param cliente Objeto cliente con las tarjetas de credito
+     * @throws SQLException 
+     */
     public void guardarViajeLogin(Connection conn, Billete billete, Cliente cliente) throws SQLException {
         int idTarjeta = 0;
         for (int i = 0; i < cliente.getTarjetas().size(); i++) {
@@ -195,7 +226,15 @@ public class Operaciones {
         PrepSt4.setInt(2, billete.getIdViaje());
         PrepSt4.executeUpdate();
     }
-
+    
+    /**
+     * Guarda los datos del viaje con una nueva tarjeta del cliente
+     * @param conn Parametro de conexion
+     * @param billete Objeto billete con todos los datos
+     * @param cliente Objeto cliente con todos los datos y una tarjeta nueva
+     * @throws SQLException
+     * @throws Excepcion 
+     */
     public void guardarViajeNuevaTarjeta(Connection conn, Billete billete, Cliente cliente) throws SQLException, Excepcion {
         if (comprobacionTarjeta(cliente.getTarjetas().get(cliente.getTarjetas().size() - 1).getNumero())) {
             String ordensqlCliente = "SELECT * FROM clientes WHERE nif=?";
@@ -270,6 +309,13 @@ public class Operaciones {
 
     }
 
+    /**
+     * Comprueba si existe el viajero que le pasamos como parametro en la base de datos
+     * @param pasajero Objeto pasajero
+     * @param conn Parametro de conexion
+     * @return devuelve el id del viajero
+     * @throws SQLException 
+     */
     public int compruebaViajero(Pasajero pasajero, Connection conn) throws SQLException {
         int idViajero = -1;
         String ordensql = "SELECT * FROM viajeros WHERE nif=?";
@@ -282,7 +328,14 @@ public class Operaciones {
         return idViajero;
 
     }
-
+    
+    /**
+     * Devuelve en un arrayList las estaciones que hay de destino con la estacion de origen que se le pasa.
+     * @param conn Parametro de conexion
+     * @param estacion Estacion en string
+     * @return ArrayList con las estaciones de destino de la estacion
+     * @throws SQLException 
+     */
     public ArrayList getRutas(Connection conn, String estacion) throws SQLException {
         ArrayList<String> estacionesRuta = new ArrayList<>();
         String ordensql = "SELECT * FROM estaciones WHERE nombre=?";
@@ -316,6 +369,13 @@ public class Operaciones {
         return estacionesRuta;
     }
 
+    /**
+     * Comprueba si existe el nif y el correo que ha introducido el cliente, si existe se devuelve falso
+     * @param conn Parametro de conexion
+     * @param cliente Objeto cliente con sus datos
+     * @return devuelve un booleano
+     * @throws SQLException 
+     */
     public boolean compruebaNifCorreoCliente(Connection conn, Cliente cliente) throws SQLException {
         boolean validar;
         String ordensql = "SELECT * FROM clientes WHERE nif=?;";
@@ -339,7 +399,11 @@ public class Operaciones {
         }
         return validar;
     }
-
+/**
+ * Comprueba si la tarjeta de credito introducida es valida
+ * @param tarjeta Parametro String
+ * @return booleano, si es valida devuelve true
+ */
     public boolean comprobacionTarjeta(String tarjeta) {
         boolean validar = false;
 
@@ -379,7 +443,14 @@ public class Operaciones {
 
         return validar;
     }
-
+    
+    /**
+     * Devuekve un arrayList de horarios con todos las rutas disponibles y sus horas, billete debe tener origen, destino y dia como minimo
+     * @param billete Objeto billete 
+     * @param conn Paramentro de conexion
+     * @return arrayList con los horarios de las rutas disponibles
+     * @throws SQLException 
+     */
     public ArrayList getHorariosRuta(Billete billete, Connection conn) throws SQLException {
         ArrayList<Horario> horarios = new ArrayList<>();
         String ordensql = "SELECT * FROM estaciones WHERE nombre = ?;";
@@ -426,7 +497,14 @@ public class Operaciones {
 
         return horarios;
     }
-
+    
+    /**
+     * Metodo que sirve para dar una lista de los asientos ocupados en un viaje
+     * @param conn Parametro de conexion
+     * @param billete Billete que debe contener principamente el id
+     * @return Devuelve un ArrayList con los asientos
+     * @throws SQLException 
+     */
     public ArrayList getAsientosOcupados(Connection conn, Billete billete) throws SQLException {
         System.out.println("BILLETE>>>>>>>>>>>>>>>>>>>>" + billete.toString());
         ArrayList asientosOcupados = new ArrayList();
@@ -440,8 +518,16 @@ public class Operaciones {
 
         return asientosOcupados;
     }
-
-    public Cliente compruebarLogin(Connection conn, String email, String pass) throws SQLException {
+    
+    /**
+     * En caso de que el usuario se logue, este metodo devuelve todos los datos del cliente guardados en la base de datos.
+     * @param conn Parametro de conexion
+     * @param email Email del cliente
+     * @param pass Contraseña del cliente
+     * @return Objeto cliente con sus datos
+     * @throws SQLException 
+     */
+    public Cliente recuperarDatosCliente(Connection conn, String email, String pass) throws SQLException {
         String ordensql = "SELECT * FROM clientes WHERE email=? AND AES_DECRYPT(password,'sorbete')=?;";
         PreparedStatement PrepStm = conn.prepareStatement(ordensql);
         PrepStm.setString(1, email);
@@ -466,7 +552,16 @@ public class Operaciones {
         return cliente;
 
     }
-
+    
+    /**
+     * Metodo que devuelve un arraylist con todos los viajes existentes para enviarlos a backup
+     * @param conn Parametro de conexion
+     * @param origen Estacion de origen
+     * @param destino Estacion de destino
+     * @param fecha Fecha en LocalDate
+     * @return ArrayList de todos los viajes existentes
+     * @throws SQLException 
+     */
     public ArrayList getViajesBackup(Connection conn, String origen, String destino, LocalDate fecha) throws SQLException {
         String ordensqlOrigen = "SELECT * FROM estaciones WHERE nombre=?;";
         PreparedStatement PrepStmOrigen = conn.prepareStatement(ordensqlOrigen);
@@ -476,7 +571,7 @@ public class Operaciones {
         while (rsOrigen.next()) {
             origenID = rsOrigen.getInt("id");
         }
-        
+
         String ordenSqlDestino = "SELECT * FROM estaciones WHERE nombre=?;";
         PreparedStatement PrepStmDestino = conn.prepareStatement(ordenSqlDestino);
         PrepStmDestino.setString(1, destino);
@@ -485,8 +580,7 @@ public class Operaciones {
         while (rsDestino.next()) {
             destinoID = rsDestino.getInt("id");
         }
-        
-        
+
         String ordensql = "SELECT viajes.id AS 'idViajes', estaciones.nombre AS 'nombreEstacion', rutas_horarios.horaSalida AS 'horaSalida', rutas_horarios.horaLLegada AS 'horaLLegada', viajes.fecha AS 'fecha'   FROM viajes, rutas_horarios, rutas, estaciones WHERE rutas_horarios.id = viajes.id_rutas_horarios AND rutas.id = rutas_horarios.ruta AND estaciones.id = rutas.origen AND viajes.fecha = ? AND rutas.origen = ? AND rutas.destino = ?;";
         ArrayList<Viaje> viajes = new ArrayList<>();
         PreparedStatement PrepStm = conn.prepareStatement(ordensql);
@@ -504,7 +598,13 @@ public class Operaciones {
 
     }
 
-    public void borrarViaje(int idViaje, String fecha, Connection conn) throws SQLException {
+    /**
+     * Metodo que borra un viaje completamente y lo envia a backup, se le debe pasar el id del viaje que se desea borrar y la fecha
+     * @param idViaje id del viaje de tipo Int
+     * @param conn Parametro de conexion
+     * @throws SQLException 
+     */
+    public void borrarViaje(int idViaje, Connection conn) throws SQLException {
         String ordenSQL = "SELECT * FROM viajes WHERE id=?";
         PreparedStatement PrepStm = conn.prepareStatement(ordenSQL);
         PrepStm.setInt(1, idViaje);
@@ -583,7 +683,7 @@ public class Operaciones {
                 String ordensqlBorradoOcupacionViajero = "DELETE FROM `ocupacion` WHERE `id_viajero`=? AND id_reserva=?;";
                 PreparedStatement PrepStBorradoOcupacion = conn.prepareStatement(ordensqlBorradoOcupacionViajero);
                 PrepStBorradoOcupacion.setInt(1, rs3.getInt("id"));
-                PrepStBorradoOcupacion.setInt(2, rs2.getInt("id"));                
+                PrepStBorradoOcupacion.setInt(2, rs2.getInt("id"));
                 PrepStBorradoOcupacion.executeUpdate();
 
                 String ordenSql_CompruebaViajeros = "SELECT COUNT(*) AS 'numeroViajeros' FROM ocupacion WHERE id_viajero=?";
@@ -621,6 +721,10 @@ public class Operaciones {
 
     }
 
+    /**
+     * Genera un codigo aleatorio para el billete de los pasajeros
+     * @return   Devuelve el codigo en String
+     */
     public String generarCodigo() {
         String cad = "";
         String[] matriz = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "1", "2", "3", "4", "5", "6"};

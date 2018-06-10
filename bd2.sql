@@ -30,6 +30,7 @@ CREATE TABLE `backup_ocupacion` (
   `id_backup_viajeros` int(11) NOT NULL,
   `asiento` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `reserva_viajero_bk_unique` (`id_backup_reservas`,`id_backup_viajeros`),
   KEY `id_backup_reservas_idx` (`id_backup_reservas`),
   KEY `id_backup_viajeros_idx` (`id_backup_viajeros`),
   CONSTRAINT `id_backup_reservas` FOREIGN KEY (`id_backup_reservas`) REFERENCES `backup_reservas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -196,6 +197,7 @@ CREATE TABLE `ocupacion` (
   `id_viajero` int(11) NOT NULL,
   `asiento` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `viajero_reserva_unique` (`id_viajero`,`id_reserva`),
   KEY `id_rutaHorario_idx` (`id_reserva`),
   KEY `id_viajero_idx` (`id_viajero`),
   CONSTRAINT `id_reserva` FOREIGN KEY (`id_reserva`) REFERENCES `reservas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -255,6 +257,7 @@ CREATE TABLE `rutas` (
   `destino` int(11) NOT NULL,
   `precio` double NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `origen_destino_unique` (`origen`,`destino`),
   KEY `id_origen_idx` (`origen`),
   KEY `id_destino_idx` (`destino`),
   CONSTRAINT `id_destino` FOREIGN KEY (`destino`) REFERENCES `estaciones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -400,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-09 17:08:14
+-- Dump completed on 2018-06-10 12:32:34

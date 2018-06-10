@@ -57,11 +57,10 @@ public class borrarViaje_controlador extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             int idViaje = Integer.parseInt(request.getParameter("idViaje"));
-            String fecha = (String) request.getParameter("fecha");
             Operaciones operacion = new Operaciones();
             try {
                 Conexion.setAutoCommit(false);
-                operacion.borrarViaje(idViaje, fecha, Conexion);
+                operacion.borrarViaje(idViaje, Conexion);
                 Conexion.commit();
                 response.sendRedirect("Vistas/confirmacionBorrarViaje.jsp");
             } catch (SQLException ex) {
