@@ -416,7 +416,6 @@ function mostrarEstaciones() {
     datos = datos.replace("[","");
     datos = datos.replace("]","");
     var estacionesLista = datos.split(",");
-    alert(estacionesLista);
     var estacionesList = document.getElementById("estaciones1");
     for (var i = 0; i < estacionesLista.length; i++) {
         var option = document.createElement("option");
