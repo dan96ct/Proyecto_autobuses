@@ -401,21 +401,26 @@ function borrarHijos(nodo) {
 }
 function mostrarRutas() {
     var datos = objetoAjax.responseText;
-    var estacionesLista = JSON.parse(datos);
+    datos = datos.replace("[","");
+    datos = datos.replace("]","");
+    var estacionesLista = datos.split(",");
     var estacionesList = document.getElementById("estaciones2");
-    for (var i = 0; i < estacionesLista[0].length; i++) {
+    for (var i = 0; i < estacionesLista.length; i++) {
         var option = document.createElement("option");
-        option.innerHTML = estacionesLista[0][i];
+        option.innerHTML = estacionesLista[i];
         estacionesList.appendChild(option);
     }
 }
 function mostrarEstaciones() {
     var datos = objetoAjax.responseText;
-    var estacionesLista = JSON.parse(datos);
+    datos = datos.replace("[","");
+    datos = datos.replace("]","");
+    var estacionesLista = datos.split(",");
+    alert(estacionesLista);
     var estacionesList = document.getElementById("estaciones1");
-    for (var i = 0; i < estacionesLista[0].length; i++) {
+    for (var i = 0; i < estacionesLista.length; i++) {
         var option = document.createElement("option");
-        option.innerHTML = estacionesLista[0][i];
+        option.innerHTML = estacionesLista[i];
         estacionesList.appendChild(option);
     }
 

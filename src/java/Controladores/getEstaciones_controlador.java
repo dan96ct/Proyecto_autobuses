@@ -9,20 +9,15 @@ import DAO.ConexionBBDD;
 import DAO.Operaciones;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.JSONArray;
 
 /**
  *
@@ -67,8 +62,7 @@ public class getEstaciones_controlador extends HttpServlet {
         try {
             estaciones = operaciones.getEstaciones(Conexion);
             try (PrintWriter out = response.getWriter()) {
-                JSONArray arrayJSON = new JSONArray(Arrays.asList(estaciones));
-                out.println(arrayJSON);
+                out.println(estaciones);
 
             }
         } catch (SQLException ex) {
